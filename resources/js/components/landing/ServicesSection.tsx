@@ -10,10 +10,10 @@ export default function ServicesSection() {
                         Official Service Partner Of
                     </h2>
                     <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-24 opacity-80 pt-4">
-                        <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain invert brightness-0 hover:invert-0 transition-all duration-300" />
-                        <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain invert brightness-0 hover:invert-0 transition-all duration-300" />
-                        <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain invert brightness-0 hover:invert-0 transition-all duration-300" />
-                        <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain invert brightness-0 hover:invert-0 transition-all duration-300" />
+                        <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain invert brightness-0 hover:invert-0 hover:brightness-100 transition-all duration-300" />
+                        <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain invert brightness-0 hover:invert-0 hover:brightness-100 transition-all duration-300" />
+                        <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain invert brightness-0 hover:invert-0 hover:brightness-100 transition-all duration-300" />
+                        <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain invert brightness-0 hover:invert-0 hover:brightness-100 transition-all duration-300" />
                     </div>
                 </div>
             </section>

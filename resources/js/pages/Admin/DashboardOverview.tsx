@@ -397,12 +397,12 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
 
                         {/* Pagination */}
                         {forms.last_page > 1 && localForms.length > 0 && (
-                            <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
-                                <div className="text-sm text-gray-500">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 px-6 py-4 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
+                                <div className="text-sm text-gray-500 text-center sm:text-left">
                                     Menampilkan <span className="font-medium">{localForms.length}</span> dari{' '}
                                     <span className="font-medium">{forms.total}</span> data
                                 </div>
-                                <div className="flex gap-1">
+                                <div className="flex flex-wrap justify-center sm:justify-end gap-1">
                                     {forms.links.map((link, i) => (
                                         <Button
                                             key={i}
@@ -456,8 +456,12 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                             size="icon"
                                             className="h-6 w-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 active:scale-90 transition-transform"
                                             onClick={() => {
-                                                navigator.clipboard.writeText(selectedContact.phone);
-                                                toast.success('Nomor telepon berhasil disalin');
+                                                try {
+                                                    navigator.clipboard.writeText(selectedContact.phone);
+                                                    toast.success('Nomor telepon berhasil disalin');
+                                                } catch (err) {
+                                                    toast.error('Gagal menyalin data');
+                                                }
                                             }}
                                             title="Salin Nomor Telepon"
                                         >
@@ -477,8 +481,12 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                 size="icon"
                                                 className="h-6 w-6 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 active:scale-90 transition-transform"
                                                 onClick={() => {
-                                                    navigator.clipboard.writeText(selectedContact.email!);
-                                                    toast.success('Email berhasil disalin');
+                                                    try {
+                                                        navigator.clipboard.writeText(selectedContact.email!);
+                                                        toast.success('Email berhasil disalin');
+                                                    } catch (err) {
+                                                        toast.error('Gagal menyalin data');
+                                                    }
                                                 }}
                                                 title="Salin Email"
                                             >

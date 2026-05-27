@@ -4,11 +4,9 @@ import { Link } from '@inertiajs/react';
 
 export default function HeroSection() {
     return (
-        <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden flex items-center text-white">
+        <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden flex items-center text-white">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-brand-green/10 blur-[140px]" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full bg-brand-green/5 blur-[140px]" />
             </div>
 
             <div className="container relative z-10 mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
@@ -31,7 +29,7 @@ export default function HeroSection() {
                     </p>
                     
                     <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-                        <Button asChild size="lg" className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-white rounded-full h-14 px-8 text-lg group shadow-xl shadow-brand-green/25 cursor-pointer">
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-slate-900 font-bold rounded-full h-14 px-8 text-lg group shadow-xl shadow-brand-green/25 cursor-pointer">
                             <Link href="/#contact">
                                 Pesan Sekarang
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

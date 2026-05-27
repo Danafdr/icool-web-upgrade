@@ -8,6 +8,7 @@ import {
     DialogTrigger,
 } from "../../components/ui/dialog";
 import ContactForm from '../../components/landing/ContactForm';
+import PricingCalculator from '../../components/landing/PricingCalculator';
 
 interface Props {
     title: string;
@@ -15,16 +16,16 @@ interface Props {
     benefits: string[];
     service_type?: string;
     price?: string;
+    hasCalculator?: boolean;
 }
 
-export default function GenericService({ title, description, benefits, service_type, price }: Props) {
+export default function GenericService({ title, description, benefits, service_type, price, hasCalculator = false }: Props) {
     return (
         <MainLayout title={title}>
             <div className="bg-gradient-to-b from-brand-dark to-gray-950 text-white min-h-screen">
                 {/* Header Banner Section */}
-                <div className="relative bg-white/[0.02] border-b border-white/10 py-20 lg:py-32 overflow-hidden">
+                <div className="relative bg-white/[0.02] border-b border-white/10 py-16 md:py-24 overflow-hidden">
                     <div className="absolute inset-0 pointer-events-none">
-                        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand-green/10 blur-[100px]" />
                         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-brand-dark to-transparent" />
                     </div>
                     <div className="container relative z-10 mx-auto px-6 md:px-12 text-left md:text-center">
@@ -38,7 +39,7 @@ export default function GenericService({ title, description, benefits, service_t
                 </div>
 
                 {/* Details Section */}
-                <div className="container mx-auto px-6 md:px-12 py-16 lg:py-24 flex flex-col md:flex-row gap-8 md:gap-12">
+                <div className="container mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col md:flex-row gap-8 md:gap-12">
                     <div className="flex-1 space-y-6 md:space-y-8">
                         <h2 className="text-3xl font-bold text-white text-left">Kenapa Memilih Layanan Ini?</h2>
                         <ul className="space-y-4">
@@ -62,7 +63,7 @@ export default function GenericService({ title, description, benefits, service_t
                         <div className="pt-2 mb-8 md:mb-0">
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white rounded-full h-14 px-8 text-lg shadow-xl shadow-brand-green/25 cursor-pointer">
+                                    <Button size="lg" className="bg-brand-green hover:bg-brand-green/90 text-slate-900 rounded-full h-14 px-8 text-lg font-bold shadow-xl shadow-brand-green/25 cursor-pointer">
                                         Pesan Layanan Ini
                                         <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
@@ -79,14 +80,21 @@ export default function GenericService({ title, description, benefits, service_t
                             <img 
                                 src="/images/ac_technician.png" 
                                 alt="Teknisi iCool membersihkan AC" 
-                                className="w-full h-full object-cover rounded-2xl grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105" 
+                                className="w-full h-full object-cover rounded-2xl transition-all duration-500 group-hover:scale-105" 
                             />
                         </div>
                     </div>
                 </div>
 
+                {/* Calculator Section */}
+                {hasCalculator && (
+                    <div className="border-t border-white/10 bg-gray-950/50">
+                        <PricingCalculator />
+                    </div>
+                )}
+
                 {/* Guarantees Section */}
-                <div className="border-t border-white/10 bg-white/[0.02] pt-24 pb-16 lg:py-24 mt-8 md:mt-0">
+                <div className="border-t border-white/10 bg-white/[0.02] py-16 md:py-24 mt-8 md:mt-0">
                     <div className="container mx-auto px-6 md:px-12 text-center max-w-4xl">
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                             AC Anda Masih Bermasalah?
@@ -130,7 +138,7 @@ export default function GenericService({ title, description, benefits, service_t
                 </div>
 
                 {/* Testimonial Section (Grid) */}
-                <div className="py-16 lg:py-24 relative overflow-hidden bg-transparent">
+                <div className="py-16 md:py-24 relative overflow-hidden bg-transparent">
                     <div className="container mx-auto px-6 md:px-12 mb-12 text-center relative z-20">
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Kata Pelanggan Kami</h2>
                         <p className="text-gray-400">Dipercaya oleh ratusan rumah, villa, dan perusahaan ternama.</p>

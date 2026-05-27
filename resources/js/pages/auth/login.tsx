@@ -30,6 +30,13 @@ export default function Login({ status, canResetPassword }: Props) {
             >
                 {({ processing, errors }) => (
                     <>
+                        {/* Status Message */}
+                        {status && (
+                            <div className="text-center text-sm font-medium text-green-600">
+                                {status}
+                            </div>
+                        )}
+
                         {/* Error Banner */}
                         {(errors.email || errors.password) && (
                             <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-400">
@@ -47,7 +54,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                     name="email"
                                     required
                                     autoFocus
-                                    tabIndex={1}
                                     autoComplete="email"
                                     placeholder="email@example.com"
                                     className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
@@ -61,7 +67,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                         <TextLink
                                             href={request()}
                                             className="ml-auto text-sm"
-                                            tabIndex={5}
                                         >
                                             Forgot your password?
                                         </TextLink>
@@ -71,7 +76,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                     id="password"
                                     name="password"
                                     required
-                                    tabIndex={2}
                                     autoComplete="current-password"
                                     placeholder="Password"
                                     className={errors.password ? 'border-red-500 focus-visible:ring-red-500' : ''}
@@ -82,7 +86,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                 <Checkbox
                                     id="remember"
                                     name="remember"
-                                    tabIndex={3}
                                 />
                                 <Label htmlFor="remember">Remember me</Label>
                             </div>
@@ -90,7 +93,6 @@ export default function Login({ status, canResetPassword }: Props) {
                             <Button
                                 type="submit"
                                 className="mt-4 w-full"
-                                tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
                             >
@@ -102,11 +104,6 @@ export default function Login({ status, canResetPassword }: Props) {
                 )}
             </Form>
 
-            {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
-                    {status}
-                </div>
-            )}
         </>
     );
 }

@@ -15,7 +15,7 @@ export default function MainLayout({ title, children }: PropsWithChildren<MainLa
             
             <Header />
 
-            <main className="flex-1 mt-20 lg:mt-28">
+            <main className="flex-1 mt-[var(--header-height,109px)]">
                 {children}
             </main>
 

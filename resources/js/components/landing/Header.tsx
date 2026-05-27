@@ -2,12 +2,38 @@ import { Link, usePage } from '@inertiajs/react';
 import { Button } from '../ui/button';
 import { Mail, ChevronDown, Menu, Phone } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from '../ui/sheet';
+import { useEffect, useRef } from 'react';
 
 export default function Header() {
     const { url } = usePage();
+    const headerRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const updateHeaderHeight = () => {
+            if (headerRef.current) {
+                const height = headerRef.current.offsetHeight;
+                document.documentElement.style.setProperty('--header-height', `${height}px`);
+            }
+        };
+
+        // Run initially and observe resizing
+        updateHeaderHeight();
+        window.addEventListener('resize', updateHeaderHeight);
+        
+        // Use ResizeObserver for more robust tracking of DOM mutations that change height
+        const observer = new ResizeObserver(updateHeaderHeight);
+        if (headerRef.current) {
+            observer.observe(headerRef.current);
+        }
+
+        return () => {
+            window.removeEventListener('resize', updateHeaderHeight);
+            observer.disconnect();
+        };
+    }, []);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all flex flex-col">
+        <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all flex flex-col">
             {/* Secondary Top Bar for Contact Info */}
             <div className="hidden lg:flex bg-gray-50 dark:bg-gray-950 text-gray-500 dark:text-gray-400 py-1.5 border-b border-gray-200 dark:border-gray-800 text-xs font-medium">
                 <div className="container mx-auto px-5 lg:px-8 flex justify-end items-center gap-6">
@@ -87,9 +113,12 @@ export default function Header() {
                                     <Link href="/tentang-kami" className={`text-lg font-medium transition-colors ${url.startsWith('/tentang-kami') ? 'text-primary' : 'text-gray-700 hover:text-primary dark:text-gray-300'}`}>Tentang Kami</Link>
                                 </SheetClose>
                                 
-                                <div className="flex flex-col gap-3 mt-2">
-                                    <span className={`text-lg font-medium ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-900 dark:text-white'}`}>Layanan Kami</span>
-                                    <div className="flex flex-col gap-3 pl-4 border-l-2 border-gray-100 dark:border-gray-800">
+                                <div className="flex flex-col gap-3 my-2 py-4 border-y border-gray-100 dark:border-gray-800">
+                                    <span className={`flex items-center justify-between text-lg font-medium ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-900 dark:text-white'}`}>
+                                        Layanan Kami
+                                        <ChevronDown className="w-5 h-5 text-gray-400" />
+                                    </span>
+                                    <div className="flex flex-col gap-3 pl-4 border-l-2 border-gray-100 dark:border-gray-800 mt-2">
                                         <SheetClose asChild><Link href="/service-kami/service-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Service Cuci AC</Link></SheetClose>
                                         <SheetClose asChild><Link href="/service-kami/kontrak-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Kontrak Cuci AC</Link></SheetClose>
                                         <SheetClose asChild><Link href="/service-kami/reparasi-perbaikan" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Reparasi / Perbaikan</Link></SheetClose>

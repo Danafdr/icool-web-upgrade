@@ -13,8 +13,9 @@ export default function AuthSimpleLayout({
             <div className="w-full max-w-sm">
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col items-center gap-4">
-                        {/* Hidden Logo */}
-
+                        <Link href="/" className="hover:opacity-80 transition-opacity">
+                            <img src="/images/logo.png" alt="iCool Logo" className="h-12 w-auto mb-2" />
+                        </Link>
                         <div className="space-y-2 text-center">
                             <h1 className="text-xl font-medium">{title}</h1>
                             <p className="text-center text-sm text-muted-foreground">

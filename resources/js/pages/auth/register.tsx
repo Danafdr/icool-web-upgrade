@@ -1,11 +1,11 @@
 import { Form, Head } from '@inertiajs/react';
-import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import { AlertCircle } from 'lucide-react';
 import { login } from '@/routes';
 // import { store } from '@/routes/register';
 
@@ -33,6 +33,14 @@ export default function Register({ passwordRules }: Props) {
             >
                 {({ processing, errors }) => (
                     <>
+                        {/* Error Banner */}
+                        {(errors.name || errors.email || errors.password || errors.password_confirmation) && (
+                            <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-400">
+                                <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+                                <span>{errors.name || errors.email || errors.password || errors.password_confirmation}</span>
+                            </div>
+                        )}
+
                         <div className="grid gap-6">
                             <div className="grid gap-2">
                                 <Label htmlFor="name">Name</Label>
@@ -41,14 +49,10 @@ export default function Register({ passwordRules }: Props) {
                                     type="text"
                                     required
                                     autoFocus
-                                    tabIndex={1}
                                     autoComplete="name"
                                     name="name"
                                     placeholder="Full name"
-                                />
-                                <InputError
-                                    message={errors.name}
-                                    className="mt-2"
+                                    className={errors.name ? 'border-red-500 focus-visible:ring-red-500' : ''}
                                 />
                             </div>
 
@@ -58,12 +62,11 @@ export default function Register({ passwordRules }: Props) {
                                     id="email"
                                     type="email"
                                     required
-                                    tabIndex={2}
                                     autoComplete="email"
                                     name="email"
                                     placeholder="email@example.com"
+                                    className={errors.email ? 'border-red-500 focus-visible:ring-red-500' : ''}
                                 />
-                                <InputError message={errors.email} />
                             </div>
 
                             <div className="grid gap-2">
@@ -71,13 +74,12 @@ export default function Register({ passwordRules }: Props) {
                                 <PasswordInput
                                     id="password"
                                     required
-                                    tabIndex={3}
                                     autoComplete="new-password"
                                     name="password"
                                     placeholder="Password"
                                     passwordrules={passwordRules}
+                                    className={errors.password ? 'border-red-500 focus-visible:ring-red-500' : ''}
                                 />
-                                <InputError message={errors.password} />
                             </div>
 
                             <div className="grid gap-2">
@@ -87,21 +89,17 @@ export default function Register({ passwordRules }: Props) {
                                 <PasswordInput
                                     id="password_confirmation"
                                     required
-                                    tabIndex={4}
                                     autoComplete="new-password"
                                     name="password_confirmation"
                                     placeholder="Confirm password"
                                     passwordrules={passwordRules}
-                                />
-                                <InputError
-                                    message={errors.password_confirmation}
+                                    className={errors.password_confirmation ? 'border-red-500 focus-visible:ring-red-500' : ''}
                                 />
                             </div>
 
                             <Button
                                 type="submit"
                                 className="mt-2 w-full"
-                                tabIndex={5}
                                 data-test="register-user-button"
                             >
                                 {processing && <Spinner />}
@@ -111,7 +109,7 @@ export default function Register({ passwordRules }: Props) {
 
                         <div className="text-center text-sm text-muted-foreground">
                             Already have an account?{' '}
-                            <TextLink href={login()} tabIndex={6}>
+                            <TextLink href={login()}>
                                 Log in
                             </TextLink>
                         </div>

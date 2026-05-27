@@ -34,7 +34,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                 <div className={`mx-auto bg-white/[0.02] border border-white/10 backdrop-blur-md overflow-hidden flex flex-col md:flex-row ${!isPopup ? 'max-w-4xl rounded-3xl shadow-2xl shadow-brand-green/5' : 'w-full rounded-xl border-0'}`}>
                     
                     {/* Left Info Panel */}
-                    <div className="md:w-2/5 bg-white/[0.01] border-r border-white/10 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                    <div className="md:w-2/5 bg-white/5 border-r border-white/10 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                         <div>
                             <h3 className="text-2xl font-bold mb-4 text-white">Pesan Layanan Anda</h3>
                             <p className="text-gray-400 mb-8 leading-relaxed">
@@ -88,6 +88,8 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                         <Label htmlFor="phone" className="text-gray-300">Telepon/WhatsApp <span className="text-red-500">*</span></Label>
                                         <Input 
                                             id="phone" 
+                                            type="tel"
+                                            inputMode="tel"
                                             placeholder="0812..." 
                                             value={data.phone} 
                                             onChange={e => setData('phone', e.target.value)}
@@ -117,13 +119,13 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                             <SelectValue placeholder="-- Pilih opsi --" />
                                         </SelectTrigger>
                                         <SelectContent className="bg-gray-900/95 backdrop-blur-sm border-white/20 text-white">
-                                            <SelectItem value="cuci-ac" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Service Cuci AC</SelectItem>
-                                            <SelectItem value="kontrak-cuci" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Kontrak Maintenance AC</SelectItem>
-                                            <SelectItem value="reparasi" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Reparasi / Perbaikan</SelectItem>
-                                            <SelectItem value="teknisi-standby" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Teknisi Standby / Inhouse</SelectItem>
-                                            <SelectItem value="spare-part" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Spare Part AC</SelectItem>
-                                            <SelectItem value="instalasi" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Instalasi / Pasang AC</SelectItem>
-                                            <SelectItem value="general" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Pertanyaan Umum</SelectItem>
+                                            <SelectItem value="cuci-ac" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Service Cuci AC</SelectItem>
+                                            <SelectItem value="kontrak-cuci" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Kontrak Maintenance AC</SelectItem>
+                                            <SelectItem value="reparasi" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Reparasi / Perbaikan</SelectItem>
+                                            <SelectItem value="teknisi-standby" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Teknisi Standby / Inhouse</SelectItem>
+                                            <SelectItem value="spare-part" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Spare Part AC</SelectItem>
+                                            <SelectItem value="instalasi" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Instalasi / Pasang AC</SelectItem>
+                                            <SelectItem value="general" className="hover:bg-brand-green hover:text-slate-900 focus:bg-brand-green focus:text-slate-900 cursor-pointer">Pertanyaan Umum</SelectItem>
                                         </SelectContent>
                                     </Select>
                                     {errors.hvac_issue_type && <p className="text-xs text-red-500">{errors.hvac_issue_type}</p>}
@@ -142,7 +144,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                     {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
                                 </div>
 
-                                <Button type="submit" disabled={processing} className="w-full bg-brand-green hover:bg-brand-green/90 text-white rounded-full h-12 text-md font-medium shadow-lg shadow-brand-green/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                                <Button type="submit" disabled={processing} className="w-full bg-brand-green hover:bg-brand-green/90 text-slate-900 rounded-full h-12 text-md font-bold shadow-lg shadow-brand-green/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                                     {processing && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
                                     {processing ? "Mengirim..." : "Kirim Permintaan"}
                                 </Button>

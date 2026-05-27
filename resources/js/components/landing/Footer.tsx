@@ -36,9 +36,9 @@ export default function Footer() {
                         <h4 className="font-bold text-gray-900 dark:text-white mb-6">Alamat Kantor</h4>
                         <ul className="space-y-6 text-sm">
                             <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                                <MapPin className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
                                 <a href="https://maps.google.com/?q=Ruko+Imperial+Business+Center+C-7+Jl.+Raya+Daan+Mogot+Km.+17+Kalideres,+DKI+Jakarta" target="_blank" rel="noopener noreferrer" className="group">
-                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Head Office</strong>
+                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-brand-green transition-colors">Head Office</strong>
                                     <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-300 transition-colors block">
                                         Ruko Imperial Business Center C-7<br/>
                                         Jl. Raya Daan Mogot Km. 17, Kalideres<br/>
@@ -47,9 +47,9 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                                <MapPin className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
                                 <a href="https://maps.google.com/?q=Jl.+Bypass+Ngurah+Rai+No.154,+Sanur+Kaja,+Denpasar+Selatan,+Bali" target="_blank" rel="noopener noreferrer" className="group">
-                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Cabang Bali</strong>
+                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-brand-green transition-colors">Cabang Bali</strong>
                                     <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-300 transition-colors block">
                                         Jl. Bypass Ngurah Rai No.154<br/>
                                         Sanur Kaja, Denpasar Selatan<br/>
@@ -58,9 +58,9 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li className="flex items-start gap-3">
-                                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                                <MapPin className="w-5 h-5 text-brand-green shrink-0 mt-0.5" />
                                 <a href="https://maps.google.com/?q=Ruko+Terrace+8+blok+A+No.68+Suvarna+Sutera,+Tangerang" target="_blank" rel="noopener noreferrer" className="group">
-                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-primary transition-colors">Cabang Suvarna</strong>
+                                    <strong className="block text-gray-900 dark:text-white mb-1 group-hover:text-brand-green transition-colors">Cabang Suvarna</strong>
                                     <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-300 transition-colors block">
                                         Ruko Terrace 8 blok A No.68<br/>
                                         Suvarna Sutera, Kab. Tangerang<br/>

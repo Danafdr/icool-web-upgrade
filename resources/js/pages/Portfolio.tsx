@@ -23,6 +23,22 @@ export default function Portfolio() {
     const filterBarRef = useRef<HTMLDivElement>(null);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
+    const checkScroll = () => {
+        if (scrollContainerRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+            setCanScrollLeft(scrollLeft > 0);
+            setCanScrollRight(Math.ceil(scrollLeft + clientWidth) < scrollWidth);
+        }
+    };
+
+    useEffect(() => {
+        checkScroll();
+        window.addEventListener('resize', checkScroll);
+        return () => window.removeEventListener('resize', checkScroll);
+    }, []);
 
     const handleLoadMore = () => {
         setIsLoading(true);
@@ -36,8 +52,9 @@ export default function Portfolio() {
         const handleScroll = () => {
             if (filterBarRef.current) {
                 const rect = filterBarRef.current.getBoundingClientRect();
-                const stickyOffset = window.innerWidth >= 1024 ? 112 : 80;
-                setIsScrolled(rect.top <= stickyOffset + 1);
+                const headerHeightStr = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+                const headerHeight = headerHeightStr ? parseFloat(headerHeightStr) : (window.innerWidth >= 1024 ? 112 : 80);
+                setIsScrolled(rect.top <= headerHeight + 1);
             }
         };
 
@@ -83,10 +100,8 @@ export default function Portfolio() {
             </Head>
             
             {/* Hero Section */}
-            <section className="relative min-h-[35vh] py-20 lg:py-32 bg-gray-950 overflow-hidden flex items-center justify-center">
+            <section className="relative min-h-[35vh] py-16 md:py-24 bg-gray-950 overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand-green/20 blur-[120px]" />
-                    <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-blue-900/20 blur-[120px]" />
                     <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center opacity-10 mix-blend-overlay"></div>
                     {/* Bottom Gradient Fade to transition into Portfolio Grid Section */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-dark to-transparent" />
@@ -98,7 +113,7 @@ export default function Portfolio() {
                         Our Trusted Clients
                     </div>
                     
-                    <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+                    <h1 className="text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
                         Mereka yang Mempercayakan <span className="text-brand-green">Kenyamanan</span> Kepada Kami
                     </h1>
                     
@@ -109,7 +124,7 @@ export default function Portfolio() {
             </section>
 
             {/* Portfolio Grid Section */}
-            <section className="py-16 lg:py-24 bg-gradient-to-b from-brand-dark to-gray-950 min-h-screen">
+            <section className="py-16 md:py-24 bg-gradient-to-b from-brand-dark to-gray-950 min-h-screen">
                 <div className="container mx-auto px-4 lg:px-8">
                     {/* Saring Portofolio Klien Header */}
                     <div className="mb-4 text-left">
@@ -122,7 +137,7 @@ export default function Portfolio() {
                 {/* Filter Container Block */}
                 <div 
                     ref={filterBarRef}
-                    className={`sticky top-[80px] lg:top-[109px] z-40 mb-2 w-full transition-all duration-300 ${
+                    className={`sticky top-[var(--header-height,80px)] z-40 mb-2 w-full transition-all duration-300 ${
                         isScrolled 
                             ? 'bg-gray-950 py-4 border-b border-white/10 shadow-md' 
                             : 'bg-transparent py-2 border-transparent shadow-none'
@@ -132,7 +147,12 @@ export default function Portfolio() {
                         {/* Left Scroll Button (Desktop Only) */}
                         <button 
                             onClick={() => scroll('left')}
-                            className="hidden md:flex w-10 h-10 rounded-full bg-white/5 border border-white/10 shadow-sm text-gray-400 hover:text-white hover:bg-white/10 active:scale-90 transition-all cursor-pointer shrink-0 items-center justify-center z-10"
+                            disabled={!canScrollLeft}
+                            className={`hidden md:flex w-10 h-10 rounded-full border shadow-sm transition-all shrink-0 items-center justify-center z-10 ${
+                                canScrollLeft 
+                                ? 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10 active:scale-90 cursor-pointer' 
+                                : 'bg-transparent border-transparent text-transparent cursor-default'
+                            }`}
                             aria-label="Scroll left"
                         >
                             <ChevronLeft className="w-5 h-5" />
@@ -144,7 +164,8 @@ export default function Portfolio() {
                             
                             <div 
                                 ref={scrollContainerRef}
-                                className="flex items-center gap-2.5 overflow-x-auto py-2 px-6 md:px-0 select-none scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden relative z-0"
+                                onScroll={checkScroll}
+                                className="flex items-center gap-2.5 overflow-x-auto py-2 px-6 md:px-0 select-none scroll-smooth relative z-0"
                                 role="tablist"
                                 aria-label="Portfolio Categories"
                             >
@@ -156,7 +177,7 @@ export default function Portfolio() {
                                         onClick={() => handleCategoryChange(category)}
                                         className={`whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green cursor-pointer ${
                                             activeCategory === category 
-                                            ? 'bg-brand-green text-white shadow-md shadow-brand-green/20 scale-105' 
+                                            ? 'bg-brand-green text-slate-900 shadow-md shadow-brand-green/20 scale-105' 
                                             : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white transition-colors'
                                         }`}
                                     >
@@ -171,7 +192,12 @@ export default function Portfolio() {
                         {/* Right Scroll Button (Desktop Only) */}
                         <button 
                             onClick={() => scroll('right')}
-                            className="hidden md:flex w-10 h-10 rounded-full bg-white/5 border border-white/10 shadow-sm text-gray-400 hover:text-white hover:bg-white/10 active:scale-90 transition-all cursor-pointer shrink-0 items-center justify-center z-10"
+                            disabled={!canScrollRight}
+                            className={`hidden md:flex w-10 h-10 rounded-full border shadow-sm transition-all shrink-0 items-center justify-center z-10 ${
+                                canScrollRight 
+                                ? 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10 active:scale-90 cursor-pointer' 
+                                : 'bg-transparent border-transparent text-transparent cursor-default'
+                            }`}
                             aria-label="Scroll right"
                         >
                             <ChevronRight className="w-5 h-5" />
@@ -197,15 +223,8 @@ export default function Portfolio() {
                                         {client.category}
                                     </div>
 
-                                    {/* Image Container (White BG for logos with blurred photo fallback) */}
-                                    <div className="relative h-48 sm:h-56 w-full bg-white flex items-center justify-center overflow-hidden border-b border-gray-800 group-hover:bg-gray-50 transition-colors">
-                                        {/* Blurred backdrop to fill pillarboxes for tall photos (fully opaque to cover white) */}
-                                        <div 
-                                            className="absolute inset-0 bg-cover bg-center blur-2xl scale-125 saturate-150"
-                                            style={{ backgroundImage: `url(${client.image})` }}
-                                        />
-                                        {/* Slight white overlay to ensure transparent PNG logos still have a solid readable background */}
-                                        <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]" />
+                                    {/* Image Container */}
+                                    <div className="relative h-48 sm:h-56 w-full bg-gray-50/50 dark:bg-white/5 flex items-center justify-center overflow-hidden group-hover:bg-white/10 transition-colors p-4">
                                         <img 
                                             src={client.image} 
                                             alt={client.name} 

@@ -32,7 +32,8 @@ Route::get('/service-kami/service-cuci-ac', function () {
             'Meningkatkan kualitas udara dalam ruangan.'
         ],
         'service_type' => 'cuci-ac',
-        'price' => 'Mulai Rp 75.000 / unit'
+        'price' => 'Mulai Rp 75.000 / unit',
+        'hasCalculator' => true
     ]);
 });
 

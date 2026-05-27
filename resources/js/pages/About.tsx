@@ -24,7 +24,7 @@ export default function About() {
                         <img 
                             src="/images/ac_technician.png" 
                             alt="Tim iCool" 
-                            className="w-full h-full object-cover object-top opacity-30 mix-blend-luminosity"
+                            className="w-full h-full object-cover object-top opacity-30"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent"></div>
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/50 to-transparent"></div>
@@ -48,15 +48,13 @@ export default function About() {
 
                 {/* The "No-Nonsense" Guarantee (Director's Message) */}
                 <section className="py-12 lg:py-16 relative">
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-900/10 blur-[120px] rounded-full pointer-events-none"></div>
-                    
                     <div className="container mx-auto px-6 lg:px-8 relative z-10">
                         <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-6 lg:p-12 backdrop-blur-sm max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
                             {/* Accent line */}
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900"></div>
                             
                             <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-start">
-                                <div className="w-12 h-12 lg:w-16 lg:h-16 shrink-0 rounded-2xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center text-brand-green shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                                <div className="w-12 h-12 lg:w-16 lg:h-16 shrink-0 rounded-2xl bg-brand-green/10 border border-brand-green/20 flex items-center justify-center text-brand-green">
                                     <ShieldAlert className="w-6 h-6 lg:w-8 lg:h-8" />
                                 </div>
                                 <div className="space-y-6">
@@ -149,9 +147,8 @@ export default function About() {
                             {/* Right Side: Certificate Image */}
                             <div className="flex-1 w-full relative mt-8 lg:mt-0">
                                 {/* Decorative elements behind certificate */}
-                                <div className="absolute -inset-4 bg-gradient-to-tr from-brand-green/20 to-blue-500/20 blur-3xl opacity-30 rounded-full"></div>
                                 
-                                <div className="grid grid-cols-3 gap-2 sm:gap-4 relative">
+                                <div className="max-w-sm mx-auto relative">
                                     <div className="relative rounded-xl border border-gray-700 bg-gray-900 p-1.5 shadow-xl hover:-translate-y-2 transition-transform duration-300 cursor-pointer group">
                                         <img 
                                             src="/images/certificate.png" 
@@ -160,26 +157,6 @@ export default function About() {
                                         />
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/50 rounded-xl transition-opacity">
                                             <span className="text-white text-xs sm:text-sm font-medium border border-white/50 px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm">Daikin</span>
-                                        </div>
-                                    </div>
-                                    <div className="relative rounded-xl border border-gray-700 bg-gray-900 p-1.5 shadow-xl hover:-translate-y-2 transition-transform duration-300 cursor-pointer group">
-                                        <img 
-                                            src="/images/certificate.png" 
-                                            alt="Panasonic Certificate" 
-                                            className="w-full h-auto rounded-lg shadow-inner border border-gray-800 group-hover:brightness-110"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/50 rounded-xl transition-opacity">
-                                            <span className="text-white text-xs sm:text-sm font-medium border border-white/50 px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm">Panasonic</span>
-                                        </div>
-                                    </div>
-                                    <div className="relative rounded-xl border border-gray-700 bg-gray-900 p-1.5 shadow-xl hover:-translate-y-2 transition-transform duration-300 cursor-pointer group">
-                                        <img 
-                                            src="/images/certificate.png" 
-                                            alt="Mitsubishi Certificate" 
-                                            className="w-full h-auto rounded-lg shadow-inner border border-gray-800 group-hover:brightness-110"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/50 rounded-xl transition-opacity">
-                                            <span className="text-white text-xs sm:text-sm font-medium border border-white/50 px-2 sm:px-3 py-1 rounded-full backdrop-blur-sm">Mitsubishi</span>
                                         </div>
                                     </div>
                                 </div>

@@ -106,11 +106,11 @@ export default function FormsManager({ forms }: FormsManagerProps) {
 
                     {/* Pagination */}
                     {forms.last_page > 1 && (
-                        <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
-                            <div className="text-sm text-gray-500">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 sm:gap-0 px-6 py-4 border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
+                            <div className="text-sm text-gray-500 text-center sm:text-left">
                                 Menampilkan <span className="font-medium">{forms.data.length}</span> dari <span className="font-medium">{forms.total}</span> data
                             </div>
-                            <div className="flex gap-1">
+                            <div className="flex flex-wrap justify-center sm:justify-end gap-1">
                                 {forms.links.map((link, i) => (
                                     <Button
                                         key={i}
@@ -167,12 +167,9 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                         </div>
                     )}
                     
-                    <DialogFooter className="sm:justify-between">
-                        <Button variant="outline" onClick={() => setSelectedContact(null)}>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setSelectedContact(null)} className="w-full sm:w-auto">
                             Tutup
-                        </Button>
-                        <Button>
-                            Tandai Selesai
                         </Button>
                     </DialogFooter>
                 </DialogContent>
