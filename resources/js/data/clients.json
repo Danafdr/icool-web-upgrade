@@ -1,0 +1,353 @@
+[
+    {
+        "name": "Astra Honda Motor",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/ASTRA_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Instalasi & Maintenance VRV",
+        "stats": "500+ Unit AC"
+    },
+    {
+        "name": "Bali United F.C.",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/BALI-UNITED_page-00011.jpg",
+        "category": "Featured",
+        "scope": "Kontrak Maintenance Tahunan",
+        "stats": "Seluruh Fasilitas"
+    },
+    {
+        "name": "BCA",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/bca.jpg",
+        "category": "Bank Institusi Finansial",
+        "scope": "Service & Perbaikan Rutin",
+        "stats": "Cabang Utama"
+    },
+    {
+        "name": "BIMC Hospital",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/BIMC-2_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Pembersihan Besar & Overhaul",
+        "stats": "200+ Unit Split"
+    },
+    {
+        "name": "Garuda Wisnu Kencana",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/gwk.jpg",
+        "category": "Atraksi Wisata",
+        "scope": "Pengadaan Unit & Instalasi",
+        "stats": "Sistem Chiller Sentral"
+    },
+    {
+        "name": "Intercontinental",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/INTERCONTINENTAL_page-00011.jpg",
+        "category": "Featured",
+        "scope": "Instalasi & Maintenance VRV",
+        "stats": "500+ Unit AC"
+    },
+    {
+        "name": "MNC Group",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/mnc.jpg",
+        "category": "Featured",
+        "scope": "Kontrak Maintenance Tahunan",
+        "stats": "Seluruh Fasilitas"
+    },
+    {
+        "name": "Intiland",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/INTILAND_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Service & Perbaikan Rutin",
+        "stats": "Cabang Utama"
+    },
+    {
+        "name": "CIMB Niaga",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/cimb.jpg",
+        "category": "Bank Institusi Finansial",
+        "scope": "Pembersihan Besar & Overhaul",
+        "stats": "200+ Unit Split"
+    },
+    {
+        "name": "Courtyard Marriot",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/MARRIOT_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Pengadaan Unit & Instalasi",
+        "stats": "Sistem Chiller Sentral"
+    },
+    {
+        "name": "Ciputra Hospital",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/ciputra-hospital.jpg",
+        "category": "Featured",
+        "scope": "Instalasi & Maintenance VRV",
+        "stats": "500+ Unit AC"
+    },
+    {
+        "name": "Inaya Putri Bali",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/inaya.jpg",
+        "category": "Featured",
+        "scope": "Kontrak Maintenance Tahunan",
+        "stats": "Seluruh Fasilitas"
+    },
+    {
+        "name": "Alfa Midi",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/ALFA-MIDI_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Service & Perbaikan Rutin",
+        "stats": "Cabang Utama"
+    },
+    {
+        "name": "Indomaret",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/INDOMARET_page-0001.jpg",
+        "category": "Toko Serba Ada",
+        "scope": "Pembersihan Besar & Overhaul",
+        "stats": "200+ Unit Split"
+    },
+    {
+        "name": "Gramedia",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/gramedia.jpg",
+        "category": "Featured",
+        "scope": "Pengadaan Unit & Instalasi",
+        "stats": "Sistem Chiller Sentral"
+    },
+    {
+        "name": "KPP Pratama",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/KPP.jpg",
+        "category": "Featured",
+        "scope": "Instalasi & Maintenance VRV",
+        "stats": "500+ Unit AC"
+    },
+    {
+        "name": "Erha Clinic",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/erha.jpg",
+        "category": "Salon Klinik Kecantikan",
+        "scope": "Kontrak Maintenance Tahunan",
+        "stats": "Seluruh Fasilitas"
+    },
+    {
+        "name": "Natasha Skin Clinic",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/natasha.jpg",
+        "category": "Salon Klinik Kecantikan",
+        "scope": "Service & Perbaikan Rutin",
+        "stats": "Cabang Utama"
+    },
+    {
+        "name": "Kolega Coworking",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/kolega.jpg",
+        "category": "Featured",
+        "scope": "Pembersihan Besar & Overhaul",
+        "stats": "200+ Unit Split"
+    },
+    {
+        "name": "Chatime",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/chatime.jpg",
+        "category": "Featured",
+        "scope": "Pengadaan Unit & Instalasi",
+        "stats": "Sistem Chiller Sentral"
+    },
+    {
+        "name": "Bornga",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/07/BORNGA_page-0001.jpg",
+        "category": "Featured",
+        "scope": "Instalasi & Maintenance VRV",
+        "stats": "500+ Unit AC"
+    },
+    {
+        "name": "Coco Mart",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/cocomart.jpg",
+        "category": "Featured",
+        "scope": "Kontrak Maintenance Tahunan",
+        "stats": "Seluruh Fasilitas"
+    },
+    {
+        "name": "Vivere Gallery",
+        "image": "https://mssgroup.co.id/wp-content/uploads/2020/09/vivere.jpg",
+        "category": "Featured",
+        "scope": "Service & Perbaikan Rutin",
+        "stats": "Cabang Utama"
+    },
+    {
+        "name": "MNC Televisi Indonesia",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/MNC-Televisi-Indonesia-300x300.jpg",
+        "category": "Lain Lain"
+    },
+    {
+        "name": "MPM Rent",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/MPM-Rent-300x300.jpg",
+        "category": "Lain Lain"
+    },
+    {
+        "name": "All Fresh Stores Jakarta",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Toko-Retail-All-Fresh-Stores-Jakarta-300x300.jpg",
+        "category": "Toko Retail"
+    },
+    {
+        "name": "Ranch Market Farmers Market",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Toko-Retail-Ranch-Market-Farmers-Market-300x300.jpg",
+        "category": "Toko Retail"
+    },
+    {
+        "name": "Full House Toy Store Bali",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Toko-Retail-Full-House-Toy-Store-Bali-300x300.jpg",
+        "category": "Toko Retail"
+    },
+    {
+        "name": "Arkadia Green Park Jakarta",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-Arkadia-Green-Park-Jakarta-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "FIN Logistics Head Office",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-FIN-Logistics-Head-Office-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "PT Datacom Roxy",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-PT-Datacom-Roxy-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "Bali United Head Office",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-Bali-United-Head-Office-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "UNIO Wisma AKR Jakarta",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-UNIO-Wisma-AKR-Jakarta-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "PT Gratia Multi Sejahtera",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Gedung-Perkantoran-PT-Gratia-Multi-Sejahtera-300x300.jpg",
+        "category": "Gedung Perkantoran"
+    },
+    {
+        "name": "Siloam Denpasar",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Rumah-Sakit-Siloam-Denpasar-300x300.jpg",
+        "category": "Rumah Sakit"
+    },
+    {
+        "name": "BIMC Nusa Dua",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Rumah-Sakit-BIMC-Nusa-Dua-300x300.jpg",
+        "category": "Rumah Sakit"
+    },
+    {
+        "name": "RS Premier Bintaro",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Rumah-Sakit-RS-Premier-Bintaro-300x300.jpg",
+        "category": "Rumah Sakit"
+    },
+    {
+        "name": "RS Medica BSD",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Rumah-Sakit-RS-Medica-BSD-300x300.jpg",
+        "category": "Rumah Sakit"
+    },
+    {
+        "name": "Apotik Roxy",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Rumah-Sakit-Apotik-Roxy-300x300.jpg",
+        "category": "Rumah Sakit"
+    },
+    {
+        "name": "Alfamidi",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Toko-Serba-Ada-Alfamidi-300x300.jpg",
+        "category": "Toko Serba Ada"
+    },
+    {
+        "name": "MMart",
+        "image": "https://icool.co.id/wp-content/uploads/2025/09/Toko-Serba-Ada-MMart-300x300.jpg",
+        "category": "Toko Serba Ada"
+    },
+    {
+        "name": "Circle K",
+        "image": "https://icool.co.id/wp-content/uploads/2025/09/Toko-Serba-Ada-Circle-K-300x300.jpg",
+        "category": "Toko Serba Ada"
+    },
+    {
+        "name": "Bengkel BOS",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Bengkel-BOS-300x300.jpg",
+        "category": "Bengkel Dealershop"
+    },
+    {
+        "name": "Toyota Astra Finance TAF",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Toyota-Astra-Finance-TAF-300x300.jpg",
+        "category": "Bengkel Dealershop"
+    },
+    {
+        "name": "Balai Arkeologi Kemdikbud",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Balai-Arkeologi-Kemdikbud-300x300.jpg",
+        "category": "Kantor Pemerintahan"
+    },
+    {
+        "name": "Universitas Bunda Mulia",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Sekolah-Universitas-Universitas-Bunda-Mulia-300x300.jpg",
+        "category": "Sekolah Universitas"
+    },
+    {
+        "name": "Blossom High School",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Sekolah-Universitas-Blossom-High-School-300x300.jpg",
+        "category": "Sekolah Universitas"
+    },
+    {
+        "name": "Restaurant Coffee Kentucky Fried Chicken KFC Indonesia",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Kentucky-Fried-Chicken-KFC-Indonesia-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Restaurant Coffee Sate Khas Senayan Jabodetabek",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Sate-Khas-Senayan-Jabodetabek-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Restaurant Coffee Teras Budhe Jakarta",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Teras-Budhe-Jakarta-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Restaurant Coffee Kopi KULO Renon",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Kopi-KULO-Renon-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Restaurant Coffee Cafe Le Bay Blueprint",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Cafe-Le-Bay-Blueprint-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Restaurant Coffee Kopi JANJI JIWA Nusa Dua",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Restaurant-Coffee-Kopi-JANJI-JIWA-Nusa-Dua-300x300.jpg",
+        "category": "Restaurant Coffee Shop"
+    },
+    {
+        "name": "Hotel Nikko Nusa Dua Bali",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Hotel-Villa-Hotel-Nikko-Nusa-Dua-Bali-300x300.jpg",
+        "category": "Hotel Villa"
+    },
+    {
+        "name": "Hotel Raffles Jimbaran",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Hotel-Villa-Hotel-Raffles-Jimbaran-300x300.jpg",
+        "category": "Hotel Villa"
+    },
+    {
+        "name": "Hotel Paras Paros Serangan",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Hotel-Villa-Hotel-Paras-Paros-Serangan-300x300.jpg",
+        "category": "Hotel Villa"
+    },
+    {
+        "name": "Hotel IZE Canggu",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Hotel-Villa-Hotel-IZE-Canggu-300x300.jpg",
+        "category": "Hotel Villa"
+    },
+    {
+        "name": "Stadium Olah Raga Wayan Dipta Bali United Gianyar",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Stadium-Olah-Raga-Wayan-Dipta-Bali-United-Gianyar-300x300.jpg",
+        "category": "Stadium Olahraga"
+    },
+    {
+        "name": "Gereja RK45",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Tempat-Ibadah-Gereja-RK45-300x300.jpg",
+        "category": "Tempat Ibadah"
+    },
+    {
+        "name": "Gereja Laurensius",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Tempat-Ibadah-Gereja-Laurensius-300x300.jpg",
+        "category": "Tempat Ibadah"
+    },
+    {
+        "name": "GBI MOI",
+        "image": "https://icool.co.id/wp-content/uploads/2023/11/Tempat-Ibadah-GBI-MOI-300x300.jpg",
+        "category": "Tempat Ibadah"
+    }
+]

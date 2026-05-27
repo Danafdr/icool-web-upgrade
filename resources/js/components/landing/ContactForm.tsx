@@ -1,0 +1,156 @@
+import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Textarea } from '../ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { CheckCircle2, Loader2 } from 'lucide-react';
+
+export default function ContactForm({ isPopup = false, defaultServiceType = '' }: { isPopup?: boolean; defaultServiceType?: string }) {
+    const [showSuccess, setShowSuccess] = useState(false);
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        phone: '',
+        hvac_issue_type: defaultServiceType,
+        message: ''
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post('/contact', {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+                setShowSuccess(true);
+            },
+        });
+    };
+
+    return (
+        <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "py-24 relative text-white" : "w-full text-white"}>
+            <div className={!isPopup ? "container mx-auto px-4 lg:px-8" : "w-full"}>
+                <div className={`mx-auto bg-white/[0.02] border border-white/10 backdrop-blur-md overflow-hidden flex flex-col md:flex-row ${!isPopup ? 'max-w-4xl rounded-3xl shadow-2xl shadow-brand-green/5' : 'w-full rounded-xl border-0'}`}>
+                    
+                    {/* Left Info Panel */}
+                    <div className="md:w-2/5 bg-white/[0.01] border-r border-white/10 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                        <div>
+                            <h3 className="text-2xl font-bold mb-4 text-white">Pesan Layanan Anda</h3>
+                            <p className="text-gray-400 mb-8 leading-relaxed">
+                                Isi formulir di samping dan tim kami akan segera menghubungi Anda untuk mengonfirmasi jadwal.
+                            </p>
+                            <div className="flex flex-wrap gap-3 mt-4">
+                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-green">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    <span className="font-medium text-sm text-gray-300">Respon Cepat</span>
+                                </div>
+                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-green">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    <span className="font-medium text-sm text-gray-300">Tim Profesional</span>
+                                </div>
+                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-green">
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    <span className="font-medium text-sm text-gray-300">Diskon 10% Kontrak Pertama</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Form Panel */}
+                    <div className="md:w-3/5 p-6 sm:p-8 lg:p-10">
+                        {showSuccess ? (
+                            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 animate-in zoom-in duration-500">
+                                <div className="w-16 h-16 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center">
+                                    <CheckCircle2 className="w-8 h-8" />
+                                </div>
+                                <h3 className="text-2xl font-bold text-white">Pesan Terkirim!</h3>
+                                <p className="text-gray-400">Terima kasih telah memilih iCool. Kami akan segera menghubungi Anda.</p>
+                                <Button variant="outline" onClick={() => setShowSuccess(false)} className="mt-4 border-white/10 text-white hover:bg-white/10 cursor-pointer">
+                                    Kirim pesan lain
+                                </Button>
+                            </div>
+                        ) : (
+                            <form onSubmit={submit} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="name" className="text-gray-300">Nama <span className="text-red-500">*</span></Label>
+                                        <Input 
+                                            id="name" 
+                                            placeholder="Nama lengkap Anda" 
+                                            value={data.name} 
+                                            onChange={e => setData('name', e.target.value)} 
+                                            className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.name ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label htmlFor="phone" className="text-gray-300">Telepon/WhatsApp <span className="text-red-500">*</span></Label>
+                                        <Input 
+                                            id="phone" 
+                                            placeholder="0812..." 
+                                            value={data.phone} 
+                                            onChange={e => setData('phone', e.target.value)}
+                                            className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.phone ? "border-red-500" : ""}`}
+                                        />
+                                        {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
+                                    </div>
+                                </div>
+                                
+                                <div className="space-y-2">
+                                    <Label htmlFor="email" className="text-gray-300">Email</Label>
+                                    <Input 
+                                        id="email" 
+                                        type="email" 
+                                        placeholder="anda@email.com" 
+                                        value={data.email} 
+                                        onChange={e => setData('email', e.target.value)}
+                                        className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.email ? "border-red-500" : ""}`}
+                                    />
+                                    {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
+                                </div>
+
+                                <div className="space-y-3">
+                                    <Label className="text-sm font-semibold text-gray-300">Pilih Layanan</Label>
+                                    <Select value={data.hvac_issue_type} onValueChange={(v) => setData('hvac_issue_type', v)}>
+                                        <SelectTrigger className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.hvac_issue_type ? "border-red-500" : ""}`}>
+                                            <SelectValue placeholder="-- Pilih opsi --" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-gray-900/95 backdrop-blur-sm border-white/20 text-white">
+                                            <SelectItem value="cuci-ac" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Service Cuci AC</SelectItem>
+                                            <SelectItem value="kontrak-cuci" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Kontrak Maintenance AC</SelectItem>
+                                            <SelectItem value="reparasi" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Reparasi / Perbaikan</SelectItem>
+                                            <SelectItem value="teknisi-standby" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Teknisi Standby / Inhouse</SelectItem>
+                                            <SelectItem value="spare-part" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Spare Part AC</SelectItem>
+                                            <SelectItem value="instalasi" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Instalasi / Pasang AC</SelectItem>
+                                            <SelectItem value="general" className="hover:bg-zinc-800 focus:bg-zinc-800 cursor-pointer">Pertanyaan Umum</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    {errors.hvac_issue_type && <p className="text-xs text-red-500">{errors.hvac_issue_type}</p>}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="message" className="text-gray-300">Pesan / Pertanyaan</Label>
+                                    <Textarea 
+                                        id="message" 
+                                        placeholder="Ceritakan detail keluhan atau kebutuhan Anda..." 
+                                        rows={4}
+                                        value={data.message}
+                                        onChange={e => setData('message', e.target.value)}
+                                        className={`bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.message ? "border-red-500" : "resize-none"}`}
+                                    />
+                                    {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
+                                </div>
+
+                                <Button type="submit" disabled={processing} className="w-full bg-brand-green hover:bg-brand-green/90 text-white rounded-full h-12 text-md font-medium shadow-lg shadow-brand-green/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
+                                    {processing && <Loader2 className="w-4 h-4 animate-spin mr-2" />}
+                                    {processing ? "Mengirim..." : "Kirim Permintaan"}
+                                </Button>
+                            </form>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
