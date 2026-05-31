@@ -58,10 +58,12 @@
         <div class="error-message">@yield('message')</div>
         @hasSection('action_onclick')
             <a href="javascript:void(0)" onclick="@yield('action_onclick')" class="btn">@yield('action_text')</a>
-        @elseif(View::hasSection('action_url'))
-            <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
         @else
-            <a href="/" class="btn">Kembali ke Beranda</a>
+            @hasSection('action_url')
+                <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
+            @else
+                <a href="/" class="btn">Kembali ke Beranda</a>
+            @endif
         @endif
     </div>
 </body>
