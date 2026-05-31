@@ -583,6 +583,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                 )}
                             </Button>
                         )}
+                        </div>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
