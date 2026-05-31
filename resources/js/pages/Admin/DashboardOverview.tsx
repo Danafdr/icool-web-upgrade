@@ -565,11 +565,13 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     {selectedContact.email && (
                                         <div className="flex items-center gap-2">
                                             <Button
+                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isRefining || !data.message}
                                                 className="h-7 text-xs bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/50 dark:hover:bg-emerald-900/40"
-                                                onClick={async () => {
+                                                onClick={async (e) => {
+                                                    e.preventDefault();
                                                     setIsRefining(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/refine-reply`, { draft: data.message });
@@ -586,11 +588,13 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                 Perbaiki Bahasa
                                             </Button>
                                             <Button
+                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isGenerating}
                                                 className="h-7 text-xs bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/50 dark:hover:bg-indigo-900/40"
-                                                onClick={async () => {
+                                                onClick={async (e) => {
+                                                    e.preventDefault();
                                                     setIsGenerating(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/${selectedContact.id}/generate-reply`);
