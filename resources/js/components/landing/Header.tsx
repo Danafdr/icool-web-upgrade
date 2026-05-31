@@ -115,7 +115,11 @@ export default function Header() {
                         <SheetContent side="right" className="w-[300px] sm:w-[350px] flex flex-col p-0">
                             <SheetHeader className="p-6 border-b border-gray-100 dark:border-gray-800 text-left">
                                 <SheetTitle>
-                                    <img src="/images/logo.png" alt="ICool Logo" className="h-8 w-auto object-contain" />
+                                    <SheetClose asChild>
+                                        <Link href="/">
+                                            <img src="/images/logo.png" alt="ICool Logo" className="h-8 w-auto object-contain" />
+                                        </Link>
+                                    </SheetClose>
                                 </SheetTitle>
                             </SheetHeader>
                             
