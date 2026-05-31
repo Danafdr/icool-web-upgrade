@@ -31,7 +31,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
     };
 
     return (
-        <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "py-24 relative text-white" : "w-full text-white"}>
+        <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "py-24 relative text-white scroll-mt-24 sm:scroll-m-[15vh]" : "w-full text-white"}>
             <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
                 <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8 z-[100]">
                     <DialogHeader>
