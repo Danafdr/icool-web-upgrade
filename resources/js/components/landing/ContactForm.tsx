@@ -31,7 +31,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
     };
 
     return (
-        <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "py-24 relative text-white scroll-mt-24 sm:scroll-m-[15vh]" : "w-full text-white"}>
+        <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "min-h-[calc(100vh-100px)] flex flex-col items-center justify-center py-12 relative text-white scroll-mt-[100px]" : "w-full text-white"}>
             <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
                 <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8 z-[100]">
                     <DialogHeader>
@@ -57,7 +57,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                 </DialogContent>
             </Dialog>
 
-            <div className={!isPopup ? "container mx-auto px-4 lg:px-8" : "w-full"}>
+            <div className={!isPopup ? "container mx-auto px-4 lg:px-8 w-full" : "w-full"}>
                 <div className={`mx-auto bg-white/[0.02] border border-white/10 backdrop-blur-md overflow-hidden flex flex-col md:flex-row ${!isPopup ? 'max-w-4xl rounded-3xl shadow-2xl shadow-brand-green/5' : 'w-full rounded-xl border-0'}`}>
                     
                     {/* Left Info Panel */}
