@@ -20,7 +20,9 @@ interface Contact {
     phone: string;
     hvac_issue_type: string | null;
     message: string | null;
-    status: 'pending' | 'resolved';
+    status: 'pending' | 'resolved' | 'spam';
+    ai_summary: string | null;
+    urgency_level: 'low' | 'medium' | 'high' | null;
     created_at: string;
 }
 
@@ -264,6 +266,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     <SelectItem value="all">Semua Status</SelectItem>
                                     <SelectItem value="pending">Menunggu</SelectItem>
                                     <SelectItem value="resolved">Selesai</SelectItem>
+                                    <SelectItem value="spam">Spam</SelectItem>
                                 </SelectContent>
                             </Select>
 
@@ -347,15 +350,30 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                     {contact.hvac_issue_type || '-'}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    {contact.status === 'pending' ? (
-                                                        <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/50">
-                                                            Menunggu
-                                                        </Badge>
-                                                    ) : (
-                                                        <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-900/50">
-                                                            Selesai
-                                                        </Badge>
-                                                    )}
+                                                    <div className="flex flex-col gap-1.5">
+                                                        {contact.status === 'pending' ? (
+                                                            <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/50 w-fit">
+                                                                Menunggu
+                                                            </Badge>
+                                                        ) : contact.status === 'resolved' ? (
+                                                            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-900/50 w-fit">
+                                                                Selesai
+                                                            </Badge>
+                                                        ) : (
+                                                            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-900/50 w-fit">
+                                                                Spam
+                                                            </Badge>
+                                                        )}
+                                                        {contact.urgency_level && (
+                                                            <Badge variant="outline" className={cn("text-[10px] w-fit", 
+                                                                contact.urgency_level === 'high' ? "border-red-300 text-red-600 bg-red-50 dark:bg-red-900/20 dark:border-red-800" :
+                                                                contact.urgency_level === 'medium' ? "border-orange-300 text-orange-600 bg-orange-50 dark:bg-orange-900/20 dark:border-orange-800" :
+                                                                "border-blue-300 text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-800"
+                                                            )}>
+                                                                Urgensi: {contact.urgency_level === 'high' ? 'Tinggi' : contact.urgency_level === 'medium' ? 'Sedang' : 'Rendah'}
+                                                            </Badge>
+                                                        )}
+                                                    </div>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-right">
                                                     <div className="flex items-center justify-end gap-2">
@@ -513,8 +531,26 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                             </div>
 
                             <div className="pt-2 border-t border-gray-100 dark:border-gray-800">
-                                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Pesan</label>
-                                <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-950 rounded-lg text-sm whitespace-pre-wrap text-gray-700 dark:text-gray-300 min-h-24 max-h-48 overflow-y-auto border border-gray-100/50 dark:border-gray-800/50">
+                                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                                    AI Summary 
+                                    {selectedContact.urgency_level && (
+                                        <Badge variant="outline" className={cn("text-[10px] uppercase font-bold", 
+                                            selectedContact.urgency_level === 'high' ? "border-red-300 text-red-600 bg-red-50" :
+                                            selectedContact.urgency_level === 'medium' ? "border-orange-300 text-orange-600 bg-orange-50" :
+                                            "border-blue-300 text-blue-600 bg-blue-50"
+                                        )}>
+                                            {selectedContact.urgency_level}
+                                        </Badge>
+                                    )}
+                                </label>
+                                <div className="mt-2 p-3 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200 border border-blue-100 dark:border-blue-900/50">
+                                    {selectedContact.ai_summary || selectedContact.message || 'Tidak ada pesan tambahan.'}
+                                </div>
+                            </div>
+
+                            <div className="pt-2">
+                                <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Pesan Asli</label>
+                                <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-950 rounded-lg text-sm whitespace-pre-wrap text-gray-600 dark:text-gray-400 min-h-16 max-h-32 overflow-y-auto border border-gray-100/50 dark:border-gray-800/50">
                                     {selectedContact.message || 'Tidak ada pesan tambahan.'}
                                 </div>
                             </div>
