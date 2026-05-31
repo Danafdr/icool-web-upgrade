@@ -3,3 +3,5 @@
 @section('title', __('Server Error'))
 @section('code', '500')
 @section('message', __('Server Error'))
+@section('action_url', 'javascript:window.location.reload()')
+@section('action_text', 'Refresh Website')

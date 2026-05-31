@@ -56,7 +56,11 @@
     <div class="container">
         <h1 class="error-code">@yield('code')</h1>
         <div class="error-message">@yield('message')</div>
-        <a href="/" class="btn">Kembali ke Beranda</a>
+        @hasSection('action_url')
+            <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
+        @else
+            <a href="/" class="btn">Kembali ke Beranda</a>
+        @endif
     </div>
 </body>
 </html>
