@@ -120,6 +120,7 @@ class AdminDashboardController extends Controller
             $refined = $geminiService->refineReply($request->input('draft'));
             return response()->json(['reply' => $refined]);
         } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('refineReply Controller Error: ' . $e->getMessage() . ' ' . $e->getTraceAsString());
             return response()->json(['reply' => 'Gagal memperbaiki balasan: ' . $e->getMessage()], 500);
         }
     }
