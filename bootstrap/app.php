@@ -40,6 +40,7 @@ if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
         '/tmp/storage/framework/cache/data',
         '/tmp/storage/framework/sessions',
         '/tmp/storage/logs',
+        '/tmp/bootstrap/cache',
     ];
     
     foreach ($directories as $dir) {
@@ -47,6 +48,8 @@ if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
             mkdir($dir, 0755, true);
         }
     }
+    
+    $app->useBootstrapPath('/tmp/bootstrap');
 }
 
 return $app;
