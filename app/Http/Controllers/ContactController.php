@@ -25,8 +25,15 @@ class ContactController extends Controller
         $contact->update(['order_id' => $orderId]);
 
         if ($contact->email) {
-            \Illuminate\Support\Facades\Mail::to($contact->email)
-                ->send(new \App\Mail\OrderReceivedMail($contact));
+            try {
+                \Illuminate\Support\Facades\Mail::to($contact->email)
+                    ->send(new \App\Mail\OrderReceivedMail($contact));
+            } catch (\Throwable $e) {
+                return back()->with([
+                    'success' => 'Email failed to send. Error: ' . $e->getMessage(),
+                    'order_id' => $orderId
+                ]);
+            }
         }
 
         return back()->with([
