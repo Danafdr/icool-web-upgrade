@@ -30,13 +30,13 @@ export default function About() {
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/50 to-transparent"></div>
                     </div>
                     
-                    <div className="container mx-auto px-6 lg:px-8 relative z-10">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
                         <div className="max-w-3xl">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/20 text-brand-green text-sm font-semibold mb-6">
                                 <BadgeCheck className="w-4 h-4" />
                                 PT Mitra Sahabat Selaras
                             </div>
-                            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
                                 Menjadi <span className="text-brand-green">ONE STOP HVAC SERVICE</span> Kebanggaan Indonesia
                             </h1>
                             <p className="text-xl text-gray-400 leading-relaxed">
@@ -48,7 +48,7 @@ export default function About() {
 
                 {/* The "No-Nonsense" Guarantee (Director's Message) */}
                 <section className="py-12 lg:py-16 relative">
-                    <div className="container mx-auto px-6 lg:px-8 relative z-10">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
                         <div className="bg-gray-900/50 border border-gray-800 rounded-3xl p-6 lg:p-12 backdrop-blur-sm max-w-5xl mx-auto shadow-2xl relative overflow-hidden">
                             {/* Accent line */}
                             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-900"></div>
@@ -82,7 +82,7 @@ export default function About() {
 
                 {/* Certifications, Badges & Company Profile */}
                 <section className="py-12 lg:py-20 bg-gray-900/30 border-t border-b border-gray-800/50">
-                    <div className="container mx-auto px-6 lg:px-8">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8">
                         <div className="flex flex-col lg:flex-row gap-16 items-center">
                             
                             {/* Left Side: Badges & PDF */}
@@ -137,9 +137,9 @@ export default function About() {
                                         </div>
                                         <div className="text-left">
                                             <div className="text-white font-bold group-hover:text-brand-green transition-colors">Unduh Company Profile</div>
-                                            <div className="text-sm text-gray-500 line-clamp-1">iCool Company Profile 2022.pdf</div>
+                                            <div className="text-sm text-gray-400 line-clamp-1">iCool Company Profile 2022.pdf</div>
                                         </div>
-                                        <Download className="w-5 h-5 text-gray-600 group-hover:text-brand-green ml-auto sm:ml-8 transition-colors shrink-0" />
+                                        <Download className="w-5 h-5 text-gray-400 group-hover:text-brand-green ml-auto sm:ml-8 transition-colors shrink-0" />
                                     </a>
                                 </div>
                             </div>
@@ -160,7 +160,7 @@ export default function About() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="mt-6 text-center text-sm text-gray-500">
+                                <div className="mt-6 text-center text-sm text-gray-400">
                                     Sertifikasi dan keanggotaan service partner resmi iCool
                                 </div>
                             </div>
@@ -172,7 +172,7 @@ export default function About() {
                 {/* Call to Action Footer */}
                 <section className="py-16 lg:py-24 relative overflow-hidden">
                     <div className="absolute inset-0 bg-brand-green/5"></div>
-                    <div className="container mx-auto px-6 lg:px-8 relative z-10 text-center">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10 text-center">
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
                             Siap Beralih ke Service AC yang Terpercaya?
                         </h2>
@@ -181,7 +181,7 @@ export default function About() {
                         </p>
                         <Dialog>
                             <DialogTrigger asChild>
-                                <Button size="lg" className="bg-brand-green hover:bg-brand-green/90 text-white rounded-full h-14 px-8 text-base font-medium shadow-lg shadow-brand-green/20 cursor-pointer">
+                                <Button size="lg" className="bg-brand-green hover:bg-brand-green/90 text-slate-900 rounded-full h-14 px-8 text-base font-bold shadow-lg shadow-brand-green/20 cursor-pointer">
                                     Jadwalkan Survey & Service Sekarang
                                 </Button>
                             </DialogTrigger>

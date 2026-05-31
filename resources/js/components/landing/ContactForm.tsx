@@ -80,6 +80,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                             placeholder="Nama lengkap Anda" 
                                             value={data.name} 
                                             onChange={e => setData('name', e.target.value)} 
+                                            required
                                             className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.name ? "border-red-500" : ""}`}
                                         />
                                         {errors.name && <p className="text-xs text-red-500">{errors.name}</p>}
@@ -93,6 +94,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                             placeholder="0812..." 
                                             value={data.phone} 
                                             onChange={e => setData('phone', e.target.value)}
+                                            required
                                             className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.phone ? "border-red-500" : ""}`}
                                         />
                                         {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
@@ -139,7 +141,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                         rows={4}
                                         value={data.message}
                                         onChange={e => setData('message', e.target.value)}
-                                        className={`bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.message ? "border-red-500" : "resize-none"}`}
+                                        className={`bg-white/10 border-white/20 text-white rounded-xl resize-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.message ? "border-red-500" : ""}`}
                                     />
                                     {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
                                 </div>

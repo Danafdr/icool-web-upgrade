@@ -157,7 +157,7 @@ export default function PricingCalculator() {
                             <div className="bg-white/5 border border-white/10 p-5 rounded-2xl">
                                 <Label className="text-gray-400 text-sm mb-1 block">Harga Normal</Label>
                                 <div className="text-3xl font-bold text-white mb-2">
-                                    {hasCalculated ? formatIDR(result.hargaNormal) : 'Rp 0'}
+                                    {hasCalculated ? formatIDR(result.hargaNormal) : '—'}
                                 </div>
                                 {hasCalculated && result.isBelowMinimumCharge && (
                                     <div className="flex items-start gap-2 text-yellow-500 text-xs bg-yellow-500/10 p-2 rounded-lg border border-yellow-500/20">
@@ -171,7 +171,7 @@ export default function PricingCalculator() {
                                 <div className="absolute top-0 right-0 bg-brand-green text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">HEMAT</div>
                                 <Label className="text-brand-green text-sm mb-1 block font-medium">Promo: Bayar 3, Cuci 4 X</Label>
                                 <div className="text-2xl font-bold text-white">
-                                    {hasCalculated ? formatIDR(result.promoTier1) : 'Rp 0'}
+                                    {hasCalculated ? formatIDR(result.promoTier1) : '—'}
                                 </div>
                                 <p className="text-gray-400 text-xs mt-1">Berlaku untuk paket bundling cuci 4 unit.</p>
                             </div>
@@ -180,7 +180,7 @@ export default function PricingCalculator() {
                                 <div className="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg">SUPER HEMAT</div>
                                 <Label className="text-blue-400 text-sm mb-1 block font-medium">Promo: Bayar 10, Cuci 12 X</Label>
                                 <div className="text-2xl font-bold text-white">
-                                    {hasCalculated ? formatIDR(result.promoTier2) : 'Rp 0'}
+                                    {hasCalculated ? formatIDR(result.promoTier2) : '—'}
                                 </div>
                                 <p className="text-gray-400 text-xs mt-1">Berlaku untuk paket korporasi/borongan cuci 12 unit.</p>
                             </div>

@@ -9,7 +9,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 z-0 pointer-events-none">
             </div>
 
-            <div className="container relative z-10 mx-auto px-4 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+            <div className="container relative z-10 mx-auto px-4 md:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
                 <div className="flex-1 text-center lg:text-left space-y-8">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/20 text-brand-green text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <span className="relative flex h-2 w-2">
@@ -19,9 +19,8 @@ export default function HeroSection() {
                         Diskon 10% Kontrak Service Pertama Anda
                     </div>
                     
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
-                        Mitra Terpercaya Bisnis Anda Dalam <br />
-                        <span className="text-brand-green">Urusan Pendingin</span>
+                    <h1 className="max-w-3xl text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+                        Mitra Terpercaya Bisnis Anda Dalam <span className="text-brand-green">Urusan Pendingin</span>
                     </h1>
                     
                     <p className="text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto lg:mx-0 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">

@@ -22,7 +22,6 @@ export default function Portfolio() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const filterBarRef = useRef<HTMLDivElement>(null);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
@@ -41,11 +40,7 @@ export default function Portfolio() {
     }, []);
 
     const handleLoadMore = () => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setVisibleCount(prev => prev + 8);
-            setIsLoading(false);
-        }, 500);
+        setVisibleCount(prev => prev + 8);
     };
 
     useEffect(() => {
@@ -102,7 +97,6 @@ export default function Portfolio() {
             {/* Hero Section */}
             <section className="relative min-h-[35vh] py-16 md:py-24 bg-gray-950 overflow-hidden flex items-center justify-center">
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-[url('/images/grid.svg')] bg-center opacity-10 mix-blend-overlay"></div>
                     {/* Bottom Gradient Fade to transition into Portfolio Grid Section */}
                     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-dark to-transparent" />
                 </div>
@@ -113,7 +107,7 @@ export default function Portfolio() {
                         Our Trusted Clients
                     </div>
                     
-                    <h1 className="text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight animate-in fade-in slide-in-from-bottom-6 duration-700 delay-100">
                         Mereka yang Mempercayakan <span className="text-brand-green">Kenyamanan</span> Kepada Kami
                     </h1>
                     
@@ -137,13 +131,13 @@ export default function Portfolio() {
                 {/* Filter Container Block */}
                 <div 
                     ref={filterBarRef}
-                    className={`sticky top-[var(--header-height,80px)] z-40 mb-2 w-full transition-all duration-300 ${
+                    className={`sticky top-[calc(var(--header-height,80px)-1px)] z-40 mb-2 w-full transition-all duration-300 ${
                         isScrolled 
                             ? 'bg-gray-950 py-4 border-b border-white/10 shadow-md' 
                             : 'bg-transparent py-2 border-transparent shadow-none'
                     }`}
                 >
-                    <div className="container mx-auto px-0 md:px-8 flex items-center gap-2 relative">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 flex items-center gap-2 relative">
                         {/* Left Scroll Button (Desktop Only) */}
                         <button 
                             onClick={() => scroll('left')}
@@ -158,14 +152,17 @@ export default function Portfolio() {
                             <ChevronLeft className="w-5 h-5" />
                         </button>
 
-                        {/* Scrollable Container with Mobile Gradient Affordance */}
+                        {/* Scrollable Container with Gradient Fades */}
                         <div className="relative flex-1 min-w-0">
-                            <div className={`absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l ${isScrolled ? 'from-gray-950' : 'from-brand-dark'} to-transparent z-10 pointer-events-none md:hidden`}></div>
+                            {/* Left gradient fade */}
+                            <div className={`absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r ${isScrolled ? 'from-gray-950' : 'from-brand-dark'} to-transparent z-10 pointer-events-none transition-opacity duration-300 ${canScrollLeft ? 'opacity-100' : 'opacity-0'}`}></div>
+                            {/* Right gradient fade */}
+                            <div className={`absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l ${isScrolled ? 'from-gray-950' : 'from-brand-dark'} to-transparent z-10 pointer-events-none transition-opacity duration-300 ${canScrollRight ? 'opacity-100' : 'opacity-0'}`}></div>
                             
                             <div 
                                 ref={scrollContainerRef}
                                 onScroll={checkScroll}
-                                className="flex items-center gap-2.5 overflow-x-auto py-2 px-6 md:px-0 select-none scroll-smooth relative z-0"
+                                className="flex items-center gap-2.5 overflow-x-auto py-3 px-6 md:px-2 select-none scroll-smooth relative z-0"
                                 role="tablist"
                                 aria-label="Portfolio Categories"
                             >
@@ -264,11 +261,9 @@ export default function Portfolio() {
                         <div className="mt-12 flex justify-center">
                             <button
                                 onClick={handleLoadMore}
-                                disabled={isLoading}
-                                className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white font-medium text-sm shadow-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-md active:scale-95 cursor-pointer flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white font-medium text-sm shadow-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-md active:scale-95 cursor-pointer flex items-center gap-2"
                             >
-                                {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
-                                {isLoading ? 'Memuat...' : 'Muat Lebih Banyak'}
+                                Muat Lebih Banyak
                             </button>
                         </div>
                     )}

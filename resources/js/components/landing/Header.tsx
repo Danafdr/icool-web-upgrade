@@ -2,11 +2,13 @@ import { Link, usePage } from '@inertiajs/react';
 import { Button } from '../ui/button';
 import { Mail, ChevronDown, Menu, Phone } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from '../ui/sheet';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '../ui/dropdown-menu';
 
 export default function Header() {
     const { url } = usePage();
     const headerRef = useRef<HTMLElement>(null);
+    const [isServicesOpen, setIsServicesOpen] = useState(false);
 
     useEffect(() => {
         const updateHeaderHeight = () => {
@@ -64,19 +66,31 @@ export default function Header() {
                         Tentang Kami
                     </Link>
                     
-                    <div className="relative group py-6">
-                        <button className={`flex items-center gap-1.5 transition-colors ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-600 dark:text-gray-300 hover:text-primary'}`}>
-                            Layanan Kami <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
-                        </button>
-                        <div className="absolute left-0 top-full -mt-2 hidden group-hover:flex flex-col bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 shadow-xl w-64 rounded-xl p-2 z-50">
-                            <Link href="/service-kami/service-cuci-ac" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Service Cuci AC</Link>
-                            <Link href="/service-kami/kontrak-cuci-ac" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Kontrak Cuci AC</Link>
-                            <Link href="/service-kami/reparasi-perbaikan" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Reparasi / Perbaikan</Link>
-                            <Link href="/service-kami/teknisi-standby-inhouse" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Teknisi Standby / Inhouse</Link>
-                            <Link href="/service-kami/spare-part-ac" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Spare Part AC</Link>
-                            <Link href="/service-kami/instalasi-pasang-ac" className="px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-green-50 hover:text-primary dark:hover:bg-gray-900 rounded-lg transition-colors">Instalasi / Pasang AC</Link>
-                        </div>
-                    </div>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className={`flex items-center gap-1.5 py-6 transition-colors focus:outline-none ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-600 dark:text-gray-300 hover:text-primary'}`}>
+                            Layanan Kami <ChevronDown className="w-4 h-4 transition-transform duration-300" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" className="w-64 bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-800 rounded-xl p-2 shadow-xl">
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/service-cuci-ac" className="w-full text-sm text-gray-700 dark:text-gray-300">Service Cuci AC</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/kontrak-cuci-ac" className="w-full text-sm text-gray-700 dark:text-gray-300">Kontrak Cuci AC</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/reparasi-perbaikan" className="w-full text-sm text-gray-700 dark:text-gray-300">Reparasi / Perbaikan</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/teknisi-standby-inhouse" className="w-full text-sm text-gray-700 dark:text-gray-300">Teknisi Standby / Inhouse</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/spare-part-ac" className="w-full text-sm text-gray-700 dark:text-gray-300">Spare Part AC</Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer focus:bg-green-50 focus:text-primary dark:focus:bg-gray-900 rounded-lg">
+                                <Link href="/service-kami/instalasi-pasang-ac" className="w-full text-sm text-gray-700 dark:text-gray-300">Instalasi / Pasang AC</Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
 
                     <Link href="/projek-ac" className={`transition-colors relative after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-primary after:transition-transform after:duration-300 ${url.startsWith('/projek-ac') ? 'text-primary after:scale-x-100' : 'text-gray-600 dark:text-gray-300 hover:text-primary after:scale-x-0'}`}>
                         Portfolio
@@ -84,9 +98,10 @@ export default function Header() {
                 </nav>
 
                 <div className="flex items-center gap-2 md:gap-4">
-                    <Button asChild className="hidden sm:inline-flex bg-primary hover:bg-primary/90 text-white rounded-full px-6 shadow-lg shadow-primary/30">
+                    <Button asChild className="bg-primary hover:bg-primary/90 text-slate-900 font-semibold rounded-full px-4 sm:px-6 shadow-lg shadow-primary/30">
                         <Link href="/#contact">
-                            Booking Sekarang
+                            <span className="sm:hidden">Booking</span>
+                            <span className="hidden sm:inline">Booking Sekarang</span>
                         </Link>
                     </Button>
 
@@ -114,17 +129,20 @@ export default function Header() {
                                 </SheetClose>
                                 
                                 <div className="flex flex-col gap-3 my-2 py-4 border-y border-gray-100 dark:border-gray-800">
-                                    <span className={`flex items-center justify-between text-lg font-medium ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-900 dark:text-white'}`}>
+                                    <button 
+                                        onClick={() => setIsServicesOpen(!isServicesOpen)}
+                                        className={`flex items-center justify-between w-full text-lg font-medium focus:outline-none ${url.startsWith('/service-kami') ? 'text-primary' : 'text-gray-900 dark:text-white'}`}
+                                    >
                                         Layanan Kami
-                                        <ChevronDown className="w-5 h-5 text-gray-400" />
-                                    </span>
-                                    <div className="flex flex-col gap-3 pl-4 border-l-2 border-gray-100 dark:border-gray-800 mt-2">
-                                        <SheetClose asChild><Link href="/service-kami/service-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Service Cuci AC</Link></SheetClose>
-                                        <SheetClose asChild><Link href="/service-kami/kontrak-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Kontrak Cuci AC</Link></SheetClose>
-                                        <SheetClose asChild><Link href="/service-kami/reparasi-perbaikan" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Reparasi / Perbaikan</Link></SheetClose>
-                                        <SheetClose asChild><Link href="/service-kami/teknisi-standby-inhouse" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Teknisi Standby / Inhouse</Link></SheetClose>
-                                        <SheetClose asChild><Link href="/service-kami/spare-part-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Spare Part AC</Link></SheetClose>
-                                        <SheetClose asChild><Link href="/service-kami/instalasi-pasang-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">Instalasi / Pasang AC</Link></SheetClose>
+                                        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                                    </button>
+                                    <div className={`flex flex-col gap-3 pl-4 border-l-2 border-gray-100 dark:border-gray-800 mt-2 overflow-hidden transition-all duration-300 ${isServicesOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <SheetClose asChild><Link href="/service-kami/service-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Service Cuci AC</Link></SheetClose>
+                                        <SheetClose asChild><Link href="/service-kami/kontrak-cuci-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Kontrak Cuci AC</Link></SheetClose>
+                                        <SheetClose asChild><Link href="/service-kami/reparasi-perbaikan" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Reparasi / Perbaikan</Link></SheetClose>
+                                        <SheetClose asChild><Link href="/service-kami/teknisi-standby-inhouse" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Teknisi Standby / Inhouse</Link></SheetClose>
+                                        <SheetClose asChild><Link href="/service-kami/spare-part-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Spare Part AC</Link></SheetClose>
+                                        <SheetClose asChild><Link href="/service-kami/instalasi-pasang-ac" className="text-gray-600 dark:text-gray-400 hover:text-primary transition-colors py-1">Instalasi / Pasang AC</Link></SheetClose>
                                     </div>
                                 </div>
 
@@ -133,7 +151,7 @@ export default function Header() {
                                 </SheetClose>
                                 
                                 <SheetClose asChild>
-                                    <Button asChild className="w-full mt-6 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg shadow-primary/30 h-12 text-base">
+                                    <Button asChild className="w-full mt-6 bg-primary hover:bg-primary/90 text-slate-900 font-bold rounded-full shadow-lg shadow-primary/30 h-12 text-base">
                                         <Link href="/#contact">Booking Sekarang</Link>
                                     </Button>
                                 </SheetClose>

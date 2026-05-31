@@ -28,18 +28,18 @@ export default function GenericService({ title, description, benefits, service_t
                     <div className="absolute inset-0 pointer-events-none">
                         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-brand-dark to-transparent" />
                     </div>
-                    <div className="container relative z-10 mx-auto px-6 md:px-12 text-left md:text-center">
-                        <h1 className="text-4xl lg:text-6xl font-extrabold text-white mb-6">
+                    <div className="container relative z-10 mx-auto px-4 md:px-6 lg:px-8 text-left md:text-center">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
                             {title}
                         </h1>
-                        <p className="text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto md:mx-auto ml-0">
+                        <p className="text-lg lg:text-xl text-gray-400 max-w-3xl md:mx-auto">
                             {description}
                         </p>
                     </div>
                 </div>
 
                 {/* Details Section */}
-                <div className="container mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col md:flex-row gap-8 md:gap-12">
+                <div className="container mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24 flex flex-col md:flex-row gap-8 md:gap-12">
                     <div className="flex-1 space-y-6 md:space-y-8">
                         <h2 className="text-3xl font-bold text-white text-left">Kenapa Memilih Layanan Ini?</h2>
                         <ul className="space-y-4">
@@ -95,7 +95,7 @@ export default function GenericService({ title, description, benefits, service_t
 
                 {/* Guarantees Section */}
                 <div className="border-t border-white/10 bg-white/[0.02] py-16 md:py-24 mt-8 md:mt-0">
-                    <div className="container mx-auto px-6 md:px-12 text-center max-w-4xl">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center max-w-4xl">
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
                             AC Anda Masih Bermasalah?
                         </h2>
@@ -139,12 +139,12 @@ export default function GenericService({ title, description, benefits, service_t
 
                 {/* Testimonial Section (Grid) */}
                 <div className="py-16 md:py-24 relative overflow-hidden bg-transparent">
-                    <div className="container mx-auto px-6 md:px-12 mb-12 text-center relative z-20">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 mb-12 text-center relative z-20">
                         <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Kata Pelanggan Kami</h2>
                         <p className="text-gray-400">Dipercaya oleh ratusan rumah, villa, dan perusahaan ternama.</p>
                     </div>
                     
-                    <div className="container mx-auto px-6 md:px-12 relative z-20">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-20">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {[
                                 {

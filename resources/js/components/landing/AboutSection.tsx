@@ -4,11 +4,11 @@ import { Button } from '../ui/button';
 
 export default function AboutSection() {
     return (
-        <section className="py-20 lg:py-32 relative overflow-hidden" id="about">
+        <section className="py-16 md:py-24 relative overflow-hidden" id="about">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-brand-dark to-transparent opacity-50 z-0"></div>
             
-            <div className="container mx-auto px-6 lg:px-8 relative z-10">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                     {/* Text Content */}
                     <div className="space-y-8 md:space-y-10 order-2 lg:order-1">
@@ -36,7 +36,7 @@ export default function AboutSection() {
                                 </div>
                                 <div>
                                     <h4 className="text-white font-bold mb-1">Kepuasan Pelanggan</h4>
-                                    <p className="text-sm text-gray-500">Menjadi prioritas utama di setiap kunjungan.</p>
+                                    <p className="text-sm text-gray-400">Menjadi prioritas utama di setiap kunjungan.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
@@ -45,7 +45,7 @@ export default function AboutSection() {
                                 </div>
                                 <div>
                                     <h4 className="text-white font-bold mb-1">Kepercayaan & Transparansi</h4>
-                                    <p className="text-sm text-gray-500">Tanpa biaya tersembunyi, SOP ketat anti-kecurangan.</p>
+                                    <p className="text-sm text-gray-400">Tanpa biaya tersembunyi, SOP ketat anti-kecurangan.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
@@ -54,7 +54,7 @@ export default function AboutSection() {
                                 </div>
                                 <div>
                                     <h4 className="text-white font-bold mb-1">Kerjasama Tim</h4>
-                                    <p className="text-sm text-gray-500">Teknisi tersertifikasi, solid dan profesional.</p>
+                                    <p className="text-sm text-gray-400">Teknisi tersertifikasi, solid dan profesional.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
@@ -63,7 +63,7 @@ export default function AboutSection() {
                                 </div>
                                 <div>
                                     <h4 className="text-white font-bold mb-1">Peningkatan Kualitas</h4>
-                                    <p className="text-sm text-gray-500">Terus berinovasi dan belajar setiap harinya.</p>
+                                    <p className="text-sm text-gray-400">Terus berinovasi dan belajar setiap harinya.</p>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@ export default function AboutSection() {
                             />
                         </div>
                         {/* Floating Badge */}
-                        <div className="absolute -bottom-6 -left-6 sm:bottom-8 sm:-left-12 bg-gray-950 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl z-20">
+                        <div className="absolute -bottom-6 left-4 sm:-left-12 bg-gray-950 border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl z-20">
                             <div className="flex items-center gap-4">
                                 <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-green/20 flex items-center justify-center text-brand-green">
                                     <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
