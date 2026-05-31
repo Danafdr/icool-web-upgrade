@@ -11,8 +11,8 @@ export default function ServicesSection() {
                     </h2>
                     <div className="overflow-hidden w-full relative pt-4">
                         {/* Left/Right Gradient Mask for smooth entrance/exit */}
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-950 to-transparent z-10 pointer-events-none"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-950 to-transparent z-10 pointer-events-none"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
 
                         {/* Marquee Track */}
                         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] shrink-0">
