@@ -1,5 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
+import { toast } from 'sonner';
 import { LayoutDashboard, LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { logout } from '@/routes';
@@ -9,8 +10,19 @@ interface Props {
 }
 
 export default function AdminLayout({ children }: Props) {
-    const { url } = usePage();
+    const { url, props } = usePage();
     const [sidebarOpen, setSidebarOpen] = React.useState(false);
+
+    // Watch for flash messages from Inertia
+    useEffect(() => {
+        const flash = props.flash as { success?: string; error?: string };
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+    }, [props.flash]);
 
     const navLinks = [
         { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
