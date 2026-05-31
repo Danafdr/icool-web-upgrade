@@ -28,7 +28,7 @@ class ContactController extends Controller
             try {
                 \Illuminate\Support\Facades\Mail::to($contact->email)
                     ->send(new \App\Mail\OrderReceivedMail($contact));
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
                 // Log the error but don't crash the form submission
                 \Illuminate\Support\Facades\Log::error('Failed to send order email: ' . $e->getMessage());
             }
