@@ -2,7 +2,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 import formsA66cc0 from './forms'
 /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 export const overview = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -17,7 +17,7 @@ overview.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 overview.url = (options?: RouteQueryOptions) => {
@@ -26,7 +26,7 @@ overview.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 overview.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ overview.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
     const overviewForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
         overviewForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -64,7 +64,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
         overviewForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -80,7 +80,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     overview.form = overviewForm
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 export const forms = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -95,7 +95,7 @@ forms.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.url = (options?: RouteQueryOptions) => {
@@ -104,7 +104,7 @@ forms.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -113,7 +113,7 @@ forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -123,7 +123,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
     const formsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -133,7 +133,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
         formsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -142,7 +142,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
         formsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

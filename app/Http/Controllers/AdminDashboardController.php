@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminReplyMail;
 
 class AdminDashboardController extends Controller
 {
@@ -77,5 +79,24 @@ class AdminDashboardController extends Controller
         return Inertia::render('Admin/FormsManager', [
             'forms' => $forms
         ]);
+    }
+
+    public function reply(Request $request, Contact $contact)
+    {
+        $request->validate([
+            'message' => 'required|string',
+        ]);
+
+        if (!$contact->email) {
+            return redirect()->back()->with('error', 'Kontak ini tidak memiliki alamat email.');
+        }
+
+        try {
+            Mail::to($contact->email)->send(new AdminReplyMail($contact, $request->message));
+            
+            return redirect()->back()->with('success', 'Balasan email berhasil dikirim ke ' . $contact->email);
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', 'Gagal mengirim email: ' . $e->getMessage());
+        }
     }
 }

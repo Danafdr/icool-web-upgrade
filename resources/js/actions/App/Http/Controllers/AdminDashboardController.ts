@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AdminDashboardController::index
- * @see app/Http/Controllers/AdminDashboardController.php:11
+ * @see app/Http/Controllers/AdminDashboardController.php:13
  * @route '/admin'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 export const forms = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ forms.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ forms.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
 forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
     const formsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
         formsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:72
+ * @see app/Http/Controllers/AdminDashboardController.php:74
  * @route '/admin/forms'
  */
         formsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -157,7 +157,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     forms.form = formsForm
 /**
 * @see \App\Http\Controllers\AdminDashboardController::updateStatus
- * @see app/Http/Controllers/AdminDashboardController.php:59
+ * @see app/Http/Controllers/AdminDashboardController.php:61
  * @route '/admin/forms/{contact}/status'
  */
 export const updateStatus = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -172,7 +172,7 @@ updateStatus.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::updateStatus
- * @see app/Http/Controllers/AdminDashboardController.php:59
+ * @see app/Http/Controllers/AdminDashboardController.php:61
  * @route '/admin/forms/{contact}/status'
  */
 updateStatus.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -205,7 +205,7 @@ updateStatus.url = (args: { contact: number | { id: number } } | [contact: numbe
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::updateStatus
- * @see app/Http/Controllers/AdminDashboardController.php:59
+ * @see app/Http/Controllers/AdminDashboardController.php:61
  * @route '/admin/forms/{contact}/status'
  */
 updateStatus.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -215,7 +215,7 @@ updateStatus.patch = (args: { contact: number | { id: number } } | [contact: num
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::updateStatus
- * @see app/Http/Controllers/AdminDashboardController.php:59
+ * @see app/Http/Controllers/AdminDashboardController.php:61
  * @route '/admin/forms/{contact}/status'
  */
     const updateStatusForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -230,7 +230,7 @@ updateStatus.patch = (args: { contact: number | { id: number } } | [contact: num
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::updateStatus
- * @see app/Http/Controllers/AdminDashboardController.php:59
+ * @see app/Http/Controllers/AdminDashboardController.php:61
  * @route '/admin/forms/{contact}/status'
  */
         updateStatusForm.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -244,6 +244,85 @@ updateStatus.patch = (args: { contact: number | { id: number } } | [contact: num
         })
     
     updateStatus.form = updateStatusForm
-const AdminDashboardController = { index, forms, updateStatus }
+/**
+* @see \App\Http\Controllers\AdminDashboardController::reply
+ * @see app/Http/Controllers/AdminDashboardController.php:84
+ * @route '/admin/forms/{contact}/reply'
+ */
+export const reply = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: reply.url(args, options),
+    method: 'post',
+})
+
+reply.definition = {
+    methods: ["post"],
+    url: '/admin/forms/{contact}/reply',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\AdminDashboardController::reply
+ * @see app/Http/Controllers/AdminDashboardController.php:84
+ * @route '/admin/forms/{contact}/reply'
+ */
+reply.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { contact: args }
+    }
+
+            if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+            args = { contact: args.id }
+        }
+    
+    if (Array.isArray(args)) {
+        args = {
+                    contact: args[0],
+                }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+                        contact: typeof args.contact === 'object'
+                ? args.contact.id
+                : args.contact,
+                }
+
+    return reply.definition.url
+            .replace('{contact}', parsedArgs.contact.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\AdminDashboardController::reply
+ * @see app/Http/Controllers/AdminDashboardController.php:84
+ * @route '/admin/forms/{contact}/reply'
+ */
+reply.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: reply.url(args, options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\AdminDashboardController::reply
+ * @see app/Http/Controllers/AdminDashboardController.php:84
+ * @route '/admin/forms/{contact}/reply'
+ */
+    const replyForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: reply.url(args, options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\AdminDashboardController::reply
+ * @see app/Http/Controllers/AdminDashboardController.php:84
+ * @route '/admin/forms/{contact}/reply'
+ */
+        replyForm.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: reply.url(args, options),
+            method: 'post',
+        })
+    
+    reply.form = replyForm
+const AdminDashboardController = { index, forms, updateStatus, reply }
 
 export default AdminDashboardController

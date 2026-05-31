@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Head, router } from '@inertiajs/react';
+import { Head, router, useForm, usePage } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
 import { format } from 'date-fns';
 
 interface Contact {
@@ -33,9 +34,24 @@ interface FormsManagerProps {
 
 export default function FormsManager({ forms }: FormsManagerProps) {
     const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+    const { data, setData, post, processing, reset, errors } = useForm({
+        message: ''
+    });
 
     const handleViewDetails = (contact: Contact) => {
         setSelectedContact(contact);
+        reset('message');
+    };
+
+    const handleReplySubmit = () => {
+        if (!selectedContact) return;
+        
+        post(route('admin.forms.reply', selectedContact.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset('message');
+            }
+        });
     };
 
     return (
@@ -171,6 +187,26 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                     {selectedContact.message || 'Tidak ada pesan tambahan.'}
                                 </div>
                             </div>
+
+                            {/* Reply Section */}
+                            <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <label className="text-xs font-semibold text-gray-500 uppercase block mb-2">Balas Email</label>
+                                {selectedContact.email ? (
+                                    <>
+                                        <Textarea 
+                                            placeholder="Tulis balasan email Anda di sini..." 
+                                            value={data.message}
+                                            onChange={e => setData('message', e.target.value)}
+                                            className="min-h-32 mb-2"
+                                        />
+                                        {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                                    </>
+                                ) : (
+                                    <div className="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 p-3 rounded-lg text-sm">
+                                        Pelanggan tidak menyertakan alamat email, Anda tidak dapat membalas via email.
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )}
                     
@@ -178,6 +214,15 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                         <Button variant="outline" onClick={() => setSelectedContact(null)} className="w-full sm:w-auto">
                             Tutup
                         </Button>
+                        {selectedContact?.email && (
+                            <Button 
+                                onClick={handleReplySubmit} 
+                                disabled={processing || !data.message.trim()} 
+                                className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold"
+                            >
+                                {processing ? 'Mengirim...' : 'Kirim Balasan'}
+                            </Button>
+                        )}
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
