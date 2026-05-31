@@ -21,24 +21,25 @@ class ContactController extends Controller
         // So we create the contact, generate the ID, and then update it.
         $contact = Contact::create($validated);
         
-        $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
-        $contact->update(['order_id' => $orderId]);
+        try {
+            $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
+            $contact->update(['order_id' => $orderId]);
 
-        if ($contact->email) {
-            try {
+            if ($contact->email) {
                 \Illuminate\Support\Facades\Mail::to($contact->email)
                     ->send(new \App\Mail\OrderReceivedMail($contact));
-            } catch (\Throwable $e) {
-                return back()->with([
-                    'success' => 'Email failed to send. Error: ' . $e->getMessage(),
-                    'order_id' => $orderId
-                ]);
             }
-        }
 
-        return back()->with([
-            'success' => 'Your request has been sent successfully!',
-            'order_id' => $orderId
-        ]);
+            return back()->with([
+                'success' => 'Your request has been sent successfully!',
+                'order_id' => $orderId
+            ]);
+        } catch (\Throwable $e) {
+            // Flash the EXACT error to the frontend so we can see what's wrong!
+            return back()->with([
+                'success' => 'ERROR LOG: ' . $e->getMessage(),
+                'order_id' => 'ERROR'
+            ]);
+        }
     }
 }
