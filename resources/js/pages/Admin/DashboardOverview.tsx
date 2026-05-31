@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Head, router } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import AdminLayout from '@/layouts/AdminLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
 import { FileText, AlertCircle, Calendar, Search, X, CheckCircle, Clock, Copy, Inbox } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from 'sonner';
@@ -48,6 +49,9 @@ interface Props {
 
 export default function DashboardOverview({ stats, forms, serviceTypes = [], filters = {} }: Props) {
     const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+    const { data, setData, post, processing, reset, errors } = useForm({
+        message: ''
+    });
     
     // Local states for Optimistic UI updates
     const [localForms, setLocalForms] = useState<Contact[]>(forms.data);
@@ -431,7 +435,12 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
             </div>
 
             {/* Detail Modal */}
-            <Dialog open={!!selectedContact} onOpenChange={(open) => !open && setSelectedContact(null)}>
+            <Dialog open={!!selectedContact} onOpenChange={(open) => {
+                if (!open) {
+                    setSelectedContact(null);
+                    reset('message');
+                }
+            }}>
                 <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-xl">
                     <DialogHeader>
                         <DialogTitle className="text-gray-900 dark:text-white">Detail Formulir</DialogTitle>
@@ -509,15 +518,54 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     {selectedContact.message || 'Tidak ada pesan tambahan.'}
                                 </div>
                             </div>
+                            
+                            {/* Reply Section */}
+                            <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <label className="text-xs font-semibold text-gray-500 uppercase block mb-2">Balas Email</label>
+                                {selectedContact.email ? (
+                                    <>
+                                        <Textarea 
+                                            placeholder="Tulis balasan email Anda di sini..." 
+                                            value={data.message}
+                                            onChange={e => setData('message', e.target.value)}
+                                            className="min-h-32 mb-2"
+                                        />
+                                        {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                                    </>
+                                ) : (
+                                    <div className="bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 p-3 rounded-lg text-sm">
+                                        Pelanggan tidak menyertakan alamat email, Anda tidak dapat membalas via email.
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )}
 
                     <DialogFooter className="flex sm:justify-between items-center gap-3">
-                        <Button variant="outline" onClick={() => setSelectedContact(null)} className="w-full sm:w-auto active:scale-95 transition-transform">
+                        <Button variant="outline" onClick={() => {
+                            setSelectedContact(null);
+                            reset('message');
+                        }} className="w-full sm:w-auto active:scale-95 transition-transform">
                             Tutup
                         </Button>
-                        {selectedContact && (
-                            <Button
+                        <div className="flex gap-2 w-full sm:w-auto mt-2 sm:mt-0">
+                            {selectedContact?.email && (
+                                <Button 
+                                    onClick={() => {
+                                        post(route('admin.forms.reply', selectedContact.id), {
+                                            preserveScroll: true,
+                                            onSuccess: () => reset('message')
+                                        });
+                                    }} 
+                                    disabled={processing || !data.message.trim()} 
+                                    className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold active:scale-95 transition-transform"
+                                >
+                                    {processing ? 'Mengirim...' : 'Kirim Balasan'}
+                                </Button>
+                            )}
+                            {selectedContact && (
+                                <Button
+
                                 variant={selectedContact.status === 'pending' ? 'default' : 'secondary'}
                                 onClick={() => handleStatusChange(selectedContact.id, selectedContact.status)}
                                 className="w-full sm:w-auto active:scale-95 transition-transform"
