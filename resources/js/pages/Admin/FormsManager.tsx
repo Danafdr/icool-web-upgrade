@@ -9,6 +9,7 @@ import { format } from 'date-fns';
 
 interface Contact {
     id: number;
+    order_id: string | null;
     name: string;
     email: string | null;
     phone: string;
@@ -139,6 +140,12 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                     
                     {selectedContact && (
                         <div className="space-y-4 py-4">
+                            {selectedContact.order_id && (
+                                <div className="bg-brand-green/10 border border-brand-green/20 p-3 rounded-lg mb-2">
+                                    <label className="text-xs font-semibold text-brand-green uppercase tracking-wider">Order ID</label>
+                                    <p className="text-sm font-bold text-gray-900 dark:text-white mt-1 font-mono tracking-wider">{selectedContact.order_id}</p>
+                                </div>
+                            )}
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="text-xs font-semibold text-gray-500 uppercase">Nama Pelanggan</label>

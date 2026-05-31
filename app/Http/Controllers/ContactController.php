@@ -17,14 +17,17 @@ class ContactController extends Controller
             'message' => 'nullable|string'
         ]);
 
-        // Save to database
+        // Generate Order ID (e.g., ORD-20260531-0001) first, but wait, $contact->id is only available after creation.
+        // So we create the contact, generate the ID, and then update it.
         $contact = Contact::create($validated);
-
-        // Generate Order ID (e.g., ORD-20260531-0001)
+        
         $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
+        $contact->update(['order_id' => $orderId]);
 
-        // Here you would typically send an email.
-        // Mail::to('info@icool.co.id')->send(new ContactMail($validated));
+        if ($contact->email) {
+            \Illuminate\Support\Facades\Mail::to($contact->email)
+                ->send(new \App\Mail\OrderReceivedMail($contact));
+        }
 
         return back()->with([
             'success' => 'Your request has been sent successfully!',
