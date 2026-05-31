@@ -94,4 +94,59 @@ Your output MUST be a valid JSON object with EXACTLY these keys:
 }
 PROMPT;
     }
+
+    public function generateReply(\App\Models\Contact $contact): string
+    {
+        if (empty($this->apiKey)) {
+            Log::warning('Gemini API key is not set. Cannot generate reply.');
+            return "Maaf, sistem AI sedang tidak tersedia saat ini. Mohon ketik balasan Anda secara manual.";
+        }
+
+        $prompt = <<<PROMPT
+You are an expert customer service representative for "iCool", a professional HVAC and AC repair company in Indonesia.
+Please write a polite, professional, and helpful email reply to the following customer. 
+
+Customer Details:
+Name: {$contact->name}
+Service Requested: {$contact->hvac_issue_type}
+Their Message/Summary: {$contact->ai_summary} (Original message: {$contact->message})
+
+Instructions:
+1. Write the reply in Indonesian.
+2. Be empathetic and professional. 
+3. If they requested a service/repair, tell them our technicians will contact them soon to schedule a visit, or ask them for a preferred time.
+4. Do NOT include a subject line, just the email body starting with a greeting (e.g., "Halo Bpk/Ibu {$contact->name},").
+5. Sign off as "Tim Support iCool".
+PROMPT;
+
+        try {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->post($this->baseUrl . '?key=' . $this->apiKey, [
+                'contents' => [
+                    [
+                        'parts' => [
+                            ['text' => $prompt]
+                        ]
+                    ]
+                ],
+                'generationConfig' => [
+                    'temperature' => 0.7,
+                ]
+            ]);
+
+            if ($response->successful()) {
+                $textResult = $response->json('candidates.0.content.parts.0.text');
+                if ($textResult) {
+                    return trim($textResult);
+                }
+            }
+
+            Log::error('Gemini API returned an invalid response during reply generation: ' . $response->body());
+        } catch (\Exception $e) {
+            Log::error('Gemini API connection error (reply generation): ' . $e->getMessage());
+        }
+
+        return "Maaf, sistem AI gagal menghasilkan balasan. Mohon ketik balasan secara manual.";
+    }
 }

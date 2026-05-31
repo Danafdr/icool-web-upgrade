@@ -99,4 +99,14 @@ class AdminDashboardController extends Controller
             return redirect()->back()->with('error', 'Gagal mengirim email: ' . $e->getMessage());
         }
     }
+
+    public function generateReply(Request $request, Contact $contact, \App\Services\GeminiService $geminiService)
+    {
+        try {
+            $reply = $geminiService->generateReply($contact);
+            return response()->json(['reply' => $reply]);
+        } catch (\Throwable $e) {
+            return response()->json(['reply' => 'Gagal menghasilkan balasan AI: ' . $e->getMessage()], 500);
+        }
+    }
 }
