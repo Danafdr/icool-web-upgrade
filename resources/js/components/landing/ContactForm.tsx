@@ -87,6 +87,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                     {/* Right Form Panel */}
                     <div className="md:w-3/5 p-6 sm:p-8 lg:p-10">
                         <form onSubmit={submit} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <Label htmlFor="name" className="text-gray-300">Nama <span className="text-red-500">*</span></Label>
                                         <Input 
