@@ -552,7 +552,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                             {selectedContact?.email && (
                                 <Button 
                                     onClick={() => {
-                                        post(route('admin.forms.reply', selectedContact.id), {
+                                        post(`/admin/forms/${selectedContact.id}/reply`, {
                                             preserveScroll: true,
                                             onSuccess: () => reset('message')
                                         });

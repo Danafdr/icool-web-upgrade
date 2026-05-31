@@ -46,7 +46,7 @@ export default function FormsManager({ forms }: FormsManagerProps) {
     const handleReplySubmit = () => {
         if (!selectedContact) return;
         
-        post(route('admin.forms.reply', selectedContact.id), {
+        post(`/admin/forms/${selectedContact.id}/reply`, {
             preserveScroll: true,
             onSuccess: () => {
                 reset('message');
