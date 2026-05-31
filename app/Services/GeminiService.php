@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 class GeminiService
 {
     protected string $apiKey;
-    protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/antigravity-preview-05-2026:generateContent';
+    protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-robotics-er-1.6-preview:generateContent';
 
     public function __construct()
     {
@@ -201,11 +201,10 @@ PROMPT;
                 }
             }
 
-            Log::error('Gemini API returned an invalid response during reply refinement: ' . $response->body());
+            throw new \Exception('Gemini API returned an invalid response during reply refinement: ' . $response->body());
         } catch (\Exception $e) {
             Log::error('Gemini API connection error (reply refinement): ' . $e->getMessage());
+            throw new \Exception('Gagal menghubungi AI (Mungkin masalah jaringan atau Rate Limit). Silakan coba lagi sebentar lagi.');
         }
-
-        return $draft;
     }
 }
