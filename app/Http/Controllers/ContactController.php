@@ -18,11 +18,17 @@ class ContactController extends Controller
         ]);
 
         // Save to database
-        Contact::create($validated);
+        $contact = Contact::create($validated);
+
+        // Generate Order ID (e.g., ORD-20260531-0001)
+        $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
 
         // Here you would typically send an email.
         // Mail::to('info@icool.co.id')->send(new ContactMail($validated));
 
-        return back()->with('success', 'Your request has been sent successfully!');
+        return back()->with([
+            'success' => 'Your request has been sent successfully!',
+            'order_id' => $orderId
+        ]);
     }
 }

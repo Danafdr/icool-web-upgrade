@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '../ui/dialog';
 import { CheckCircle2, Loader2 } from 'lucide-react';
 
 export default function ContactForm({ isPopup = false, defaultServiceType = '' }: { isPopup?: boolean; defaultServiceType?: string }) {
     const [showSuccess, setShowSuccess] = useState(false);
+    const { props } = usePage() as any;
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -30,6 +32,31 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
 
     return (
         <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "py-24 relative text-white" : "w-full text-white"}>
+            <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+                <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8 z-[100]">
+                    <DialogHeader>
+                        <div className="mx-auto w-16 h-16 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center mb-4">
+                            <CheckCircle2 className="w-8 h-8" />
+                        </div>
+                        <DialogTitle className="text-center text-2xl font-bold">Booking Berhasil!</DialogTitle>
+                        <DialogDescription className="text-center text-zinc-400 pt-2 text-base leading-relaxed">
+                            Terima kasih telah memilih iCool. Pesanan Anda telah kami terima dan kami akan mengirimkan email konfirmasi.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col items-center justify-center py-6 mt-2">
+                        <span className="text-sm text-zinc-500 mb-2 uppercase tracking-wider font-semibold">Order ID Anda</span>
+                        <div className="bg-zinc-800/80 border border-zinc-700 px-8 py-4 rounded-xl font-mono text-brand-green tracking-[0.2em] text-xl font-bold shadow-inner">
+                            {props.flash?.order_id || 'ORD-PENDING'}
+                        </div>
+                    </div>
+                    <div className="flex justify-center mt-2">
+                        <Button onClick={() => setShowSuccess(false)} className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold px-8 py-6 rounded-xl">
+                            Selesai
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
             <div className={!isPopup ? "container mx-auto px-4 lg:px-8" : "w-full"}>
                 <div className={`mx-auto bg-white/[0.02] border border-white/10 backdrop-blur-md overflow-hidden flex flex-col md:flex-row ${!isPopup ? 'max-w-4xl rounded-3xl shadow-2xl shadow-brand-green/5' : 'w-full rounded-xl border-0'}`}>
                     
@@ -59,20 +86,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
 
                     {/* Right Form Panel */}
                     <div className="md:w-3/5 p-6 sm:p-8 lg:p-10">
-                        {showSuccess ? (
-                            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 animate-in zoom-in duration-500">
-                                <div className="w-16 h-16 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center">
-                                    <CheckCircle2 className="w-8 h-8" />
-                                </div>
-                                <h3 className="text-2xl font-bold text-white">Pesan Terkirim!</h3>
-                                <p className="text-gray-400">Terima kasih telah memilih iCool. Kami akan segera menghubungi Anda.</p>
-                                <Button variant="outline" onClick={() => setShowSuccess(false)} className="mt-4 border-white/10 text-white hover:bg-white/10 cursor-pointer">
-                                    Kirim pesan lain
-                                </Button>
-                            </div>
-                        ) : (
-                            <form onSubmit={submit} className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <form onSubmit={submit} className="space-y-6">
                                     <div className="space-y-2">
                                         <Label htmlFor="name" className="text-gray-300">Nama <span className="text-red-500">*</span></Label>
                                         <Input 
@@ -151,7 +165,6 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                     {processing ? "Mengirim..." : "Kirim Permintaan"}
                                 </Button>
                             </form>
-                        )}
                     </div>
                 </div>
             </div>

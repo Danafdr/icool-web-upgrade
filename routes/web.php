@@ -110,7 +110,9 @@ Route::get('/service-kami/instalasi-pasang-ac', function () {
 Route::prefix('{current_team}')
     ->middleware(['auth', 'verified', EnsureTeamMembership::class])
     ->group(function () {
-        Route::inertia('dashboard', 'dashboard')->name('dashboard');
+        Route::get('dashboard', function () {
+            return redirect()->route('admin.overview');
+        })->name('dashboard');
     });
 
 // Secure Admin Dashboard Routes (auth only - no email verification required for internal panel)

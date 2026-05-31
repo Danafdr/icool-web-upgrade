@@ -23,7 +23,21 @@ export default function ServicesSection() {
                                 <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
                                 <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
                             </div>
-                            {/* Duplicate Set for Infinite Loop */}
+                            {/* Set 2 */}
+                            <div className="flex items-center gap-12 md:gap-24 px-6 md:px-12 opacity-80 shrink-0" aria-hidden="true">
+                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            </div>
+                            {/* Set 3 */}
+                            <div className="flex items-center gap-12 md:gap-24 px-6 md:px-12 opacity-80 shrink-0" aria-hidden="true">
+                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            </div>
+                            {/* Set 4 */}
                             <div className="flex items-center gap-12 md:gap-24 px-6 md:px-12 opacity-80 shrink-0" aria-hidden="true">
                                 <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
                                 <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
