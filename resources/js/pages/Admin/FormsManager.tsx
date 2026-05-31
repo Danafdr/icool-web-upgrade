@@ -42,6 +42,7 @@ export default function FormsManager({ forms }: FormsManagerProps) {
         message: ''
     });
     const [isGenerating, setIsGenerating] = useState(false);
+    const [isRefining, setIsRefining] = useState(false);
 
     const handleViewDetails = (contact: Contact) => {
         setSelectedContact(contact);
@@ -229,27 +230,50 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                 <div className="flex items-center justify-between mb-2">
                                     <label className="text-xs font-semibold text-gray-500 uppercase">Balas Email</label>
                                     {selectedContact.email && (
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            disabled={isGenerating}
-                                            className="h-7 text-xs bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/50 dark:hover:bg-indigo-900/40"
-                                            onClick={async () => {
-                                                setIsGenerating(true);
-                                                try {
-                                                    const res = await axios.post(`/admin/forms/${selectedContact.id}/generate-reply`);
-                                                    setData('message', res.data.reply);
-                                                    toast.success('Balasan AI berhasil dibuat!');
-                                                } catch (err: any) {
-                                                    toast.error(err.response?.data?.reply || 'Gagal menghasilkan balasan.');
-                                                } finally {
-                                                    setIsGenerating(false);
-                                                }
-                                            }}
-                                        >
-                                            {isGenerating ? <Loader2 className="w-3 h-3 mr-1.5 animate-spin" /> : <Sparkles className="w-3 h-3 mr-1.5" />}
-                                            Buat Balasan dengan AI
-                                        </Button>
+                                        <div className="flex items-center gap-2">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                disabled={isRefining || !data.message}
+                                                className="h-7 text-xs bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/50 dark:hover:bg-emerald-900/40"
+                                                onClick={async () => {
+                                                    setIsRefining(true);
+                                                    try {
+                                                        const res = await axios.post(`/admin/forms/refine-reply`, { draft: data.message });
+                                                        setData('message', res.data.reply);
+                                                        toast.success('Bahasa berhasil diperbaiki!');
+                                                    } catch (err: any) {
+                                                        toast.error(err.response?.data?.reply || 'Gagal memperbaiki balasan.');
+                                                    } finally {
+                                                        setIsRefining(false);
+                                                    }
+                                                }}
+                                            >
+                                                {isRefining ? <Loader2 className="w-3 h-3 mr-1.5 animate-spin" /> : <Sparkles className="w-3 h-3 mr-1.5" />}
+                                                Perbaiki Bahasa
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                disabled={isGenerating}
+                                                className="h-7 text-xs bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/50 dark:hover:bg-indigo-900/40"
+                                                onClick={async () => {
+                                                    setIsGenerating(true);
+                                                    try {
+                                                        const res = await axios.post(`/admin/forms/${selectedContact.id}/generate-reply`);
+                                                        setData('message', res.data.reply);
+                                                        toast.success('Balasan AI berhasil dibuat!');
+                                                    } catch (err: any) {
+                                                        toast.error(err.response?.data?.reply || 'Gagal menghasilkan balasan.');
+                                                    } finally {
+                                                        setIsGenerating(false);
+                                                    }
+                                                }}
+                                            >
+                                                {isGenerating ? <Loader2 className="w-3 h-3 mr-1.5 animate-spin" /> : <Sparkles className="w-3 h-3 mr-1.5" />}
+                                                Buat Balasan dengan AI
+                                            </Button>
+                                        </div>
                                     )}
                                 </div>
                                 {selectedContact.email ? (

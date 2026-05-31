@@ -122,6 +122,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::patch('/forms/{contact}/status', [AdminDashboardController::class, 'updateStatus'])->name('admin.forms.status');
     Route::post('/forms/{contact}/reply', [AdminDashboardController::class, 'reply'])->name('admin.forms.reply');
     Route::post('/forms/{contact}/generate-reply', [AdminDashboardController::class, 'generateReply'])->name('admin.forms.generate-reply');
+    Route::post('/forms/refine-reply', [AdminDashboardController::class, 'refineReply'])->name('admin.forms.refine-reply');
 });
 
 Route::middleware(['auth'])->group(function () {

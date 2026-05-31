@@ -109,4 +109,18 @@ class AdminDashboardController extends Controller
             return response()->json(['reply' => 'Gagal menghasilkan balasan AI: ' . $e->getMessage()], 500);
         }
     }
+
+    public function refineReply(Request $request, \App\Services\GeminiService $geminiService)
+    {
+        $request->validate([
+            'draft' => 'required|string'
+        ]);
+
+        try {
+            $refined = $geminiService->refineReply($request->input('draft'));
+            return response()->json(['reply' => $refined]);
+        } catch (\Throwable $e) {
+            return response()->json(['reply' => 'Gagal memperbaiki balasan: ' . $e->getMessage()], 500);
+        }
+    }
 }
