@@ -33,25 +33,34 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
     return (
         <section id={!isPopup ? "contact" : undefined} className={!isPopup ? "min-h-[calc(100vh-100px)] flex flex-col items-center justify-center py-12 relative text-white scroll-mt-[100px]" : "w-full text-white"}>
             <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
-                <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8 z-[100]">
+                <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white p-6 sm:p-8">
                     <DialogHeader>
                         <div className="mx-auto w-16 h-16 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center mb-4">
                             <CheckCircle2 className="w-8 h-8" />
                         </div>
-                        <DialogTitle className="text-center text-2xl font-bold">Booking Berhasil!</DialogTitle>
+                        <DialogTitle className="text-center text-2xl font-bold">
+                            {props.flash?.success?.includes('ERROR LOG') ? 'Gagal Menyimpan' : 'Booking Berhasil!'}
+                        </DialogTitle>
                         <DialogDescription className="text-center text-zinc-400 pt-2 text-base leading-relaxed">
-                            Terima kasih telah memilih iCool. Pesanan Anda telah kami terima dan kami akan mengirimkan email konfirmasi.
+                            {props.flash?.success?.includes('ERROR LOG') 
+                                ? props.flash.success 
+                                : 'Terima kasih telah memilih iCool. Pesanan Anda telah kami terima dan kami akan mengirimkan email konfirmasi.'}
                         </DialogDescription>
                     </DialogHeader>
-                    <div className="flex flex-col items-center justify-center py-6 mt-2">
-                        <span className="text-sm text-zinc-500 mb-2 uppercase tracking-wider font-semibold">Order ID Anda</span>
-                        <div className="bg-zinc-800/80 border border-zinc-700 px-8 py-4 rounded-xl font-mono text-brand-green tracking-[0.2em] text-xl font-bold shadow-inner">
-                            {props.flash?.order_id || 'ORD-PENDING'}
+                    {!props.flash?.success?.includes('ERROR LOG') && (
+                        <div className="flex flex-col items-center justify-center py-6 mt-2">
+                            <span className="text-sm text-zinc-500 mb-2 uppercase tracking-wider font-semibold">Order ID Anda</span>
+                            <div className="bg-zinc-800/80 border border-zinc-700 px-8 py-4 rounded-xl font-mono text-brand-green tracking-[0.2em] text-xl font-bold shadow-inner">
+                                {props.flash?.order_id || 'ORD-PENDING'}
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex justify-center mt-2">
-                        <Button onClick={() => setShowSuccess(false)} className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold px-8 py-6 rounded-xl">
-                            Selesai
+                    )}
+                    <div className="flex justify-center mt-2 gap-3">
+                        <Button onClick={() => setShowSuccess(false)} variant="outline" className="w-full sm:w-auto text-zinc-300 border-zinc-700 hover:bg-zinc-800 px-6 py-6 rounded-xl">
+                            Tutup
+                        </Button>
+                        <Button onClick={() => router.visit('/')} className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold px-6 py-6 rounded-xl">
+                            Kembali ke Beranda
                         </Button>
                     </div>
                 </DialogContent>
