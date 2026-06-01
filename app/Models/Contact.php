@@ -17,6 +17,8 @@ class Contact extends Model
         'service_area',
         'hvac_issue_type',
         'message',
+        'ai_summary',
+        'urgency_level',
         'status',
     ];
 }

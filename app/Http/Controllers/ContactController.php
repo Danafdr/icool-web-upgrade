@@ -47,9 +47,9 @@ class ContactController extends Controller
 
         // Generate Order ID (e.g., ORD-20260531-0001) first, but wait, $contact->id is only available after creation.
         // So we create the contact, generate the ID, and then update it.
-        $contact = Contact::create($contactData);
-        
         try {
+            $contact = Contact::create($contactData);
+            
             $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
             $contact->update(['order_id' => $orderId]);
 
