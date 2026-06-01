@@ -42,7 +42,9 @@ class ContactController extends Controller
         ]);
 
         if (isset($analysis['is_spam']) && $analysis['is_spam'] === true) {
-            $contactData['status'] = 'spam';
+            return back()->withInput()->withErrors([
+                'message' => 'Maaf, sistem kami mendeteksi format yang tidak valid pada pesan Anda. Mohon periksa kembali input Anda.'
+            ]);
         }
 
         // Generate Order ID (e.g., ORD-20260531-0001) first, but wait, $contact->id is only available after creation.
@@ -53,8 +55,7 @@ class ContactController extends Controller
             $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
             $contact->update(['order_id' => $orderId]);
 
-            // Don't send confirmation email if it's spam
-            if ($contact->email && $contact->status !== 'spam') {
+            if ($contact->email) {
                 \Illuminate\Support\Facades\Mail::to($contact->email)
                     ->send(new \App\Mail\OrderReceivedMail($contact));
             }
