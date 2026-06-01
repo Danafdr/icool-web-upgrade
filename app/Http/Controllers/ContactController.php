@@ -33,44 +33,56 @@ class ContactController extends Controller
             ]);
         }
 
-        // AI Analysis
-        $analysis = $geminiService->analyzeContactForm($validated);
-
-        // Prepare data for creation
-        $contactData = array_merge($validated, [
-            'ai_summary' => $analysis['cleaned_message'] ?? null,
-            'urgency_level' => $analysis['urgency'] ?? null,
-            'ai_reasoning' => $analysis['reasoning'] ?? null,
-            'suggested_service' => $analysis['suggested_service'] ?? null,
-        ]);
-
-        if (isset($analysis['is_spam']) && $analysis['is_spam'] === true) {
-            return back()->withInput()->withErrors([
-                'message' => 'Maaf, sistem kami mendeteksi format yang tidak valid pada pesan Anda. Mohon periksa kembali input Anda.'
-            ]);
-        }
-
-        // Generate Order ID (e.g., ORD-20260531-0001) first, but wait, $contact->id is only available after creation.
-        // So we create the contact, generate the ID, and then update it.
+        // Create contact immediately so user doesn't wait
         try {
-            $contact = Contact::create($contactData);
+            $contact = Contact::create(array_merge($validated, [
+                'status' => 'menunggu'
+            ]));
             
             $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
             $contact->update(['order_id' => $orderId]);
 
-            if ($contact->email) {
-                \Illuminate\Support\Facades\Mail::to($contact->email)
-                    ->send(new \App\Mail\OrderReceivedMail($contact));
-            }
+            // Defer AI and Email processing to run after the response is sent to the user
+            defer(function () use ($contact, $validated, $geminiService) {
+                try {
+                    // AI Analysis
+                    $analysis = $geminiService->analyzeContactForm($validated);
+                    
+                    if (isset($analysis['is_spam']) && $analysis['is_spam'] === true) {
+                        // Mark as spam and DO NOT send email
+                        $contact->update([
+                            'status' => 'spam',
+                            'ai_summary' => $analysis['cleaned_message'] ?? 'Spam detected',
+                            'ai_reasoning' => $analysis['reasoning'] ?? null,
+                        ]);
+                        return;
+                    }
+
+                    // Update with AI results
+                    $contact->update([
+                        'ai_summary' => $analysis['cleaned_message'] ?? null,
+                        'urgency_level' => $analysis['urgency'] ?? null,
+                        'ai_reasoning' => $analysis['reasoning'] ?? null,
+                        'suggested_service' => $analysis['suggested_service'] ?? null,
+                    ]);
+
+                    // Send email if not spam
+                    if ($contact->email) {
+                        \Illuminate\Support\Facades\Mail::to($contact->email)
+                            ->send(new \App\Mail\OrderReceivedMail($contact));
+                    }
+                } catch (\Throwable $e) {
+                    \Illuminate\Support\Facades\Log::error('Deferred AI/Mail failed: ' . $e->getMessage());
+                }
+            });
 
             return back()->with([
-                'success' => 'Your request has been sent successfully!',
+                'success' => 'Permintaan Anda telah berhasil dikirim! Tim kami akan segera menghubungi Anda.',
                 'order_id' => $orderId
             ]);
         } catch (\Throwable $e) {
-            // Flash the EXACT error to the frontend so we can see what's wrong!
             return back()->with([
-                'success' => 'ERROR LOG: ' . $e->getMessage(),
+                'success' => 'Terjadi kesalahan sistem: ' . $e->getMessage(),
                 'order_id' => 'ERROR'
             ]);
         }
