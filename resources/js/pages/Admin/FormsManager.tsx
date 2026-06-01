@@ -18,7 +18,7 @@ interface Contact {
     phone: string;
     hvac_issue_type: string | null;
     message: string | null;
-    status: 'pending' | 'resolved' | 'spam';
+    status: 'menunggu' | 'dijadwalkan' | 'dalam_proses' | 'selesai' | 'spam';
     ai_summary: string | null;
     urgency_level: 'low' | 'medium' | 'high' | null;
     created_at: string;
@@ -34,9 +34,14 @@ interface PaginationData {
 
 interface FormsManagerProps {
     forms: PaginationData;
+    filters?: {
+        search?: string;
+        sort_by?: string;
+        sort_dir?: 'asc' | 'desc';
+    };
 }
 
-export default function FormsManager({ forms }: FormsManagerProps) {
+export default function FormsManager({ forms, filters = {} }: FormsManagerProps) {
     const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
     const { data, setData, post, processing, reset, errors } = useForm({
         message: ''
@@ -60,8 +65,32 @@ export default function FormsManager({ forms }: FormsManagerProps) {
         });
     };
 
+    const handleSort = (column: string) => {
+        const direction = filters.sort_by === column && filters.sort_dir === 'asc' ? 'desc' : 'asc';
+        router.get('/admin/forms', { ...filters, sort_by: column, sort_dir: direction }, { preserveState: true, preserveScroll: true });
+    };
+
+    const SortableHeader = ({ column, label }: { column: string, label: string }) => {
+        const isActive = filters.sort_by === column;
+        return (
+            <th 
+                className="px-6 py-4 font-medium cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                onClick={() => handleSort(column)}
+            >
+                <div className="flex items-center gap-1">
+                    {label}
+                    {isActive && (
+                        <span className="text-brand-green">
+                            {filters.sort_dir === 'asc' ? '↑' : '↓'}
+                        </span>
+                    )}
+                </div>
+            </th>
+        );
+    };
+
     return (
-        <AdminLayout>
+        <AdminLayout title="Forms Manager">
             <Head title="Forms Manager" />
             
             <div className="space-y-6">
@@ -77,10 +106,11 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                         <table className="w-full text-sm text-left">
                             <thead className="text-xs text-gray-600 dark:text-gray-400 uppercase bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800">
                                 <tr>
-                                    <th className="px-6 py-4 font-medium">Tanggal</th>
+                                    <SortableHeader column="created_at" label="Tanggal" />
                                     <th className="px-6 py-4 font-medium">Pelanggan</th>
                                     <th className="px-6 py-4 font-medium">Jenis Layanan</th>
-                                    <th className="px-6 py-4 font-medium">Status</th>
+                                    <SortableHeader column="urgency_level" label="Urgensi" />
+                                    <SortableHeader column="status" label="Status" />
                                     <th className="px-6 py-4 font-medium text-right">Aksi</th>
                                 </tr>
                             </thead>
@@ -99,28 +129,39 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="font-medium text-gray-900 dark:text-white">{contact.name}</div>
-                                                <div className="text-gray-500">{contact.phone}</div>
+                                                <div className="text-gray-500" title={contact.email || ''}>
+                                                    {contact.email ? contact.email : '-'}
+                                                </div>
+                                                <div className="text-gray-400 text-xs mt-0.5">{contact.phone}</div>
                                             </td>
                                             <td className="px-6 py-4 text-gray-700 dark:text-gray-300">
                                                 {contact.hvac_issue_type || '-'}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
+                                                {contact.urgency_level ? (
+                                                    <Badge variant="outline" className={`text-[10px] w-fit ${
+                                                        contact.urgency_level === 'high' ? "border-red-300 text-red-600 bg-red-50" :
+                                                        contact.urgency_level === 'medium' ? "border-orange-300 text-orange-600 bg-orange-50" :
+                                                        "border-blue-300 text-blue-600 bg-blue-50"
+                                                    }`}>
+                                                        {contact.urgency_level === 'high' ? 'Tinggi' : contact.urgency_level === 'medium' ? 'Sedang' : 'Rendah'}
+                                                    </Badge>
+                                                ) : (
+                                                    <span className="text-xs text-gray-400">-</span>
+                                                )}
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex flex-col gap-1.5">
-                                                    {contact.status === 'pending' ? (
+                                                    {contact.status === 'menunggu' ? (
                                                         <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 w-fit">Menunggu</Badge>
-                                                    ) : contact.status === 'resolved' ? (
+                                                    ) : contact.status === 'dijadwalkan' ? (
+                                                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 w-fit">Dijadwalkan</Badge>
+                                                    ) : contact.status === 'dalam_proses' ? (
+                                                        <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 w-fit">Dalam Proses</Badge>
+                                                    ) : contact.status === 'selesai' ? (
                                                         <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 w-fit">Selesai</Badge>
                                                     ) : (
                                                         <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200 w-fit">Spam</Badge>
-                                                    )}
-                                                    {contact.urgency_level && (
-                                                        <Badge variant="outline" className={`text-[10px] w-fit ${
-                                                            contact.urgency_level === 'high' ? "border-red-300 text-red-600 bg-red-50" :
-                                                            contact.urgency_level === 'medium' ? "border-orange-300 text-orange-600 bg-orange-50" :
-                                                            "border-blue-300 text-blue-600 bg-blue-50"
-                                                        }`}>
-                                                            Urgensi: {contact.urgency_level === 'high' ? 'Tinggi' : contact.urgency_level === 'medium' ? 'Sedang' : 'Rendah'}
-                                                        </Badge>
                                                     )}
                                                 </div>
                                             </td>

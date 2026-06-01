@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import { toast } from 'sonner';
 import axios from 'axios';
 import { cn } from '@/lib/utils';
+import KanbanBoard from '@/components/admin/KanbanBoard';
 
 interface Contact {
     id: number;
@@ -21,9 +22,15 @@ interface Contact {
     phone: string;
     hvac_issue_type: string | null;
     message: string | null;
-    status: 'pending' | 'resolved' | 'spam';
+    status: 'menunggu' | 'dijadwalkan' | 'dalam_proses' | 'selesai' | 'spam';
     ai_summary: string | null;
     urgency_level: 'low' | 'medium' | 'high' | null;
+    address: string | null;
+    ai_reasoning: string | null;
+    suggested_service: string | null;
+    internal_notes: string | null;
+    scheduled_at: string | null;
+    technician_id: number | null;
     created_at: string;
 }
 
@@ -38,8 +45,9 @@ interface PaginationData {
 interface Props {
     stats: {
         totalForms: number;
-        unresolvedIssues: number;
-        newFormsThisWeek: number;
+        waitingForSchedule: number;
+        inProgress: number;
+        resolved: number;
     };
     forms: PaginationData;
     serviceTypes?: string[];
@@ -48,15 +56,25 @@ interface Props {
         status?: string;
         service_type?: string;
     };
+    technicians?: { id: number; name: string }[];
 }
 
-export default function DashboardOverview({ stats, forms, serviceTypes = [], filters = {} }: Props) {
+export default function DashboardOverview({ stats, forms, serviceTypes = [], filters = {}, technicians = [] }: Props) {
     const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+    const [viewMode, setViewMode] = useState<'kanban' | 'table'>('kanban');
     const { data, setData, post, processing, reset, errors } = useForm({
         message: ''
     });
+    const notesForm = useForm({
+        internal_notes: ''
+    });
+    const scheduleForm = useForm({
+        technician_id: '',
+        scheduled_at: ''
+    });
     const [isGenerating, setIsGenerating] = useState(false);
     const [isRefining, setIsRefining] = useState(false);
+    const [customerHistory, setCustomerHistory] = useState<Contact[]>([]);
     
     // Local states for Optimistic UI updates
     const [localForms, setLocalForms] = useState<Contact[]>(forms.data);
@@ -105,8 +123,11 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
     }, [search, status, serviceType]);
 
     // Optimistic status toggle handler
-    const handleStatusChange = (contactId: number, currentStatus: 'pending' | 'resolved') => {
-        const newStatus = currentStatus === 'pending' ? 'resolved' : 'pending';
+    const handleStatusChange = (contactId: number, currentStatusOrNewStatus: string) => {
+        // Support both old binary toggle and new explicit status setting
+        let newStatus = currentStatusOrNewStatus;
+        if (currentStatusOrNewStatus === 'pending') newStatus = 'resolved';
+        else if (currentStatusOrNewStatus === 'resolved') newStatus = 'pending';
 
         // 1. Snapshot original data for rollback in case of failure
         const originalForms = [...localForms];
@@ -114,78 +135,85 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
 
         // 2. Perform optimistic update instantly
         setLocalForms(prev =>
-            prev.map(c => (c.id === contactId ? { ...c, status: newStatus } : c))
+            prev.map(c => (c.id === contactId ? { ...c, status: newStatus as any } : c))
         );
 
         if (selectedContact && selectedContact.id === contactId) {
-            setSelectedContact(prev => prev ? { ...prev, status: newStatus } : null);
+            setSelectedContact(prev => prev ? { ...prev, status: newStatus as any } : null);
         }
 
         setLocalStats(prev => {
-            const diff = newStatus === 'resolved' ? -1 : 1;
+            const isResolved = newStatus === 'selesai';
+            const wasResolved = originalForms.find(c => c.id === contactId)?.status === 'selesai';
+            
+            let unresolvedDiff = 0;
+            if (isResolved && !wasResolved) unresolvedDiff = -1;
+            if (!isResolved && wasResolved) unresolvedDiff = 1;
+
             return {
                 ...prev,
-                unresolvedIssues: Math.max(0, prev.unresolvedIssues + diff),
+                waitingForSchedule: prev.waitingForSchedule, 
+                resolved: Math.max(0, prev.resolved - unresolvedDiff),
             };
         });
 
-        // 3. Trigger background PATCH request
-        const toastId = toast.loading('Memperbarui status...', {
-            description: `Mengubah status formulir ke ${newStatus === 'resolved' ? 'Selesai' : 'Menunggu'}`,
-        });
-
-        router.patch(
-            `/admin/forms/${contactId}/status`,
-            { status: newStatus },
-            {
-                preserveScroll: true,
-                preserveState: true,
-                onSuccess: () => {
-                    toast.success('Status berhasil diperbarui', {
-                        id: toastId,
-                        description: `Status telah diubah menjadi ${newStatus === 'resolved' ? 'Selesai' : 'Menunggu'}.`,
-                    });
-                },
-                onError: () => {
-                    // Revert UI on failure
-                    setLocalForms(originalForms);
-                    setLocalStats(originalStats);
-                    if (selectedContact && selectedContact.id === contactId) {
-                        setSelectedContact(originalForms.find(c => c.id === contactId) || null);
-                    }
-                    toast.error('Gagal memperbarui status', {
-                        id: toastId,
-                        description: 'Terjadi kesalahan jaringan atau server. Silakan coba lagi.',
-                    });
-                },
+        // 3. Fire to server in background
+        axios.patch(`/admin/forms/${contactId}/status`, { status: newStatus }).catch(() => {
+            toast.error('Gagal memperbarui status');
+            setLocalForms(originalForms);
+            setLocalStats(originalStats);
+            if (selectedContact && selectedContact.id === contactId) {
+                const originalStatus = originalForms.find(c => c.id === contactId)?.status;
+                if (originalStatus) {
+                    setSelectedContact(prev => prev ? { ...prev, status: originalStatus as any } : null);
+                }
             }
-        );
+        });
+    };
+
+    const handleViewContact = async (contact: Contact) => {
+        setSelectedContact(contact);
+        reset('message');
+        try {
+            const res = await axios.get(`/admin/forms/${contact.id}/history`);
+            setCustomerHistory(res.data.history);
+        } catch (err) {
+            setCustomerHistory([]);
+        }
     };
 
     const statCards = [
         {
-            title: 'Total Formulir Masuk',
-            value: localStats.totalForms,
-            icon: FileText,
-            description: 'Total semua pengiriman',
-            color: 'text-blue-600 dark:text-blue-400',
-            borderColor: 'border-t-blue-500 dark:border-t-blue-600',
-        },
-        {
-            title: 'Masalah Belum Selesai',
-            value: localStats.unresolvedIssues,
+            title: 'Menunggu Jadwal',
+            value: localStats.waitingForSchedule,
             icon: AlertCircle,
-            description: 'Formulir dengan status menunggu',
+            description: 'Perlu dijadwalkan teknisi',
             color: 'text-amber-600 dark:text-amber-400',
             borderColor: 'border-t-amber-500 dark:border-t-amber-600',
         },
         {
-            title: 'Baru Minggu Ini',
-            value: localStats.newFormsThisWeek,
-            icon: Calendar,
-            description: 'Pengiriman dalam 7 hari terakhir',
+            title: 'Dalam Proses',
+            value: localStats.inProgress,
+            icon: Clock,
+            description: 'Dijadwalkan / sedang dikerjakan',
+            color: 'text-blue-600 dark:text-blue-400',
+            borderColor: 'border-t-blue-500 dark:border-t-blue-600',
+        },
+        {
+            title: 'Selesai',
+            value: localStats.resolved,
+            icon: CheckCircle,
+            description: 'Sudah diselesaikan',
             color: 'text-emerald-600 dark:text-emerald-400',
             borderColor: 'border-t-emerald-500 dark:border-t-emerald-600',
+        },
+        {
+            title: 'Total Masuk',
+            value: localStats.totalForms,
+            icon: FileText,
+            description: 'Keseluruhan order',
+            color: 'text-gray-600 dark:text-gray-400',
+            borderColor: 'border-t-gray-500 dark:border-t-gray-600',
         },
     ];
 
@@ -203,7 +231,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                 </div>
 
                 {/* Stat Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     {statCards.map((card, i) => {
                         const Icon = card.icon;
                         return (
@@ -235,7 +263,23 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                 {/* Forms Section with Filters */}
                 <div>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Formulir Pelanggan</h2>
+                        <div className="flex items-center gap-4">
+                            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Daftar Formulir</h2>
+                            <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-lg">
+                                <button
+                                    onClick={() => setViewMode('kanban')}
+                                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${viewMode === 'kanban' ? 'bg-white dark:bg-gray-700 shadow text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+                                >
+                                    Kanban
+                                </button>
+                                <button
+                                    onClick={() => setViewMode('table')}
+                                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${viewMode === 'table' ? 'bg-white dark:bg-gray-700 shadow text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+                                >
+                                    Tabel
+                                </button>
+                            </div>
+                        </div>
                         
                         {/* Search and Filters */}
                         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
@@ -267,8 +311,10 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="all">Semua Status</SelectItem>
-                                    <SelectItem value="pending">Menunggu</SelectItem>
-                                    <SelectItem value="resolved">Selesai</SelectItem>
+                                    <SelectItem value="menunggu">Menunggu</SelectItem>
+                                    <SelectItem value="dijadwalkan">Dijadwalkan</SelectItem>
+                                    <SelectItem value="dalam_proses">Dalam Proses</SelectItem>
+                                    <SelectItem value="selesai">Selesai</SelectItem>
                                     <SelectItem value="spam">Spam</SelectItem>
                                 </SelectContent>
                             </Select>
@@ -325,6 +371,14 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     </Button>
                                 )}
                             </div>
+                        ) : viewMode === 'kanban' ? (
+                            <div className={`p-4 transition-opacity duration-200 ${isLoading ? 'opacity-60' : 'opacity-100'}`}>
+                                <KanbanBoard 
+                                    contacts={localForms}
+                                    onStatusChange={handleStatusChange}
+                                    onViewContact={handleViewContact}
+                                />
+                            </div>
                         ) : (
                             <div className={`overflow-x-auto transition-opacity duration-200 ${isLoading ? 'opacity-60' : 'opacity-100'}`}>
                                 <table className="w-full text-sm text-left">
@@ -354,18 +408,16 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex flex-col gap-1.5">
-                                                        {contact.status === 'pending' ? (
-                                                            <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/50 w-fit">
-                                                                Menunggu
-                                                            </Badge>
-                                                        ) : contact.status === 'resolved' ? (
-                                                            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-900/50 w-fit">
-                                                                Selesai
-                                                            </Badge>
+                                                        {contact.status === 'menunggu' ? (
+                                                            <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/20 dark:text-amber-400 dark:border-amber-900/50 w-fit">Menunggu</Badge>
+                                                        ) : contact.status === 'dijadwalkan' ? (
+                                                            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-900/50 w-fit">Dijadwalkan</Badge>
+                                                        ) : contact.status === 'dalam_proses' ? (
+                                                            <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-900/20 dark:text-purple-400 dark:border-purple-900/50 w-fit">Dalam Proses</Badge>
+                                                        ) : contact.status === 'selesai' ? (
+                                                            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-900/50 w-fit">Selesai</Badge>
                                                         ) : (
-                                                            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-900/50 w-fit">
-                                                                Spam
-                                                            </Badge>
+                                                            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-900/50 w-fit">Spam</Badge>
                                                         )}
                                                         {contact.urgency_level && (
                                                             <Badge variant="outline" className={cn("text-[10px] w-fit", 
@@ -384,7 +436,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                             variant="ghost"
                                                             size="sm"
                                                             className="active:scale-95 transition-transform duration-100"
-                                                            onClick={() => setSelectedContact(contact)}
+                                                            onClick={() => handleViewContact(contact)}
                                                         >
                                                             Lihat Detail
                                                         </Button>
@@ -393,21 +445,21 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                             size="sm"
                                                             className={cn(
                                                                 "active:scale-95 transition-transform duration-100",
-                                                                contact.status === 'pending'
-                                                                    ? 'border-amber-200 hover:bg-amber-50/50 dark:border-amber-900/30 dark:hover:bg-amber-900/20'
-                                                                    : 'border-emerald-200 hover:bg-emerald-50/50 dark:border-emerald-900/30 dark:hover:bg-emerald-900/20'
+                                                                contact.status === 'selesai'
+                                                                    ? 'border-emerald-200 hover:bg-emerald-50/50 dark:border-emerald-900/30 dark:hover:bg-emerald-900/20'
+                                                                    : 'border-amber-200 hover:bg-amber-50/50 dark:border-amber-900/30 dark:hover:bg-amber-900/20'
                                                             )}
-                                                            onClick={() => handleStatusChange(contact.id, contact.status)}
+                                                            onClick={() => handleStatusChange(contact.id, contact.status === 'selesai' ? 'menunggu' : 'selesai')}
                                                         >
-                                                            {contact.status === 'pending' ? (
-                                                                <>
-                                                                    <CheckCircle className="w-3.5 h-3.5 mr-1 text-amber-600 dark:text-amber-400" />
-                                                                    Selesaikan
-                                                                </>
-                                                            ) : (
+                                                            {contact.status === 'selesai' ? (
                                                                 <>
                                                                     <Clock className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
                                                                     Buka Kembali
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    <CheckCircle className="w-3.5 h-3.5 mr-1 text-amber-600 dark:text-amber-400" />
+                                                                    Selesaikan
                                                                 </>
                                                             )}
                                                         </Button>
@@ -460,13 +512,28 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                 if (!open) {
                     setSelectedContact(null);
                     reset('message');
+                    notesForm.reset('internal_notes');
+                    scheduleForm.reset();
+                } else if (selectedContact) {
+                    notesForm.setData('internal_notes', selectedContact.internal_notes || '');
+                    scheduleForm.setData({
+                        technician_id: selectedContact.technician_id ? selectedContact.technician_id.toString() : '',
+                        scheduled_at: selectedContact.scheduled_at ? new Date(selectedContact.scheduled_at).toISOString().slice(0, 16) : ''
+                    });
                 }
             }}>
-                <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-xl">
+                <DialogContent className="sm:max-w-md bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 shadow-xl overflow-y-auto max-h-[90vh]">
                     <DialogHeader>
-                        <DialogTitle className="text-gray-900 dark:text-white">Detail Formulir</DialogTitle>
-                        <DialogDescription className="text-gray-500 dark:text-gray-400">
-                            Dikirim pada {selectedContact ? format(new Date(selectedContact.created_at), 'PPP') : ''}
+                        <DialogTitle className="flex items-center gap-2">
+                            Detail Formulir Pelanggan
+                            {customerHistory.length > 0 && (
+                                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                                    Pelanggan Lama ({customerHistory.length} Riwayat)
+                                </Badge>
+                            )}
+                        </DialogTitle>
+                        <DialogDescription>
+                            Masuk pada {selectedContact && format(new Date(selectedContact.created_at), 'd MMMM yyyy, HH:mm')}
                         </DialogDescription>
                     </DialogHeader>
 
@@ -503,7 +570,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Alamat Email</label>
                                     {selectedContact.email ? (
                                         <div className="flex items-center gap-1.5 mt-0.5">
-                                            <p className="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[140px]" title={selectedContact.email}>
+                                            <p className="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[200px]" title={selectedContact.email}>
                                                 {selectedContact.email}
                                             </p>
                                             <Button
@@ -531,11 +598,15 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Jenis Layanan</label>
                                     <p className="text-sm font-semibold mt-1 text-gray-900 dark:text-white">{selectedContact.hvac_issue_type || 'Tidak ada'}</p>
                                 </div>
+                                <div className="col-span-2">
+                                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Alamat Lengkap</label>
+                                    <p className="text-sm font-semibold mt-1 text-gray-900 dark:text-white whitespace-pre-wrap">{selectedContact.address || 'Tidak ada alamat tercatat.'}</p>
+                                </div>
                             </div>
 
                             <div className="pt-2 border-t border-gray-100 dark:border-gray-800">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                                    AI Summary 
+                                    AI Summary & Reasoning
                                     {selectedContact.urgency_level && (
                                         <Badge variant="outline" className={cn("text-[10px] uppercase font-bold", 
                                             selectedContact.urgency_level === 'high' ? "border-red-300 text-red-600 bg-red-50" :
@@ -545,9 +616,23 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                             {selectedContact.urgency_level}
                                         </Badge>
                                     )}
+                                    {selectedContact.suggested_service && (
+                                        <Badge variant="outline" className="text-[10px] uppercase font-bold border-indigo-300 text-indigo-600 bg-indigo-50">
+                                            {selectedContact.suggested_service}
+                                        </Badge>
+                                    )}
                                 </label>
-                                <div className="mt-2 p-3 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200 border border-blue-100 dark:border-blue-900/50">
-                                    {selectedContact.ai_summary || selectedContact.message || 'Tidak ada pesan tambahan.'}
+                                <div className="mt-2 p-3 bg-blue-50/50 dark:bg-blue-950/20 rounded-lg text-sm whitespace-pre-wrap text-gray-800 dark:text-gray-200 border border-blue-100 dark:border-blue-900/50 space-y-2">
+                                    <div>
+                                        <span className="font-semibold text-blue-800 dark:text-blue-300">Ringkasan: </span>
+                                        {selectedContact.ai_summary || selectedContact.message || 'Tidak ada pesan tambahan.'}
+                                    </div>
+                                    {selectedContact.ai_reasoning && (
+                                        <div>
+                                            <span className="font-semibold text-blue-800 dark:text-blue-300">Alasan: </span>
+                                            {selectedContact.ai_reasoning}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -558,6 +643,87 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                 </div>
                             </div>
                             
+                            {/* Jadwal & Teknisi */}
+                            <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <div className="flex items-center justify-between mb-2">
+                                    <label className="text-xs font-semibold text-gray-500 uppercase">Jadwal & Teknisi</label>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        disabled={scheduleForm.processing || !scheduleForm.data.technician_id || !scheduleForm.data.scheduled_at}
+                                        className="h-7 text-xs active:scale-95 transition-transform"
+                                        onClick={() => {
+                                            scheduleForm.patch(`/admin/forms/${selectedContact.id}/schedule`, {
+                                                preserveScroll: true,
+                                                onSuccess: () => toast.success('Jadwal & teknisi berhasil disimpan! Tiket sekarang Dalam Proses.'),
+                                                onError: () => toast.error('Gagal menyimpan jadwal.')
+                                            });
+                                        }}
+                                    >
+                                        {scheduleForm.processing ? 'Menyimpan...' : 'Atur Jadwal'}
+                                    </Button>
+                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs text-gray-500 dark:text-gray-400">Pilih Teknisi</label>
+                                        <Select 
+                                            value={scheduleForm.data.technician_id} 
+                                            onValueChange={v => scheduleForm.setData('technician_id', v)}
+                                        >
+                                            <SelectTrigger className="h-9 bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800">
+                                                <SelectValue placeholder="Pilih Teknisi" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {technicians.length > 0 ? technicians.map(tech => (
+                                                    <SelectItem key={tech.id} value={tech.id.toString()}>{tech.name}</SelectItem>
+                                                )) : (
+                                                    <SelectItem value="none" disabled>Tidak ada teknisi aktif</SelectItem>
+                                                )}
+                                            </SelectContent>
+                                        </Select>
+                                        {scheduleForm.errors.technician_id && <span className="text-[10px] text-red-500">{scheduleForm.errors.technician_id}</span>}
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <label className="text-xs text-gray-500 dark:text-gray-400">Tanggal & Waktu</label>
+                                        <Input 
+                                            type="datetime-local" 
+                                            value={scheduleForm.data.scheduled_at}
+                                            onChange={e => scheduleForm.setData('scheduled_at', e.target.value)}
+                                            className="h-9 bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800" 
+                                        />
+                                        {scheduleForm.errors.scheduled_at && <span className="text-[10px] text-red-500">{scheduleForm.errors.scheduled_at}</span>}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Internal Notes */}
+                            <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
+                                <div className="flex items-center justify-between mb-2">
+                                    <label className="text-xs font-semibold text-gray-500 uppercase">Catatan Internal (Admin)</label>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        disabled={notesForm.processing}
+                                        className="h-7 text-xs active:scale-95 transition-transform"
+                                        onClick={() => {
+                                            notesForm.patch(`/admin/forms/${selectedContact.id}/notes`, {
+                                                preserveScroll: true,
+                                                onSuccess: () => toast.success('Catatan berhasil disimpan!'),
+                                                onError: () => toast.error('Gagal menyimpan catatan.')
+                                            });
+                                        }}
+                                    >
+                                        {notesForm.processing ? 'Menyimpan...' : 'Simpan Catatan'}
+                                    </Button>
+                                </div>
+                                <Textarea
+                                    placeholder="Tulis catatan internal di sini (tidak terlihat oleh pelanggan)..."
+                                    value={notesForm.data.internal_notes}
+                                    onChange={e => notesForm.setData('internal_notes', e.target.value)}
+                                    className="min-h-20 mb-2 bg-yellow-50/30 dark:bg-yellow-900/10 border-yellow-200 dark:border-yellow-900/30 focus-visible:ring-yellow-500"
+                                />
+                            </div>
+                            
                             {/* Reply Section */}
                             <div className="pt-4 border-t border-gray-100 dark:border-gray-800">
                                 <div className="flex items-center justify-between mb-2">
@@ -565,13 +731,11 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     {selectedContact.email && (
                                         <div className="flex items-center gap-2">
                                             <Button
-                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isRefining || !data.message}
                                                 className="h-7 text-xs bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/50 dark:hover:bg-emerald-900/40"
-                                                onClick={async (e) => {
-                                                    e.preventDefault();
+                                                onClick={async () => {
                                                     setIsRefining(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/refine-reply`, { draft: data.message });
@@ -588,13 +752,11 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                 Perbaiki Bahasa
                                             </Button>
                                             <Button
-                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isGenerating}
                                                 className="h-7 text-xs bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/50 dark:hover:bg-indigo-900/40"
-                                                onClick={async (e) => {
-                                                    e.preventDefault();
+                                                onClick={async () => {
                                                     setIsGenerating(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/${selectedContact.id}/generate-reply`);
@@ -632,14 +794,44 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                         </div>
                     )}
 
-                    <DialogFooter className="flex sm:justify-between items-center gap-3">
-                        <Button variant="outline" onClick={() => {
-                            setSelectedContact(null);
-                            reset('message');
-                        }} className="w-full sm:w-auto active:scale-95 transition-transform">
-                            Tutup
-                        </Button>
-                        <div className="flex gap-2 w-full sm:w-auto mt-2 sm:mt-0">
+                    <DialogFooter className="flex flex-col sm:flex-row items-center gap-3 w-full border-t border-gray-100 dark:border-gray-800 pt-4">
+                        <div className="flex w-full sm:w-auto">
+                            <Button variant="outline" onClick={() => {
+                                setSelectedContact(null);
+                                reset('message');
+                                notesForm.reset('internal_notes');
+                            }} className="w-full sm:w-auto active:scale-95 transition-transform">
+                                Tutup
+                            </Button>
+                        </div>
+                        
+                        <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto sm:ml-auto items-center">
+                            {selectedContact && (
+                                <div className="w-full sm:w-auto flex justify-end">
+                                    <Button
+                                        variant={selectedContact.status === 'selesai' ? 'secondary' : 'default'}
+                                        onClick={() => handleStatusChange(selectedContact.id, selectedContact.status === 'selesai' ? 'menunggu' : 'selesai')}
+                                        className="w-full sm:w-auto active:scale-95 transition-transform"
+                                    >
+                                        {selectedContact.status !== 'selesai' ? (
+                                            <>
+                                                <CheckCircle className="w-4 h-4 mr-2" />
+                                                Tandai Selesai
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Clock className="w-4 h-4 mr-2" />
+                                                Buka Kembali
+                                            </>
+                                        )}
+                                    </Button>
+                                </div>
+                            )}
+
+                            {selectedContact?.email && (
+                                <div className="hidden sm:block h-8 w-px bg-gray-200 dark:bg-gray-700 mx-1"></div>
+                            )}
+
                             {selectedContact?.email && (
                                 <Button 
                                     onClick={() => {
@@ -654,26 +846,6 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     {processing ? 'Mengirim...' : 'Kirim Balasan'}
                                 </Button>
                             )}
-                            {selectedContact && (
-                                <Button
-
-                                variant={selectedContact.status === 'pending' ? 'default' : 'secondary'}
-                                onClick={() => handleStatusChange(selectedContact.id, selectedContact.status)}
-                                className="w-full sm:w-auto active:scale-95 transition-transform"
-                            >
-                                {selectedContact.status === 'pending' ? (
-                                    <>
-                                        <CheckCircle className="w-4 h-4 mr-2" />
-                                        Tandai Selesai
-                                    </>
-                                ) : (
-                                    <>
-                                        <Clock className="w-4 h-4 mr-2" />
-                                        Tandai Menunggu
-                                    </>
-                                )}
-                            </Button>
-                        )}
                         </div>
                     </DialogFooter>
                 </DialogContent>

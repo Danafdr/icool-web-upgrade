@@ -19,6 +19,17 @@ class Contact extends Model
         'message',
         'ai_summary',
         'urgency_level',
+        'address',
+        'ai_reasoning',
+        'suggested_service',
+        'internal_notes',
+        'scheduled_at',
+        'technician_id',
         'status',
     ];
+
+    public function technician()
+    {
+        return $this->belongsTo(Technician::class);
+    }
 }

@@ -15,6 +15,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
         name: '',
         email: '',
         phone: '',
+        address: '',
         service_area: '',
         hvac_issue_type: defaultServiceType,
         message: ''
@@ -134,6 +135,20 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                         className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.email ? "border-red-500" : ""}`}
                                     />
                                     {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="address" className="text-gray-300">Alamat Lengkap <span className="text-red-500">*</span></Label>
+                                    <Textarea 
+                                        id="address" 
+                                        placeholder="Nama jalan, nomor rumah, RT/RW, kecamatan..." 
+                                        rows={2}
+                                        value={data.address}
+                                        required
+                                        onChange={e => setData('address', e.target.value)}
+                                        className={`bg-white/10 border-white/20 text-white rounded-xl resize-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.address ? "border-red-500" : ""}`}
+                                    />
+                                    {errors.address && <p className="text-xs text-red-500">{errors.address}</p>}
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

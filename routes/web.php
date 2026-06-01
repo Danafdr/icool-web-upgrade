@@ -120,9 +120,22 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.overview');
     Route::get('/forms', [AdminDashboardController::class, 'forms'])->name('admin.forms');
     Route::patch('/forms/{contact}/status', [AdminDashboardController::class, 'updateStatus'])->name('admin.forms.status');
+    Route::patch('/forms/{contact}/notes', [AdminDashboardController::class, 'updateNotes'])->name('admin.forms.notes');
+    Route::patch('/forms/{contact}/schedule', [AdminDashboardController::class, 'schedule'])->name('admin.forms.schedule');
+    Route::get('/forms/{contact}/history', [AdminDashboardController::class, 'history'])->name('admin.forms.history');
     Route::post('/forms/{contact}/reply', [AdminDashboardController::class, 'reply'])->name('admin.forms.reply');
     Route::post('/forms/{contact}/generate-reply', [AdminDashboardController::class, 'generateReply'])->name('admin.forms.generate-reply');
     Route::post('/forms/refine-reply', [AdminDashboardController::class, 'refineReply'])->name('admin.forms.refine-reply');
+    
+    // Pages
+    Route::get('/jadwal', [App\Http\Controllers\ScheduleController::class, 'index'])->name('admin.schedule');
+    Route::get('/laporan', [App\Http\Controllers\AnalyticsController::class, 'index'])->name('admin.analytics');
+
+    // Technicians
+    Route::get('/technicians', [App\Http\Controllers\TechnicianController::class, 'index'])->name('admin.technicians.index');
+    Route::post('/technicians', [App\Http\Controllers\TechnicianController::class, 'store'])->name('admin.technicians.store');
+    Route::put('/technicians/{technician}', [App\Http\Controllers\TechnicianController::class, 'update'])->name('admin.technicians.update');
+    Route::delete('/technicians/{technician}', [App\Http\Controllers\TechnicianController::class, 'destroy'])->name('admin.technicians.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

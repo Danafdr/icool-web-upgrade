@@ -10,6 +10,5 @@ $property->setAccessible(true);
 $apiKey = $property->getValue($gemini);
 $baseUrl = $reflection->getProperty('baseUrl');
 $baseUrl->setAccessible(true);
-$response = \Illuminate\Support\Facades\Http::get('https://generativelanguage.googleapis.com/v1beta/models?key=' . $apiKey);
-var_dump($response->status());
-var_dump($response->body());
+$prompt = "test";
+var_dump($gemini->refineReply("wth u talking abt just pay 200rb now or i wont come to ur house"));

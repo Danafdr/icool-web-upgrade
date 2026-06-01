@@ -1,5 +1,6 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 import formsA66cc0 from './forms'
+import technicians from './technicians'
 /**
 * @see \App\Http\Controllers\AdminDashboardController::overview
  * @see app/Http/Controllers/AdminDashboardController.php:13
@@ -80,7 +81,7 @@ overview.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     overview.form = overviewForm
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
 export const forms = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -95,7 +96,7 @@ forms.definition = {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
 forms.url = (options?: RouteQueryOptions) => {
@@ -104,7 +105,7 @@ forms.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
 forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -113,7 +114,7 @@ forms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
 forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -123,7 +124,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
     const formsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -133,7 +134,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
         formsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -142,7 +143,7 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AdminDashboardController::forms
- * @see app/Http/Controllers/AdminDashboardController.php:74
+ * @see app/Http/Controllers/AdminDashboardController.php:108
  * @route '/admin/forms'
  */
         formsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -156,9 +157,168 @@ forms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
     
     forms.form = formsForm
+/**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+export const schedule = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: schedule.url(options),
+    method: 'get',
+})
+
+schedule.definition = {
+    methods: ["get","head"],
+    url: '/admin/jadwal',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+schedule.url = (options?: RouteQueryOptions) => {
+    return schedule.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+schedule.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: schedule.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+schedule.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: schedule.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+    const scheduleForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: schedule.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+        scheduleForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: schedule.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ScheduleController::schedule
+ * @see app/Http/Controllers/ScheduleController.php:11
+ * @route '/admin/jadwal'
+ */
+        scheduleForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: schedule.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    schedule.form = scheduleForm
+/**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+export const analytics = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: analytics.url(options),
+    method: 'get',
+})
+
+analytics.definition = {
+    methods: ["get","head"],
+    url: '/admin/laporan',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+analytics.url = (options?: RouteQueryOptions) => {
+    return analytics.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+analytics.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: analytics.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+analytics.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: analytics.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+    const analyticsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: analytics.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+        analyticsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: analytics.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\AnalyticsController::analytics
+ * @see app/Http/Controllers/AnalyticsController.php:13
+ * @route '/admin/laporan'
+ */
+        analyticsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: analytics.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    analytics.form = analyticsForm
 const admin = {
     overview: Object.assign(overview, overview),
 forms: Object.assign(forms, formsA66cc0),
+schedule: Object.assign(schedule, schedule),
+analytics: Object.assign(analytics, analytics),
+technicians: Object.assign(technicians, technicians),
 }
 
 export default admin

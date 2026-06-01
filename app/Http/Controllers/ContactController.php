@@ -13,11 +13,12 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
-            'service_area' => 'nullable|string',
-            'hvac_issue_type' => 'nullable|string',
-            'message' => 'nullable|string'
+            'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:500',
+            'service_area' => 'nullable|string|max:255',
+            'hvac_issue_type' => 'nullable|string|max:255',
+            'message' => 'nullable|string',
         ]);
 
         // Duplicate Checking: Prevent identical requests within 5 minutes
@@ -39,6 +40,8 @@ class ContactController extends Controller
         $contactData = array_merge($validated, [
             'ai_summary' => $analysis['cleaned_message'] ?? null,
             'urgency_level' => $analysis['urgency'] ?? null,
+            'ai_reasoning' => $analysis['reasoning'] ?? null,
+            'suggested_service' => $analysis['suggested_service'] ?? null,
         ]);
 
         if (isset($analysis['is_spam']) && $analysis['is_spam'] === true) {

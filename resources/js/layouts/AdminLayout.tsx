@@ -1,7 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import React, { ReactNode, useEffect } from 'react';
 import { toast } from 'sonner';
-import { LayoutDashboard, LogOut, Menu } from 'lucide-react';
+import { LayoutDashboard, LogOut, Menu, FileText, Calendar, Wrench, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { logout } from '@/routes';
 
@@ -26,6 +26,10 @@ export default function AdminLayout({ children }: Props) {
 
     const navLinks = [
         { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+        { name: 'Formulir', href: '/admin/forms', icon: FileText },
+        { name: 'Jadwal', href: '/admin/jadwal', icon: Calendar },
+        { name: 'Teknisi', href: '/admin/technicians', icon: Wrench },
+        { name: 'Laporan', href: '/admin/laporan', icon: BarChart3 },
     ];
 
     return (
