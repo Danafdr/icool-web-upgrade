@@ -56,13 +56,40 @@
     <div class="container">
         <h1 class="error-code">@yield('code')</h1>
         <div class="error-message">@yield('message')</div>
-        @hasSection('action_onclick')
-            <button type="button" onclick="@yield('action_onclick')" class="btn" style="border: none; cursor: pointer; font-size: inherit; font-family: inherit;">@yield('action_text')</button>
-        @elseif(View::hasSection('action_url'))
-            <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
-        @else
-            <a href="/" class="btn">Kembali ke Beranda</a>
-        @endif
+        <button type="button" id="refresh-btn" class="btn" style="border: none; cursor: pointer; font-size: inherit; font-family: inherit;">
+            @hasSection('action_text')
+                @yield('action_text')
+            @else
+                Refresh Website
+            @endif
+        </button>
     </div>
+
+    <script>
+        document.getElementById('refresh-btn').addEventListener('click', function() {
+            try {
+                // Strategy 1: Navigate the top-level window (works if not sandboxed)
+                if (window.top && window.top !== window) {
+                    window.top.location.reload();
+                    return;
+                }
+            } catch (e) {
+                // Blocked by sandbox — try postMessage
+            }
+
+            try {
+                // Strategy 2: Ask the parent frame to reload via postMessage
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage('inertia-reload', '*');
+                    return;
+                }
+            } catch (e) {
+                // Also blocked
+            }
+
+            // Strategy 3: We're not in an iframe at all, just reload normally
+            window.location.reload(true);
+        });
+    </script>
 </body>
 </html>

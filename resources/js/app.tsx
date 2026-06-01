@@ -43,3 +43,10 @@ createInertiaApp({
 
 // This will set light / dark mode on load...
 initializeTheme();
+
+// Listen for reload requests from error pages rendered inside Inertia's sandboxed iframe
+window.addEventListener('message', (event) => {
+    if (event.data === 'inertia-reload') {
+        window.location.reload();
+    }
+});
