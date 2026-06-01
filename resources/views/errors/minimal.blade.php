@@ -57,13 +57,11 @@
         <h1 class="error-code">@yield('code')</h1>
         <div class="error-message">@yield('message')</div>
         @hasSection('action_onclick')
-            <a href="javascript:void(0)" onclick="@yield('action_onclick')" class="btn">@yield('action_text')</a>
+            <button type="button" onclick="@yield('action_onclick')" class="btn" style="border: none; cursor: pointer; font-size: inherit; font-family: inherit;">@yield('action_text')</button>
+        @elseif(View::hasSection('action_url'))
+            <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
         @else
-            @hasSection('action_url')
-                <a href="@yield('action_url')" class="btn">@yield('action_text')</a>
-            @else
-                <a href="/" class="btn">Kembali ke Beranda</a>
-            @endif
+            <a href="/" class="btn">Kembali ke Beranda</a>
         @endif
     </div>
 </body>
