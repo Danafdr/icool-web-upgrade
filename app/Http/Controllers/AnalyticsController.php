@@ -16,11 +16,9 @@ class AnalyticsController extends Controller
         $sixMonthsAgo = $now->copy()->subMonths(5)->startOfMonth();
 
         // 1. Leads per month (last 6 months)
-        $leadsPerMonth = Contact::where('status', '!=', 'spam')
+        $leadsPerMonthQuery = Contact::where('status', '!=', 'spam')
             ->where('created_at', '>=', $sixMonthsAgo)
-            ->selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
-            ->groupBy('month')
-            ->orderBy('month', 'asc')
+            ->select('id', 'created_at')
             ->get();
 
         // Map to displayable format
@@ -30,10 +28,13 @@ class AnalyticsController extends Controller
             $monthKey = $month->format('Y-m');
             $monthName = $month->translatedFormat('M Y');
             
-            $found = $leadsPerMonth->firstWhere('month', $monthKey);
+            $count = $leadsPerMonthQuery->filter(function ($item) use ($monthKey) {
+                return $item->created_at->format('Y-m') === $monthKey;
+            })->count();
+
             $monthlyLeads[] = [
                 'name' => $monthName,
-                'count' => $found ? $found->count : 0
+                'count' => $count
             ];
         }
 
