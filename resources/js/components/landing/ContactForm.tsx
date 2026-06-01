@@ -59,9 +59,6 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                         <Button onClick={() => setShowSuccess(false)} variant="outline" className="w-full sm:w-auto text-zinc-300 border-zinc-700 hover:bg-zinc-800 px-6 py-6 rounded-xl">
                             Tutup
                         </Button>
-                        <Button onClick={() => window.location.reload()} className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-zinc-950 font-semibold px-6 py-6 rounded-xl">
-                            Refresh Website
-                        </Button>
                     </div>
                 </DialogContent>
             </Dialog>
