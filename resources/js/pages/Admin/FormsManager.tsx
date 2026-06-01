@@ -198,6 +198,10 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                     <label className="text-xs font-semibold text-gray-500 uppercase">Jenis Layanan</label>
                                     <p className="text-sm font-medium mt-1">{selectedContact.hvac_issue_type || 'Tidak ada'}</p>
                                 </div>
+                                <div>
+                                    <label className="text-xs font-semibold text-gray-500 uppercase">Area Layanan</label>
+                                    <p className="text-sm font-medium mt-1">{selectedContact.service_area || 'Tidak ada'}</p>
+                                </div>
                             </div>
                             
                             <div className="pt-2 border-t border-gray-100 dark:border-gray-800">
@@ -232,13 +236,11 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                     {selectedContact.email && (
                                         <div className="flex items-center gap-2">
                                             <Button
-                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isRefining || !data.message}
                                                 className="h-7 text-xs bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-800/50 dark:hover:bg-emerald-900/40"
-                                                onClick={async (e) => {
-                                                    e.preventDefault();
+                                                onClick={async () => {
                                                     setIsRefining(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/refine-reply`, { draft: data.message });
@@ -255,13 +257,11 @@ export default function FormsManager({ forms }: FormsManagerProps) {
                                                 Perbaiki Bahasa
                                             </Button>
                                             <Button
-                                                type="button"
                                                 variant="outline"
                                                 size="sm"
                                                 disabled={isGenerating}
                                                 className="h-7 text-xs bg-indigo-50 text-indigo-600 border-indigo-200 hover:bg-indigo-100 hover:text-indigo-700 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/50 dark:hover:bg-indigo-900/40"
-                                                onClick={async (e) => {
-                                                    e.preventDefault();
+                                                onClick={async () => {
                                                     setIsGenerating(true);
                                                     try {
                                                         const res = await axios.post(`/admin/forms/${selectedContact.id}/generate-reply`);

@@ -14,6 +14,7 @@ class Contact extends Model
         'name',
         'phone',
         'email',
+        'service_area',
         'hvac_issue_type',
         'message',
         'status',

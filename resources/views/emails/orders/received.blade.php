@@ -10,6 +10,7 @@ Terima kasih telah memilih iCool untuk kebutuhan HVAC Anda! Pesanan Anda telah k
 - **Nama:** {{ $contact->name }}
 - **Telepon/WA:** {{ $contact->phone }}
 - **Layanan:** {{ $contact->hvac_issue_type ?: 'Pemasangan/Perawatan' }}
+- **Area Layanan:** {{ $contact->service_area ?: 'Tidak disebutkan' }}
 
 Kami akan menghubungi Anda dalam waktu 1x24 jam untuk konfirmasi jadwal.
 

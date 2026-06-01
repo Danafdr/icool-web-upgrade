@@ -15,6 +15,7 @@ class ContactController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'nullable|email|max:255',
+            'service_area' => 'nullable|string',
             'hvac_issue_type' => 'nullable|string',
             'message' => 'nullable|string'
         ]);

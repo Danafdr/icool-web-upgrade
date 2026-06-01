@@ -15,6 +15,7 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
         name: '',
         email: '',
         phone: '',
+        service_area: '',
         hvac_issue_type: defaultServiceType,
         message: ''
     });
@@ -133,6 +134,25 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                         className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:border-transparent ${errors.email ? "border-red-500" : ""}`}
                                     />
                                     {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
+                                </div>
+
+                                <div className="space-y-3">
+                                    <Label className="text-sm font-semibold text-gray-300">Area Layanan</Label>
+                                    <Select value={data.service_area} onValueChange={(v) => setData('service_area', v)}>
+                                        <SelectTrigger className={`h-12 bg-white/10 border-white/20 text-white rounded-xl focus:ring-2 focus:ring-brand-green ${errors.service_area ? "border-red-500" : ""}`}>
+                                            <SelectValue placeholder="Pilih area lokasi Anda" />
+                                        </SelectTrigger>
+                                        <SelectContent className="bg-zinc-900 border-zinc-700 text-white">
+                                            <SelectItem value="Jakarta Selatan">Jakarta Selatan</SelectItem>
+                                            <SelectItem value="Jakarta Pusat">Jakarta Pusat</SelectItem>
+                                            <SelectItem value="Jakarta Barat">Jakarta Barat</SelectItem>
+                                            <SelectItem value="Jakarta Timur">Jakarta Timur</SelectItem>
+                                            <SelectItem value="Jakarta Utara">Jakarta Utara</SelectItem>
+                                            <SelectItem value="Bodetabek">Bodetabek (Bogor, Depok, Tangerang, Bekasi)</SelectItem>
+                                            <SelectItem value="Lainnya">Lainnya</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    {errors.service_area && <p className="text-xs text-red-500">{errors.service_area}</p>}
                                 </div>
 
                                 <div className="space-y-3">
