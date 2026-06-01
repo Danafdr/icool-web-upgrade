@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { format } from 'date-fns';
 import { Clock, CheckCircle, AlertCircle, Calendar as CalendarIcon, GripVertical } from 'lucide-react';
 
@@ -106,16 +107,20 @@ export default function KanbanBoard({ contacts, onStatusChange, onViewContact }:
                                             
                                             {/* Status Dropdown to easily move items without drag and drop */}
                                             <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-800" onClick={(e) => e.stopPropagation()}>
-                                                <select 
-                                                    className="w-full text-xs bg-gray-50 dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-md py-1 px-2 focus:ring-blue-500 focus:border-blue-500"
-                                                    value={contact.status}
-                                                    onChange={(e) => onStatusChange(contact.id, e.target.value as any)}
+                                                <Select 
+                                                    value={contact.status} 
+                                                    onValueChange={(val: 'menunggu' | 'dijadwalkan' | 'dalam_proses' | 'selesai') => onStatusChange(contact.id, val)}
                                                 >
-                                                    <option value="menunggu">Menunggu</option>
-                                                    <option value="dijadwalkan">Dijadwalkan</option>
-                                                    <option value="dalam_proses">Dalam Proses</option>
-                                                    <option value="selesai">Selesai</option>
-                                                </select>
+                                                    <SelectTrigger className="w-full h-8 text-xs bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800 focus:ring-1 focus:ring-brand-green/50">
+                                                        <SelectValue placeholder="Pindah Status" />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectItem value="menunggu" className="text-xs cursor-pointer">Menunggu</SelectItem>
+                                                        <SelectItem value="dijadwalkan" className="text-xs cursor-pointer">Dijadwalkan</SelectItem>
+                                                        <SelectItem value="dalam_proses" className="text-xs cursor-pointer">Dalam Proses</SelectItem>
+                                                        <SelectItem value="selesai" className="text-xs cursor-pointer">Selesai</SelectItem>
+                                                    </SelectContent>
+                                                </Select>
                                             </div>
                                         </CardContent>
                                     </Card>
