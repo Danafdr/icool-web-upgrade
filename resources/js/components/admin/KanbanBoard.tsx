@@ -24,10 +24,10 @@ interface KanbanBoardProps {
 
 export default function KanbanBoard({ contacts, onStatusChange, onViewContact }: KanbanBoardProps) {
     const columns = [
-        { id: 'menunggu', title: 'Menunggu', icon: AlertCircle, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-950/20', border: 'border-amber-200 dark:border-amber-900/50' },
-        { id: 'dijadwalkan', title: 'Dijadwalkan', icon: CalendarIcon, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-950/20', border: 'border-blue-200 dark:border-blue-900/50' },
-        { id: 'dalam_proses', title: 'Dalam Proses', icon: Clock, color: 'text-purple-600', bg: 'bg-purple-50 dark:bg-purple-950/20', border: 'border-purple-200 dark:border-purple-900/50' },
-        { id: 'selesai', title: 'Selesai', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-950/20', border: 'border-emerald-200 dark:border-emerald-900/50' },
+        { id: 'menunggu', title: 'Menunggu', icon: AlertCircle, color: 'text-amber-600', bg: 'bg-gray-50 dark:bg-gray-900', border: 'border-gray-200 dark:border-gray-800' },
+        { id: 'dijadwalkan', title: 'Dijadwalkan', icon: CalendarIcon, color: 'text-blue-600', bg: 'bg-gray-50 dark:bg-gray-900', border: 'border-gray-200 dark:border-gray-800' },
+        { id: 'dalam_proses', title: 'Dalam Proses', icon: Clock, color: 'text-purple-600', bg: 'bg-gray-50 dark:bg-gray-900', border: 'border-gray-200 dark:border-gray-800' },
+        { id: 'selesai', title: 'Selesai', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-gray-50 dark:bg-gray-900', border: 'border-gray-200 dark:border-gray-800' },
     ] as const;
 
     // Filter out spam from the board

@@ -10,7 +10,10 @@ class TechnicianController extends Controller
 {
     public function index()
     {
-        $technicians = Technician::latest()->paginate(10);
+        $technicians = Technician::withCount(['contacts as active_jobs_count' => function ($query) {
+            $query->whereIn('status', ['dijadwalkan', 'dalam_proses']);
+        }])->latest()->paginate(10);
+        
         return Inertia::render('Admin/TechnicianManager', [
             'technicians' => $technicians
         ]);
@@ -21,6 +24,8 @@ class TechnicianController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
+            'specialization' => 'nullable|string|max:255',
+            'service_area' => 'nullable|string|max:255',
             'status' => 'required|in:active,inactive',
         ]);
 
@@ -34,6 +39,8 @@ class TechnicianController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
+            'specialization' => 'nullable|string|max:255',
+            'service_area' => 'nullable|string|max:255',
             'status' => 'required|in:active,inactive',
         ]);
 

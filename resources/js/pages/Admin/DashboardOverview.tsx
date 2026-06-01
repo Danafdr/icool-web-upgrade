@@ -440,29 +440,30 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                                         >
                                                             Lihat Detail
                                                         </Button>
-                                                        <Button
-                                                            variant="outline"
-                                                            size="sm"
-                                                            className={cn(
-                                                                "active:scale-95 transition-transform duration-100",
-                                                                contact.status === 'selesai'
-                                                                    ? 'border-emerald-200 hover:bg-emerald-50/50 dark:border-emerald-900/30 dark:hover:bg-emerald-900/20'
-                                                                    : 'border-amber-200 hover:bg-amber-50/50 dark:border-amber-900/30 dark:hover:bg-amber-900/20'
-                                                            )}
-                                                            onClick={() => handleStatusChange(contact.id, contact.status === 'selesai' ? 'menunggu' : 'selesai')}
-                                                        >
-                                                            {contact.status === 'selesai' ? (
-                                                                <>
-                                                                    <Clock className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
-                                                                    Buka Kembali
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    <CheckCircle className="w-3.5 h-3.5 mr-1 text-amber-600 dark:text-amber-400" />
-                                                                    Selesaikan
-                                                                </>
-                                                            )}
-                                                        </Button>
+                                                        {contact.status !== 'spam' ? (
+                                                            <Button
+                                                                variant="outline"
+                                                                size="sm"
+                                                                className={cn(
+                                                                    "active:scale-95 transition-transform duration-100",
+                                                                    contact.status === 'selesai'
+                                                                        ? 'border-emerald-200 hover:bg-emerald-50/50 text-emerald-700'
+                                                                        : 'border-amber-200 hover:bg-amber-50/50 text-amber-700'
+                                                                )}
+                                                                onClick={() => handleStatusChange(contact.id, contact.status === 'selesai' ? 'menunggu' : 'selesai')}
+                                                            >
+                                                                {contact.status === 'selesai' ? 'Buka Kembali' : 'Selesaikan'}
+                                                            </Button>
+                                                        ) : (
+                                                            <Button
+                                                                variant="outline"
+                                                                size="sm"
+                                                                className="active:scale-95 transition-transform duration-100 border-red-200 hover:bg-red-50/50 text-red-700"
+                                                                onClick={() => handleStatusChange(contact.id, 'menunggu')}
+                                                            >
+                                                                Bukan Spam
+                                                            </Button>
+                                                        )}
                                                     </div>
                                                 </td>
                                             </tr>
@@ -808,27 +809,37 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto sm:ml-auto items-center">
                             {selectedContact && (
                                 <div className="w-full sm:w-auto flex justify-end">
-                                    <Button
-                                        variant={selectedContact.status === 'selesai' ? 'secondary' : 'default'}
-                                        onClick={() => handleStatusChange(selectedContact.id, selectedContact.status === 'selesai' ? 'menunggu' : 'selesai')}
-                                        className="w-full sm:w-auto active:scale-95 transition-transform"
-                                    >
-                                        {selectedContact.status !== 'selesai' ? (
-                                            <>
-                                                <CheckCircle className="w-4 h-4 mr-2" />
-                                                Tandai Selesai
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Clock className="w-4 h-4 mr-2" />
-                                                Buka Kembali
-                                            </>
-                                        )}
-                                    </Button>
+                                    {selectedContact.status !== 'spam' ? (
+                                        <Button
+                                            variant={selectedContact.status === 'selesai' ? 'secondary' : 'default'}
+                                            onClick={() => handleStatusChange(selectedContact.id, selectedContact.status === 'selesai' ? 'menunggu' : 'selesai')}
+                                            className="w-full sm:w-auto active:scale-95 transition-transform"
+                                        >
+                                            {selectedContact.status !== 'selesai' ? (
+                                                <>
+                                                    <CheckCircle className="w-4 h-4 mr-2" />
+                                                    Tandai Selesai
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Clock className="w-4 h-4 mr-2" />
+                                                    Buka Kembali
+                                                </>
+                                            )}
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => handleStatusChange(selectedContact.id, 'menunggu')}
+                                            className="w-full sm:w-auto active:scale-95 transition-transform border-red-200 text-red-600 hover:bg-red-50"
+                                        >
+                                            Bukan Spam
+                                        </Button>
+                                    )}
                                 </div>
                             )}
 
-                            {selectedContact?.email && (
+                            {selectedContact?.email && selectedContact?.status !== 'spam' && (
                                 <div className="hidden sm:block h-8 w-px bg-gray-200 dark:bg-gray-700 mx-1"></div>
                             )}
 

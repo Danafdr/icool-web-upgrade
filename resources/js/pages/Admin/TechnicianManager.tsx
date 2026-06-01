@@ -6,14 +6,17 @@ import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PlusCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, User } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Technician {
     id: number;
     name: string;
     phone: string | null;
+    specialization: string | null;
+    service_area: string | null;
     status: 'active' | 'inactive';
+    active_jobs_count?: number;
     created_at: string;
 }
 
@@ -36,6 +39,8 @@ export default function TechnicianManager({ technicians }: Props) {
     const { data, setData, post, put, delete: destroy, processing, reset, errors } = useForm({
         name: '',
         phone: '',
+        specialization: '',
+        service_area: '',
         status: 'active' as 'active' | 'inactive'
     });
 
@@ -50,6 +55,8 @@ export default function TechnicianManager({ technicians }: Props) {
         setData({
             name: tech.name,
             phone: tech.phone || '',
+            specialization: tech.specialization || '',
+            service_area: tech.service_area || '',
             status: tech.status
         });
         setIsModalOpen(true);
@@ -109,6 +116,9 @@ export default function TechnicianManager({ technicians }: Props) {
                             <tr>
                                 <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300">Nama</th>
                                 <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300">No. Telepon</th>
+                                <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300">Spesialisasi</th>
+                                <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300">Area Layanan</th>
+                                <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300 text-center">Jobs Aktif</th>
                                 <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300">Status</th>
                                 <th className="px-4 py-3 font-semibold text-gray-600 dark:text-gray-300 text-right">Aksi</th>
                             </tr>
@@ -116,8 +126,18 @@ export default function TechnicianManager({ technicians }: Props) {
                         <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                             {technicians.data.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-4 py-8 text-center text-gray-500">
-                                        Belum ada data teknisi.
+                                    <td colSpan={7} className="px-4 py-12 text-center">
+                                        <div className="flex flex-col items-center justify-center text-gray-500">
+                                            <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-3">
+                                                <User className="w-6 h-6 text-gray-400" />
+                                            </div>
+                                            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">Belum ada data teknisi</h3>
+                                            <p className="text-sm text-gray-500 max-w-sm mb-4">Tambahkan teknisi pertama Anda untuk mulai menjadwalkan pekerjaan dan memantau beban kerja mereka.</p>
+                                            <Button onClick={openCreateModal} variant="outline" size="sm">
+                                                <PlusCircle className="w-4 h-4 mr-2" />
+                                                Tambah Teknisi
+                                            </Button>
+                                        </div>
                                     </td>
                                 </tr>
                             ) : (
@@ -125,6 +145,15 @@ export default function TechnicianManager({ technicians }: Props) {
                                     <tr key={tech.id} className="hover:bg-gray-50/50 dark:hover:bg-gray-900/50 transition-colors">
                                         <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{tech.name}</td>
                                         <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{tech.phone || '-'}</td>
+                                        <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{tech.specialization || '-'}</td>
+                                        <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{tech.service_area || '-'}</td>
+                                        <td className="px-4 py-3 text-center">
+                                            {tech.active_jobs_count !== undefined ? (
+                                                <Badge variant="outline" className={tech.active_jobs_count > 0 ? "bg-blue-50 text-blue-700 border-blue-200" : "bg-gray-50 text-gray-600 border-gray-200"}>
+                                                    {tech.active_jobs_count}
+                                                </Badge>
+                                            ) : '-'}
+                                        </td>
                                         <td className="px-4 py-3">
                                             <Badge variant={tech.status === 'active' ? 'default' : 'secondary'} 
                                                 className={tech.status === 'active' ? 'bg-green-100 text-green-700 hover:bg-green-100 border-0' : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 border-0'}>
@@ -183,6 +212,28 @@ export default function TechnicianManager({ technicians }: Props) {
                                 className="bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800"
                             />
                             {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Spesialisasi</label>
+                            <Input 
+                                value={data.specialization}
+                                onChange={e => setData('specialization', e.target.value)}
+                                placeholder="Cth: AC Split, AC Cassette, Kulkas"
+                                className="bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800"
+                            />
+                            {errors.specialization && <p className="text-xs text-red-500">{errors.specialization}</p>}
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Area Layanan (Wilayah)</label>
+                            <Input 
+                                value={data.service_area}
+                                onChange={e => setData('service_area', e.target.value)}
+                                placeholder="Cth: Jakarta Selatan, Depok"
+                                className="bg-gray-50 dark:bg-gray-950 border-gray-200 dark:border-gray-800"
+                            />
+                            {errors.service_area && <p className="text-xs text-red-500">{errors.service_area}</p>}
                         </div>
 
                         <div className="space-y-2">

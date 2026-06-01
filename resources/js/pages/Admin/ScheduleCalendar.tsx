@@ -58,7 +58,7 @@ export default function ScheduleCalendar({ jobs }: Props) {
                         <p className="text-gray-500 dark:text-gray-400 mt-1">Kelola dan pantau jadwal pengerjaan teknisi di lapangan.</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm" onClick={goToToday}>
+                        <Button variant="outline" size="sm" onClick={goToToday} className="bg-brand-green/10 text-brand-green border-brand-green/30 hover:bg-brand-green/20">
                             Hari Ini
                         </Button>
                         <div className="flex items-center bg-white dark:bg-gray-900 rounded-md border border-gray-200 dark:border-gray-800">
@@ -95,11 +95,18 @@ export default function ScheduleCalendar({ jobs }: Props) {
                                 )}
                             >
                                 <div className={cn(
-                                    "p-3 text-center border-b",
+                                    "p-3 text-center border-b relative group",
                                     isCurrentDay 
                                         ? "bg-brand-green/10 dark:bg-brand-green/20 border-brand-green/20" 
                                         : "bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-800"
                                 )}>
+                                    <button 
+                                        onClick={() => router.get('/admin')}
+                                        title="Jadwalkan pekerjaan dari halaman formulir"
+                                        className="absolute top-2 right-2 p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:text-brand-green hover:border-brand-green"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                    </button>
                                     <div className="text-xs font-semibold text-gray-500 uppercase">{format(date, 'EEEE', { locale: id })}</div>
                                     <div className={cn(
                                         "text-xl font-bold mt-1",

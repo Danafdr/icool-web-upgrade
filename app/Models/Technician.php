@@ -9,7 +9,7 @@ class Technician extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone', 'status'];
+    protected $fillable = ['name', 'phone', 'status', 'specialization', 'service_area'];
 
     public function contacts()
     {
