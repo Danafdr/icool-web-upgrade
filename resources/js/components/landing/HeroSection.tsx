@@ -39,37 +39,37 @@ export default function HeroSection() {
 
                 <div className="flex-1 w-full max-w-2xl mx-auto lg:mx-0 lg:max-w-none lg:w-[55%] mt-10 lg:mt-0 animate-in fade-in zoom-in-95 duration-1000 delay-300">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative lg:ml-auto lg:max-w-[800px]">
-                        <Link href="/service-kami/kontrak-cuci-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/kontrak-cuci-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <FileText className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
                             <span className="font-medium text-sm lg:text-base text-gray-300 group-hover:text-white transition-colors">Kontrak Maintenance</span>
                         </Link>
-                        <Link href="/service-kami/service-cuci-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/service-cuci-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <PhoneCall className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
                             <span className="font-medium text-sm lg:text-base text-gray-300 group-hover:text-white transition-colors">On-Call Service</span>
                         </Link>
-                        <Link href="/service-kami/reparasi-perbaikan" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/reparasi-perbaikan" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <Wrench className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
                             <span className="font-medium text-sm lg:text-base text-gray-300 group-hover:text-white transition-colors">Reparasi / Perbaikan</span>
                         </Link>
-                        <Link href="/service-kami/teknisi-standby-inhouse" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/teknisi-standby-inhouse" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <UserCheck className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
                             <span className="font-medium text-sm lg:text-base text-gray-300 group-hover:text-white transition-colors">Teknisi Standby</span>
                         </Link>
-                        <Link href="/service-kami/spare-part-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/spare-part-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <Layers className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
                             <span className="font-medium text-sm lg:text-base text-gray-300 group-hover:text-white transition-colors">Spare Part AC</span>
                         </Link>
-                        <Link href="/service-kami/instalasi-pasang-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4">
+                        <Link href="/service-kami/instalasi-pasang-ac" className="group flex sm:flex-col items-center justify-start sm:justify-center p-4 sm:p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 hover:border-brand-green hover:-translate-y-1 hover:shadow-lg transition-all text-left sm:text-center gap-4 transform-gpu will-change-transform">
                             <div className="w-12 h-12 sm:w-16 sm:h-16 shrink-0 rounded-xl sm:rounded-2xl bg-white/5 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300 text-brand-green shadow-sm">
                                 <Power className="w-6 h-6 sm:w-8 sm:h-8" strokeWidth={1.5} />
                             </div>
