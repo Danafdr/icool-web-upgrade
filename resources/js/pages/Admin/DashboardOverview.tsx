@@ -79,6 +79,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
     
     // Import state
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
     const { data: importData, setData: setImportData, post: postImport, processing: importing, reset: resetImport, errors: importErrors } = useForm<{ file: File | null }>({
         file: null
     });
@@ -907,7 +908,21 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                             onError: () => toast.error('Gagal mengimpor data.')
                         });
                     }} className="space-y-4">
-                        <div className="border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-lg p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                        <div 
+                            className={cn(
+                                "border-2 border-dashed rounded-lg p-6 text-center transition-colors relative",
+                                isDragging ? "border-brand-green bg-brand-green/5" : "border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900/50"
+                            )}
+                            onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
+                            onDragLeave={() => setIsDragging(false)}
+                            onDrop={(e) => {
+                                e.preventDefault();
+                                setIsDragging(false);
+                                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                                    setImportData('file', e.dataTransfer.files[0]);
+                                }
+                            }}
+                        >
                             <input 
                                 type="file" 
                                 id="file-upload" 
@@ -915,13 +930,16 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                 accept=".csv,.xlsx" 
                                 onChange={(e) => setImportData('file', e.target.files ? e.target.files[0] : null)}
                             />
-                            <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center">
-                                <Upload className="w-8 h-8 text-gray-400 mb-3" />
+                            <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center justify-center w-full h-full absolute inset-0 z-10 opacity-0">
+                                Upload
+                            </label>
+                            <div className="pointer-events-none flex flex-col items-center relative z-0">
+                                <Upload className={cn("w-8 h-8 mb-3 transition-colors", isDragging ? "text-brand-green" : "text-gray-400")} />
                                 <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    {importData.file ? importData.file.name : 'Klik untuk upload file (.xlsx, .csv)'}
+                                    {importData.file ? importData.file.name : 'Klik atau drag & drop file (.xlsx, .csv)'}
                                 </span>
                                 <span className="text-xs text-gray-500 mt-1">Maksimal 5MB. Proses analisis AI mungkin memakan waktu beberapa detik.</span>
-                            </label>
+                            </div>
                         </div>
                         {importErrors.file && <p className="text-xs text-red-500 text-center">{importErrors.file}</p>}
                         
