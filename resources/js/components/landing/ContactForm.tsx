@@ -47,8 +47,17 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                 setData('order_id', response.data.order_id);
                 setStep(2);
             }
-        } catch (error) {
-            setStep1Error('Gagal mengirim data. Silakan coba lagi.');
+        } catch (error: any) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                setStep1Error(`Error ${error.response.status}: ${error.response.data.message || error.response.data.error || 'Terjadi kesalahan sistem'}`);
+            } else if (error.request) {
+                // The request was made but no response was received
+                setStep1Error('Network Error: Tidak dapat terhubung ke server.');
+            } else {
+                setStep1Error(`Gagal mengirim data: ${error.message}`);
+            }
         } finally {
             setStep1Loading(false);
         }

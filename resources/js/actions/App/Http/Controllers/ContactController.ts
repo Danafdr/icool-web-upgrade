@@ -56,7 +56,7 @@ step1.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     step1.form = step1Form
 /**
 * @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:56
+ * @see app/Http/Controllers/ContactController.php:57
  * @route '/contact/step2'
  */
 export const step2 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ step2.definition = {
 
 /**
 * @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:56
+ * @see app/Http/Controllers/ContactController.php:57
  * @route '/contact/step2'
  */
 step2.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ step2.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:56
+ * @see app/Http/Controllers/ContactController.php:57
  * @route '/contact/step2'
  */
 step2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ step2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:56
+ * @see app/Http/Controllers/ContactController.php:57
  * @route '/contact/step2'
  */
     const step2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ step2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:56
+ * @see app/Http/Controllers/ContactController.php:57
  * @route '/contact/step2'
  */
         step2Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
