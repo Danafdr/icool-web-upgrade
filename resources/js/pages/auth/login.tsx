@@ -1,5 +1,4 @@
 import { Form, Head } from '@inertiajs/react';
-import PasskeyVerify from '@/components/passkey-verify';
 import PasswordInput from '@/components/password-input';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -20,8 +19,6 @@ export default function Login({ status, canResetPassword }: Props) {
     return (
         <>
             <Head title="Log in" />
-
-            <PasskeyVerify />
 
             <Form
                 {...store.form()}
