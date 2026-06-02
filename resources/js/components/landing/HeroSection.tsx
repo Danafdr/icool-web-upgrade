@@ -28,12 +28,28 @@ export default function HeroSection() {
                     </p>
                     
                     <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-                        <Button asChild size="lg" className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-slate-900 font-bold rounded-full h-14 px-8 text-lg group shadow-xl shadow-brand-green/25 cursor-pointer">
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold rounded-full h-14 px-8 text-lg group shadow-xl shadow-red-600/25 cursor-pointer">
                             <Link href="/#contact">
-                                Pesan Sekarang
+                                Butuh Teknisi Darurat? (Tiba &lt; 2 Jam)
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </Button>
+                        <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-brand-green text-brand-green hover:bg-brand-green/10 font-bold rounded-full h-14 px-8 text-lg cursor-pointer">
+                            <Link href="/#contact">
+                                Jadwalkan Perawatan Rutin
+                            </Link>
+                        </Button>
+                    </div>
+
+                    {/* Trust Signals Elevated */}
+                    <div className="pt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500">
+                        <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase">Official Service Partner Of</p>
+                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 lg:gap-8 opacity-70">
+                            <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-7 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                        </div>
                     </div>
                 </div>
 

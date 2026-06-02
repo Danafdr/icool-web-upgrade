@@ -3,49 +3,7 @@ import { Plus } from 'lucide-react';
 export default function ServicesSection() {
     return (
         <>
-            {/* Partners Section */}
-            <section className="py-16 border-b border-white/5 relative">
-                <div className="container mx-auto px-4 lg:px-8">
-                    <h2 className="text-sm md:text-base font-bold text-center text-gray-400 mb-10 tracking-[0.2em] uppercase">
-                        Official Service Partner Of
-                    </h2>
-                    <div className="overflow-hidden w-full relative pt-4">
-                        {/* Left/Right Gradient Mask for smooth entrance/exit (mobile only) */}
-                        <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none md:hidden"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none md:hidden"></div>
 
-                        {/* Marquee Track */}
-                        <div className="flex w-max md:w-full animate-marquee md:animate-none md:justify-center hover:[animation-play-state:paused] shrink-0">
-                            {/* First Set (Always visible, centered on tablet/desktop) */}
-                            <div className="flex items-center justify-center gap-12 md:gap-16 lg:gap-24 px-6 md:px-12 opacity-80 shrink-0 md:w-full">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-12 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                            {/* Duplicate Sets (Hidden on tablet/desktop where animation stops) */}
-                            <div className="flex md:hidden items-center gap-12 px-6 opacity-80 shrink-0" aria-hidden="true">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                            <div className="flex md:hidden items-center gap-12 px-6 opacity-80 shrink-0" aria-hidden="true">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                            <div className="flex md:hidden items-center gap-12 px-6 opacity-80 shrink-0" aria-hidden="true">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* FAQ Section */}
             <section id="faq" className="py-24 relative border-b border-white/5 text-white">

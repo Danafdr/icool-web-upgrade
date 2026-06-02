@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\ContactController::step1
  * @see app/Http/Controllers/ContactController.php:12
@@ -109,6 +109,9 @@ step2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
         })
     
     step2.form = step2Form
-const ContactController = { step1, step2 }
+const contact = {
+    step1: Object.assign(step1, step1),
+step2: Object.assign(step2, step2),
+}
 
-export default ContactController
+export default contact
