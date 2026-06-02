@@ -35,7 +35,7 @@ class ContactController extends Controller
                 'phone' => $validated['phone'],
                 'hvac_issue_type' => $validated['hvac_issue_type'],
                 'address' => 'Belum diisi', // Placeholder
-                'status' => 'pending'
+                'status' => 'menunggu'
             ]);
             
             $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);

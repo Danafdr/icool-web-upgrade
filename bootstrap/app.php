@@ -19,6 +19,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
         $middleware->validateCsrfTokens(except: [
             '/contact/step1',
+            '/contact/step2',
         ]);
 
         $middleware->web(append: [
