@@ -899,7 +899,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                     
                     <form onSubmit={(e) => {
                         e.preventDefault();
-                        postImport(route('admin.import'), {
+                        postImport('/admin/import', {
                             onSuccess: () => {
                                 setIsImportModalOpen(false);
                                 resetImport();
