@@ -15,8 +15,7 @@ Route::get('/tentang-kami', function () {
     return Inertia::render('About');
 })->name('about');
 
-Route::post('/contact/step1', [ContactController::class, 'step1'])->name('contact.step1')->middleware('throttle:10,1');
-Route::post('/contact/step2', [ContactController::class, 'step2'])->name('contact.step2')->middleware('throttle:6,1');
+Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:6,1');
 
 // Service Routes
 Route::get('/projek-ac', function () {
