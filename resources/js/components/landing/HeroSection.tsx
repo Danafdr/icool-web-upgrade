@@ -28,13 +28,7 @@ export default function HeroSection() {
                     </p>
                     
                     <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-                        <Button asChild size="lg" className="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold rounded-full h-14 px-8 text-lg group shadow-xl shadow-red-600/25 cursor-pointer">
-                            <Link href="/#contact">
-                                Butuh Teknisi Darurat? (Tiba &lt; 2 Jam)
-                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </Button>
-                        <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-brand-green text-brand-green hover:bg-brand-green/10 font-bold rounded-full h-14 px-8 text-lg cursor-pointer">
+                        <Button asChild size="lg" className="w-full sm:w-auto bg-brand-green hover:bg-brand-green/90 text-black font-bold rounded-full h-14 px-8 text-lg cursor-pointer shadow-xl shadow-brand-green/25">
                             <Link href="/#contact">
                                 Jadwalkan Perawatan Rutin
                             </Link>
