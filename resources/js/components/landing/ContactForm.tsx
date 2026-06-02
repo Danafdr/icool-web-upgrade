@@ -25,9 +25,15 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
         e.preventDefault();
         post('/contact', {
             preserveScroll: true,
-            onSuccess: () => {
-                reset();
-                setShowSuccess(true);
+            onSuccess: (page) => {
+                const flash = page.props.flash as any;
+                if (flash?.error) {
+                    // Do not show success modal if there is an error
+                    setShowSuccess(false);
+                } else if (flash?.success) {
+                    reset();
+                    setShowSuccess(true);
+                }
             },
         });
     };
@@ -203,6 +209,12 @@ export default function ContactForm({ isPopup = false, defaultServiceType = '' }
                                     />
                                     {errors.message && <p className="text-xs text-red-500">{errors.message}</p>}
                                 </div>
+
+                                {props.flash?.error && (
+                                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm font-medium text-center">
+                                        {props.flash.error}
+                                    </div>
+                                )}
 
                                 <Button type="submit" disabled={processing} className="w-full bg-brand-green hover:bg-brand-green/90 text-slate-900 rounded-full h-12 text-md font-bold shadow-lg shadow-brand-green/20 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed">
                                     {processing && <Loader2 className="w-4 h-4 animate-spin mr-2" />}

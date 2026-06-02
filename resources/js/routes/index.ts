@@ -275,7 +275,7 @@ about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     about.form = aboutForm
 /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
 export const dashboard = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -289,7 +289,7 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
 dashboard.url = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -316,7 +316,7 @@ dashboard.url = (args: { current_team: string | number } | [current_team: string
 }
 
 /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
 dashboard.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -324,7 +324,7 @@ dashboard.get = (args: { current_team: string | number } | [current_team: string
     method: 'get',
 })
 /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
 dashboard.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -333,7 +333,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
 })
 
     /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
     const dashboardForm = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -342,7 +342,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
     })
 
             /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -350,7 +350,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
             method: 'get',
         })
             /**
- * @see routes/web.php:114
+ * @see routes/web.php:113
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

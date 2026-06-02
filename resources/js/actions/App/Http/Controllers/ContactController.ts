@@ -1,114 +1,59 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
-* @see \App\Http\Controllers\ContactController::step1
+* @see \App\Http\Controllers\ContactController::store
  * @see app/Http/Controllers/ContactController.php:12
- * @route '/contact/step1'
+ * @route '/contact'
  */
-export const step1 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: step1.url(options),
+export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
     method: 'post',
 })
 
-step1.definition = {
+store.definition = {
     methods: ["post"],
-    url: '/contact/step1',
+    url: '/contact',
 } satisfies RouteDefinition<["post"]>
 
 /**
-* @see \App\Http\Controllers\ContactController::step1
+* @see \App\Http\Controllers\ContactController::store
  * @see app/Http/Controllers/ContactController.php:12
- * @route '/contact/step1'
+ * @route '/contact'
  */
-step1.url = (options?: RouteQueryOptions) => {
-    return step1.definition.url + queryParams(options)
+store.url = (options?: RouteQueryOptions) => {
+    return store.definition.url + queryParams(options)
 }
 
 /**
-* @see \App\Http\Controllers\ContactController::step1
+* @see \App\Http\Controllers\ContactController::store
  * @see app/Http/Controllers/ContactController.php:12
- * @route '/contact/step1'
+ * @route '/contact'
  */
-step1.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: step1.url(options),
+store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: store.url(options),
     method: 'post',
 })
 
     /**
-* @see \App\Http\Controllers\ContactController::step1
+* @see \App\Http\Controllers\ContactController::store
  * @see app/Http/Controllers/ContactController.php:12
- * @route '/contact/step1'
+ * @route '/contact'
  */
-    const step1Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: step1.url(options),
+    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: store.url(options),
         method: 'post',
     })
 
             /**
-* @see \App\Http\Controllers\ContactController::step1
+* @see \App\Http\Controllers\ContactController::store
  * @see app/Http/Controllers/ContactController.php:12
- * @route '/contact/step1'
+ * @route '/contact'
  */
-        step1Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: step1.url(options),
+        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: store.url(options),
             method: 'post',
         })
     
-    step1.form = step1Form
-/**
-* @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:57
- * @route '/contact/step2'
- */
-export const step2 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: step2.url(options),
-    method: 'post',
-})
-
-step2.definition = {
-    methods: ["post"],
-    url: '/contact/step2',
-} satisfies RouteDefinition<["post"]>
-
-/**
-* @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:57
- * @route '/contact/step2'
- */
-step2.url = (options?: RouteQueryOptions) => {
-    return step2.definition.url + queryParams(options)
-}
-
-/**
-* @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:57
- * @route '/contact/step2'
- */
-step2.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
-    url: step2.url(options),
-    method: 'post',
-})
-
-    /**
-* @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:57
- * @route '/contact/step2'
- */
-    const step2Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-        action: step2.url(options),
-        method: 'post',
-    })
-
-            /**
-* @see \App\Http\Controllers\ContactController::step2
- * @see app/Http/Controllers/ContactController.php:57
- * @route '/contact/step2'
- */
-        step2Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
-            action: step2.url(options),
-            method: 'post',
-        })
-    
-    step2.form = step2Form
-const ContactController = { step1, step2 }
+    store.form = storeForm
+const ContactController = { store }
 
 export default ContactController
