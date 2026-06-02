@@ -41,18 +41,20 @@ export default function HeroSection() {
                         
                         {/* Mobile Marquee (hidden on md screens and up) */}
                         <div className="relative flex overflow-hidden group md:hidden -mx-4 [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
-                            <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            </div>
-                            {/* Duplicate set for seamless infinite scroll */}
-                            <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10" aria-hidden="true">
-                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            <div className="flex w-max animate-marquee">
+                                <div className="flex shrink-0 items-center gap-10 pr-10">
+                                    <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                </div>
+                                {/* Duplicate set for seamless infinite scroll */}
+                                <div className="flex shrink-0 items-center gap-10 pr-10" aria-hidden="true">
+                                    <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                    <img src="/images/partners/gree.png" alt="Gree" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                </div>
                             </div>
                         </div>
 
