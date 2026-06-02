@@ -35,7 +35,7 @@ class ContactController extends Controller
                 'phone' => $validated['phone'],
                 'hvac_issue_type' => $validated['hvac_issue_type'],
                 'address' => 'Belum diisi', // Placeholder
-                'status' => 'menunggu'
+                'status' => 'pending'
             ]);
             
             $orderId = 'ORD-' . date('Ymd') . '-' . str_pad($contact->id, 4, '0', STR_PAD_LEFT);
@@ -47,8 +47,9 @@ class ContactController extends Controller
                 'is_duplicate' => false
             ]);
         } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Step 1 Error: ' . $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
             return response()->json([
-                'error' => 'Terjadi kesalahan sistem. Mohon coba lagi.',
+                'error' => 'Terjadi kesalahan sistem. Mohon coba lagi. ' . $e->getMessage(),
             ], 500);
         }
     }
