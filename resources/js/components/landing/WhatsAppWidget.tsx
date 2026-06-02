@@ -17,7 +17,7 @@ export default function WhatsAppWidget() {
 
     const admins = [
         {
-            name: "Admin HO",
+            name: "Admin Jakarta",
             role: "Customer Support",
             url: "https://api.whatsapp.com/send?phone=6281386049231&text=Hallo%20iCool.."
         },

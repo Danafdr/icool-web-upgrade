@@ -133,7 +133,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     
     logout.form = logoutForm
 /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
 export const home = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -147,7 +147,7 @@ home.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
 home.url = (options?: RouteQueryOptions) => {
@@ -155,7 +155,7 @@ home.url = (options?: RouteQueryOptions) => {
 }
 
 /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
 home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -163,7 +163,7 @@ home.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
 home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -172,7 +172,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
     const homeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -181,7 +181,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
         homeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -189,7 +189,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
- * @see routes/web.php:10
+ * @see [serialized-closure]:2
  * @route '/'
  */
         homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -204,7 +204,7 @@ home.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     home.form = homeForm
 /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
 export const about = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -218,7 +218,7 @@ about.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
 about.url = (options?: RouteQueryOptions) => {
@@ -226,7 +226,7 @@ about.url = (options?: RouteQueryOptions) => {
 }
 
 /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
 about.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -234,7 +234,7 @@ about.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     method: 'get',
 })
 /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
 about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -243,7 +243,7 @@ about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
     /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
     const aboutForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -252,7 +252,7 @@ about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     })
 
             /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
         aboutForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -260,7 +260,7 @@ about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
             method: 'get',
         })
             /**
- * @see routes/web.php:14
+ * @see [serialized-closure]:2
  * @route '/tentang-kami'
  */
         aboutForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -275,7 +275,7 @@ about.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     
     about.form = aboutForm
 /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
 export const dashboard = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -289,7 +289,7 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
 dashboard.url = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -316,7 +316,7 @@ dashboard.url = (args: { current_team: string | number } | [current_team: string
 }
 
 /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
 dashboard.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -324,7 +324,7 @@ dashboard.get = (args: { current_team: string | number } | [current_team: string
     method: 'get',
 })
 /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
 dashboard.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -333,7 +333,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
 })
 
     /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
     const dashboardForm = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -342,7 +342,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
     })
 
             /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.get = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -350,7 +350,7 @@ dashboard.head = (args: { current_team: string | number } | [current_team: strin
             method: 'get',
         })
             /**
- * @see routes/web.php:113
+ * @see [serialized-closure]:2
  * @route '/{current_team}/dashboard'
  */
         dashboardForm.head = (args: { current_team: string | number } | [current_team: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
