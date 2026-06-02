@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 
 export default function HeroSection() {
     return (
-        <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden flex items-center text-white">
+        <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-x-clip flex items-center text-white">
             {/* Background Effects */}
             <div className="absolute inset-0 z-0 pointer-events-none">
             </div>
@@ -40,7 +40,7 @@ export default function HeroSection() {
                         <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase text-center md:text-left">Official Service Partner Of</p>
                         
                         {/* Mobile Marquee (hidden on md screens and up) */}
-                        <div className="relative flex overflow-hidden group md:hidden -mx-4 [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+                        <div className="relative flex overflow-hidden group md:hidden [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
                             <div className="flex w-max animate-marquee">
                                 <div className="flex shrink-0 items-center gap-10 pr-10">
                                     <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
