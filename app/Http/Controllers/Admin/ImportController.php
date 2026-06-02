@@ -21,14 +21,21 @@ class ImportController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:csv,xlsx,xls|max:5120',
+            'file' => 'required|file|max:5120',
         ]);
 
         $file = $request->file('file');
+        $extension = strtolower($file->getClientOriginalExtension());
+        if (!in_array($extension, ['csv', 'xlsx', 'xls'])) {
+            return redirect()->back()->with('error', 'Format file harus berupa CSV atau Excel.');
+        }
+
+        $file = $request->file('file');
         $path = $file->getRealPath();
+        $extension = $file->getClientOriginalExtension();
 
         try {
-            $rows = SimpleExcelReader::create($path)->getRows()->toArray();
+            $rows = SimpleExcelReader::create($path, $extension)->getRows()->toArray();
             
             if (empty($rows)) {
                 return redirect()->back()->with('error', 'File kosong atau tidak memiliki data.');
