@@ -190,6 +190,11 @@ class AdminDashboardController extends Controller
 
     public function history(Contact $contact)
     {
+        // If there's no email or phone to match on, return empty history
+        if (!$contact->email && !$contact->phone) {
+            return response()->json(['history' => []]);
+        }
+
         // Find other contacts with same email or phone, excluding this one
         $query = Contact::where('id', '!=', $contact->id);
         

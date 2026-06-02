@@ -673,7 +673,7 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                         onClick={() => {
                                             scheduleForm.patch(`/admin/forms/${selectedContact.id}/schedule`, {
                                                 preserveScroll: true,
-                                                onSuccess: () => toast.success('Jadwal & teknisi berhasil disimpan! Tiket sekarang Dalam Proses.'),
+                                                onSuccess: () => toast.success('Jadwal & teknisi berhasil disimpan! Status diubah ke Dijadwalkan.'),
                                                 onError: () => toast.error('Gagal menyimpan jadwal.')
                                             });
                                         }}

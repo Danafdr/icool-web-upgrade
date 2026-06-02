@@ -82,8 +82,7 @@ class ContactController extends Controller
             ]);
         } catch (\Throwable $e) {
             return back()->with([
-                'success' => 'Terjadi kesalahan sistem: ' . $e->getMessage(),
-                'order_id' => 'ERROR'
+                'error' => 'Terjadi kesalahan sistem. Mohon coba lagi atau hubungi kami langsung.',
             ]);
         }
     }

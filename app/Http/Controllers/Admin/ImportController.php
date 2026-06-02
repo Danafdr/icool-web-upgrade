@@ -30,9 +30,7 @@ class ImportController extends Controller
             return redirect()->back()->with('error', 'Format file harus berupa CSV atau Excel.');
         }
 
-        $file = $request->file('file');
         $path = $file->getRealPath();
-        $extension = $file->getClientOriginalExtension();
 
         try {
             $rows = SimpleExcelReader::create($path, $extension)->getRows()->toArray();

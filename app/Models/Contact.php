@@ -26,6 +26,7 @@ class Contact extends Model
         'scheduled_at',
         'technician_id',
         'status',
+        'is_spam',
     ];
 
     public function technician()
