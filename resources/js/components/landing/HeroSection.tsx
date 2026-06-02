@@ -40,7 +40,7 @@ export default function HeroSection() {
                         <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase text-center md:text-left">Official Service Partner Of</p>
                         
                         {/* Mobile Marquee (hidden on md screens and up) */}
-                        <div className="relative flex overflow-hidden group md:hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] w-[100vw] -ml-4 px-4 sm:w-full sm:ml-0 sm:px-0">
+                        <div className="relative flex overflow-hidden group md:hidden -mx-4 [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
                             <div className="flex shrink-0 animate-marquee items-center gap-10 pr-10">
                                 <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
                                 <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
