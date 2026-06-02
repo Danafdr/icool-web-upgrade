@@ -37,14 +37,14 @@ export default function Header() {
     return (
         <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all flex flex-col">
             {/* Secondary Top Bar for Contact Info */}
-            <div className="hidden lg:flex bg-gray-50 dark:bg-gray-950 text-gray-500 dark:text-gray-400 py-1.5 border-b border-gray-200 dark:border-gray-800 text-xs font-medium">
-                <div className="container mx-auto px-5 lg:px-8 flex justify-end items-center gap-6">
-                    <a href="mailto:support@icool.co.id" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-                        <Mail className="w-3.5 h-3.5 text-primary" />
+            <div className="flex bg-gray-50 dark:bg-gray-950 text-gray-500 dark:text-gray-400 py-1.5 border-b border-gray-200 dark:border-gray-800 text-[10px] sm:text-xs font-medium">
+                <div className="container mx-auto px-4 sm:px-5 lg:px-8 flex justify-between sm:justify-end items-center gap-2 sm:gap-6">
+                    <a href="mailto:support@icool.co.id" className="flex items-center gap-1 sm:gap-1.5 hover:text-primary transition-colors">
+                        <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
                         support@icool.co.id
                     </a>
-                    <a href="tel:08001060610" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-                        <Phone className="w-3.5 h-3.5 text-primary" />
+                    <a href="tel:08001060610" className="flex items-center gap-1 sm:gap-1.5 hover:text-primary transition-colors">
+                        <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
                         0800-10-606-10
                     </a>
                 </div>
