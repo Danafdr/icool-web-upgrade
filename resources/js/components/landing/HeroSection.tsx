@@ -10,7 +10,7 @@ export default function HeroSection() {
             </div>
 
             <div className="container relative z-10 mx-auto px-4 md:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
-                <div className="flex-1 text-center lg:text-left space-y-8">
+                <div className="flex-1 min-w-0 w-full text-center lg:text-left space-y-8">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-green/10 border border-brand-green/20 text-brand-green text-sm font-medium animate-in fade-in slide-in-from-bottom-4 duration-700">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green/45 opacity-75"></span>
@@ -40,7 +40,7 @@ export default function HeroSection() {
                         <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase text-center md:text-left">Official Service Partner Of</p>
                         
                         {/* Mobile Marquee (hidden on md screens and up) */}
-                        <div className="relative flex overflow-hidden group md:hidden [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+                        <div className="relative flex w-full overflow-hidden group md:hidden [-webkit-mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
                             <div className="flex w-max animate-marquee">
                                 <div className="flex shrink-0 items-center gap-10 pr-10">
                                     <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
