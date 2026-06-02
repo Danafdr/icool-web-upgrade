@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
  * @see app/Http/Controllers/AdminDashboardController.php:66
  * @route '/admin/forms/{contact}/status'
  */
-export const status = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const status = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: status.url(args, options),
     method: 'patch',
 })
@@ -19,7 +19,7 @@ status.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:66
  * @route '/admin/forms/{contact}/status'
  */
-status.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+status.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -52,7 +52,7 @@ status.url = (args: { contact: number | { id: number } } | [contact: number | { 
  * @see app/Http/Controllers/AdminDashboardController.php:66
  * @route '/admin/forms/{contact}/status'
  */
-status.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+status.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: status.url(args, options),
     method: 'patch',
 })
@@ -62,7 +62,7 @@ status.patch = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:66
  * @route '/admin/forms/{contact}/status'
  */
-    const statusForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const statusForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: status.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -77,7 +77,7 @@ status.patch = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:66
  * @route '/admin/forms/{contact}/status'
  */
-        statusForm.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        statusForm.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: status.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
@@ -93,7 +93,7 @@ status.patch = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:79
  * @route '/admin/forms/{contact}/notes'
  */
-export const notes = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const notes = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: notes.url(args, options),
     method: 'patch',
 })
@@ -108,7 +108,7 @@ notes.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:79
  * @route '/admin/forms/{contact}/notes'
  */
-notes.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+notes.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -141,7 +141,7 @@ notes.url = (args: { contact: number | { id: number } } | [contact: number | { i
  * @see app/Http/Controllers/AdminDashboardController.php:79
  * @route '/admin/forms/{contact}/notes'
  */
-notes.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+notes.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: notes.url(args, options),
     method: 'patch',
 })
@@ -151,7 +151,7 @@ notes.patch = (args: { contact: number | { id: number } } | [contact: number | {
  * @see app/Http/Controllers/AdminDashboardController.php:79
  * @route '/admin/forms/{contact}/notes'
  */
-    const notesForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const notesForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: notes.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -166,7 +166,7 @@ notes.patch = (args: { contact: number | { id: number } } | [contact: number | {
  * @see app/Http/Controllers/AdminDashboardController.php:79
  * @route '/admin/forms/{contact}/notes'
  */
-        notesForm.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        notesForm.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: notes.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
@@ -182,7 +182,7 @@ notes.patch = (args: { contact: number | { id: number } } | [contact: number | {
  * @see app/Http/Controllers/AdminDashboardController.php:92
  * @route '/admin/forms/{contact}/schedule'
  */
-export const schedule = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const schedule = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: schedule.url(args, options),
     method: 'patch',
 })
@@ -197,7 +197,7 @@ schedule.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:92
  * @route '/admin/forms/{contact}/schedule'
  */
-schedule.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+schedule.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -230,7 +230,7 @@ schedule.url = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:92
  * @route '/admin/forms/{contact}/schedule'
  */
-schedule.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+schedule.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: schedule.url(args, options),
     method: 'patch',
 })
@@ -240,7 +240,7 @@ schedule.patch = (args: { contact: number | { id: number } } | [contact: number 
  * @see app/Http/Controllers/AdminDashboardController.php:92
  * @route '/admin/forms/{contact}/schedule'
  */
-    const scheduleForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const scheduleForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: schedule.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -255,7 +255,7 @@ schedule.patch = (args: { contact: number | { id: number } } | [contact: number 
  * @see app/Http/Controllers/AdminDashboardController.php:92
  * @route '/admin/forms/{contact}/schedule'
  */
-        scheduleForm.patch = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        scheduleForm.patch = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: schedule.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
@@ -271,7 +271,7 @@ schedule.patch = (args: { contact: number | { id: number } } | [contact: number 
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-export const history = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const history = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: history.url(args, options),
     method: 'get',
 })
@@ -286,7 +286,7 @@ history.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-history.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+history.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -319,7 +319,7 @@ history.url = (args: { contact: number | { id: number } } | [contact: number | {
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-history.get = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+history.get = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: history.url(args, options),
     method: 'get',
 })
@@ -328,7 +328,7 @@ history.get = (args: { contact: number | { id: number } } | [contact: number | {
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-history.head = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+history.head = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: history.url(args, options),
     method: 'head',
 })
@@ -338,7 +338,7 @@ history.head = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-    const historyForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    const historyForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
         action: history.url(args, options),
         method: 'get',
     })
@@ -348,7 +348,7 @@ history.head = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-        historyForm.get = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        historyForm.get = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: history.url(args, options),
             method: 'get',
         })
@@ -357,7 +357,7 @@ history.head = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:191
  * @route '/admin/forms/{contact}/history'
  */
-        historyForm.head = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        historyForm.head = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: history.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
@@ -373,7 +373,7 @@ history.head = (args: { contact: number | { id: number } } | [contact: number | 
  * @see app/Http/Controllers/AdminDashboardController.php:147
  * @route '/admin/forms/{contact}/reply'
  */
-export const reply = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const reply = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: reply.url(args, options),
     method: 'post',
 })
@@ -388,7 +388,7 @@ reply.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:147
  * @route '/admin/forms/{contact}/reply'
  */
-reply.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+reply.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -421,7 +421,7 @@ reply.url = (args: { contact: number | { id: number } } | [contact: number | { i
  * @see app/Http/Controllers/AdminDashboardController.php:147
  * @route '/admin/forms/{contact}/reply'
  */
-reply.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+reply.post = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: reply.url(args, options),
     method: 'post',
 })
@@ -431,7 +431,7 @@ reply.post = (args: { contact: number | { id: number } } | [contact: number | { 
  * @see app/Http/Controllers/AdminDashboardController.php:147
  * @route '/admin/forms/{contact}/reply'
  */
-    const replyForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const replyForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: reply.url(args, options),
         method: 'post',
     })
@@ -441,7 +441,7 @@ reply.post = (args: { contact: number | { id: number } } | [contact: number | { 
  * @see app/Http/Controllers/AdminDashboardController.php:147
  * @route '/admin/forms/{contact}/reply'
  */
-        replyForm.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        replyForm.post = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: reply.url(args, options),
             method: 'post',
         })
@@ -452,7 +452,7 @@ reply.post = (args: { contact: number | { id: number } } | [contact: number | { 
  * @see app/Http/Controllers/AdminDashboardController.php:166
  * @route '/admin/forms/{contact}/generate-reply'
  */
-export const generateReply = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const generateReply = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: generateReply.url(args, options),
     method: 'post',
 })
@@ -467,7 +467,7 @@ generateReply.definition = {
  * @see app/Http/Controllers/AdminDashboardController.php:166
  * @route '/admin/forms/{contact}/generate-reply'
  */
-generateReply.url = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+generateReply.url = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { contact: args }
     }
@@ -500,7 +500,7 @@ generateReply.url = (args: { contact: number | { id: number } } | [contact: numb
  * @see app/Http/Controllers/AdminDashboardController.php:166
  * @route '/admin/forms/{contact}/generate-reply'
  */
-generateReply.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+generateReply.post = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: generateReply.url(args, options),
     method: 'post',
 })
@@ -510,7 +510,7 @@ generateReply.post = (args: { contact: number | { id: number } } | [contact: num
  * @see app/Http/Controllers/AdminDashboardController.php:166
  * @route '/admin/forms/{contact}/generate-reply'
  */
-    const generateReplyForm = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const generateReplyForm = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: generateReply.url(args, options),
         method: 'post',
     })
@@ -520,7 +520,7 @@ generateReply.post = (args: { contact: number | { id: number } } | [contact: num
  * @see app/Http/Controllers/AdminDashboardController.php:166
  * @route '/admin/forms/{contact}/generate-reply'
  */
-        generateReplyForm.post = (args: { contact: number | { id: number } } | [contact: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        generateReplyForm.post = (args: { contact: string | number | { id: string | number } } | [contact: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: generateReply.url(args, options),
             method: 'post',
         })

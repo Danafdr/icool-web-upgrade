@@ -137,7 +137,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/TechnicianController.php:37
  * @route '/admin/technicians/{technician}'
  */
-export const update = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -152,7 +152,7 @@ update.definition = {
  * @see app/Http/Controllers/TechnicianController.php:37
  * @route '/admin/technicians/{technician}'
  */
-update.url = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+update.url = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { technician: args }
     }
@@ -185,7 +185,7 @@ update.url = (args: { technician: number | { id: number } } | [technician: numbe
  * @see app/Http/Controllers/TechnicianController.php:37
  * @route '/admin/technicians/{technician}'
  */
-update.put = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -195,7 +195,7 @@ update.put = (args: { technician: number | { id: number } } | [technician: numbe
  * @see app/Http/Controllers/TechnicianController.php:37
  * @route '/admin/technicians/{technician}'
  */
-    const updateForm = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateForm = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: update.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PUT',
@@ -210,7 +210,7 @@ update.put = (args: { technician: number | { id: number } } | [technician: numbe
  * @see app/Http/Controllers/TechnicianController.php:37
  * @route '/admin/technicians/{technician}'
  */
-        updateForm.put = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateForm.put = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: update.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PUT',
@@ -226,7 +226,7 @@ update.put = (args: { technician: number | { id: number } } | [technician: numbe
  * @see app/Http/Controllers/TechnicianController.php:52
  * @route '/admin/technicians/{technician}'
  */
-export const destroy = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -241,7 +241,7 @@ destroy.definition = {
  * @see app/Http/Controllers/TechnicianController.php:52
  * @route '/admin/technicians/{technician}'
  */
-destroy.url = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { technician: args }
     }
@@ -274,7 +274,7 @@ destroy.url = (args: { technician: number | { id: number } } | [technician: numb
  * @see app/Http/Controllers/TechnicianController.php:52
  * @route '/admin/technicians/{technician}'
  */
-destroy.delete = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -284,7 +284,7 @@ destroy.delete = (args: { technician: number | { id: number } } | [technician: n
  * @see app/Http/Controllers/TechnicianController.php:52
  * @route '/admin/technicians/{technician}'
  */
-    const destroyForm = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyForm = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroy.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -299,7 +299,7 @@ destroy.delete = (args: { technician: number | { id: number } } | [technician: n
  * @see app/Http/Controllers/TechnicianController.php:52
  * @route '/admin/technicians/{technician}'
  */
-        destroyForm.delete = (args: { technician: number | { id: number } } | [technician: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyForm.delete = (args: { technician: string | number | { id: string | number } } | [technician: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroy.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',

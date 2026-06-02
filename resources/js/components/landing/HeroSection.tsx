@@ -36,13 +36,23 @@ export default function HeroSection() {
                     </div>
 
                     {/* Trust Signals Elevated */}
-                    <div className="pt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500">
-                        <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase">Official Service Partner Of</p>
-                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6 lg:gap-8 opacity-70">
-                            <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-7 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
-                            <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                    <div className="pt-8 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500 overflow-hidden w-full">
+                        <p className="text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase text-center lg:text-left">Official Service Partner Of</p>
+                        
+                        <div className="relative flex overflow-hidden group">
+                            <div className="flex shrink-0 animate-marquee items-center gap-10 md:gap-16 pr-10 md:pr-16">
+                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-7 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            </div>
+                            {/* Duplicate set for seamless infinite scroll */}
+                            <div className="flex shrink-0 animate-marquee items-center gap-10 md:gap-16 pr-10 md:pr-16" aria-hidden="true">
+                                <img src="/images/partners/daikin.png" alt="Daikin" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/panasonic.png" alt="Panasonic" className="h-5 md:h-7 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/mitsubishi.png" alt="Mitsubishi Electric" className="h-8 md:h-10 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                                <img src="/images/partners/gree.png" alt="Gree" className="h-6 md:h-8 object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity duration-300" />
+                            </div>
                         </div>
                     </div>
                 </div>

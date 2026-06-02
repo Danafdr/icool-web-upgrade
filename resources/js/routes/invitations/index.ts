@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-export const accept = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const accept = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: accept.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ accept.definition = {
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-accept.url = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions) => {
+accept.url = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { invitation: args }
     }
@@ -52,7 +52,7 @@ accept.url = (args: { invitation: string | { code: string } } | [invitation: str
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-accept.get = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+accept.get = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: accept.url(args, options),
     method: 'get',
 })
@@ -61,7 +61,7 @@ accept.get = (args: { invitation: string | { code: string } } | [invitation: str
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-accept.head = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+accept.head = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: accept.url(args, options),
     method: 'head',
 })
@@ -71,7 +71,7 @@ accept.head = (args: { invitation: string | { code: string } } | [invitation: st
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-    const acceptForm = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    const acceptForm = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
         action: accept.url(args, options),
         method: 'get',
     })
@@ -81,7 +81,7 @@ accept.head = (args: { invitation: string | { code: string } } | [invitation: st
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-        acceptForm.get = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        acceptForm.get = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: accept.url(args, options),
             method: 'get',
         })
@@ -90,7 +90,7 @@ accept.head = (args: { invitation: string | { code: string } } | [invitation: st
  * @see app/Http/Controllers/Teams/TeamInvitationController.php:61
  * @route '/invitations/{invitation}/accept'
  */
-        acceptForm.head = (args: { invitation: string | { code: string } } | [invitation: string | { code: string } ] | string | { code: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        acceptForm.head = (args: { invitation: string | number | { code: string | number } } | [invitation: string | number | { code: string | number } ] | string | number | { code: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
             action: accept.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'HEAD',
