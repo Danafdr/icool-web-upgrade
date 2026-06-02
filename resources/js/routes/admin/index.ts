@@ -313,12 +313,68 @@ analytics.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
     
     analytics.form = analyticsForm
+/**
+* @see \App\Http\Controllers\Admin\ImportController::importMethod
+ * @see app/Http/Controllers/Admin/ImportController.php:21
+ * @route '/admin/import'
+ */
+export const importMethod = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: importMethod.url(options),
+    method: 'post',
+})
+
+importMethod.definition = {
+    methods: ["post"],
+    url: '/admin/import',
+} satisfies RouteDefinition<["post"]>
+
+/**
+* @see \App\Http\Controllers\Admin\ImportController::importMethod
+ * @see app/Http/Controllers/Admin/ImportController.php:21
+ * @route '/admin/import'
+ */
+importMethod.url = (options?: RouteQueryOptions) => {
+    return importMethod.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\Admin\ImportController::importMethod
+ * @see app/Http/Controllers/Admin/ImportController.php:21
+ * @route '/admin/import'
+ */
+importMethod.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+    url: importMethod.url(options),
+    method: 'post',
+})
+
+    /**
+* @see \App\Http\Controllers\Admin\ImportController::importMethod
+ * @see app/Http/Controllers/Admin/ImportController.php:21
+ * @route '/admin/import'
+ */
+    const importMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: importMethod.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\Admin\ImportController::importMethod
+ * @see app/Http/Controllers/Admin/ImportController.php:21
+ * @route '/admin/import'
+ */
+        importMethodForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: importMethod.url(options),
+            method: 'post',
+        })
+    
+    importMethod.form = importMethodForm
 const admin = {
     overview: Object.assign(overview, overview),
 forms: Object.assign(forms, formsA66cc0),
 schedule: Object.assign(schedule, schedule),
 analytics: Object.assign(analytics, analytics),
 technicians: Object.assign(technicians, technicians),
+import: Object.assign(importMethod, importMethod),
 }
 
 export default admin

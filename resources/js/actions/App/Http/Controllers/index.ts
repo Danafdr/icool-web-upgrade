@@ -3,6 +3,7 @@ import AdminDashboardController from './AdminDashboardController'
 import ScheduleController from './ScheduleController'
 import AnalyticsController from './AnalyticsController'
 import TechnicianController from './TechnicianController'
+import Admin from './Admin'
 import Teams from './Teams'
 import Settings from './Settings'
 const Controllers = {
@@ -11,6 +12,7 @@ AdminDashboardController: Object.assign(AdminDashboardController, AdminDashboard
 ScheduleController: Object.assign(ScheduleController, ScheduleController),
 AnalyticsController: Object.assign(AnalyticsController, AnalyticsController),
 TechnicianController: Object.assign(TechnicianController, TechnicianController),
+Admin: Object.assign(Admin, Admin),
 Teams: Object.assign(Teams, Teams),
 Settings: Object.assign(Settings, Settings),
 }

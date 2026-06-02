@@ -136,6 +136,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('/technicians', [App\Http\Controllers\TechnicianController::class, 'store'])->name('admin.technicians.store');
     Route::put('/technicians/{technician}', [App\Http\Controllers\TechnicianController::class, 'update'])->name('admin.technicians.update');
     Route::delete('/technicians/{technician}', [App\Http\Controllers\TechnicianController::class, 'destroy'])->name('admin.technicians.destroy');
+    
+    // Data Import
+    Route::post('/import', [App\Http\Controllers\Admin\ImportController::class, 'store'])->name('admin.import');
 });
 
 Route::middleware(['auth'])->group(function () {

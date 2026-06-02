@@ -14,6 +14,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { cn } from '@/lib/utils';
 import KanbanBoard from '@/components/admin/KanbanBoard';
+import { Upload } from 'lucide-react';
 
 interface Contact {
     id: number;
@@ -75,6 +76,12 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
     const [isGenerating, setIsGenerating] = useState(false);
     const [isRefining, setIsRefining] = useState(false);
     const [customerHistory, setCustomerHistory] = useState<Contact[]>([]);
+    
+    // Import state
+    const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+    const { data: importData, setData: setImportData, post: postImport, processing: importing, reset: resetImport, errors: importErrors } = useForm<{ file: File | null }>({
+        file: null
+    });
     
     // Local states for Optimistic UI updates
     const [localForms, setLocalForms] = useState<Contact[]>(forms.data);
@@ -279,6 +286,15 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                                     Tabel
                                 </button>
                             </div>
+                            <Button 
+                                variant="outline" 
+                                size="sm" 
+                                onClick={() => setIsImportModalOpen(true)}
+                                className="ml-2 text-brand-green border-brand-green/30 hover:bg-brand-green/10"
+                            >
+                                <Upload className="w-4 h-4 mr-2" />
+                                Import Excel
+                            </Button>
                         </div>
                         
                         {/* Search and Filters */}
@@ -869,6 +885,62 @@ export default function DashboardOverview({ stats, forms, serviceTypes = [], fil
                     100% { transform: translateX(200%); }
                 }
             `}</style>
+            {/* Import Modal */}
+            <Dialog open={isImportModalOpen} onOpenChange={setIsImportModalOpen}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Import Data Pelanggan</DialogTitle>
+                        <DialogDescription>
+                            Upload file Excel (.xlsx) atau CSV yang berisi data keluhan pelanggan. 
+                            AI akan secara otomatis membaca dan menganalisis setiap baris data yang Anda upload.
+                        </DialogDescription>
+                    </DialogHeader>
+                    
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        postImport(route('admin.import'), {
+                            onSuccess: () => {
+                                setIsImportModalOpen(false);
+                                resetImport();
+                                toast.success('Data berhasil diimpor dan dianalisis!');
+                            },
+                            onError: () => toast.error('Gagal mengimpor data.')
+                        });
+                    }} className="space-y-4">
+                        <div className="border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-lg p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
+                            <input 
+                                type="file" 
+                                id="file-upload" 
+                                className="hidden" 
+                                accept=".csv,.xlsx" 
+                                onChange={(e) => setImportData('file', e.target.files ? e.target.files[0] : null)}
+                            />
+                            <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center">
+                                <Upload className="w-8 h-8 text-gray-400 mb-3" />
+                                <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    {importData.file ? importData.file.name : 'Klik untuk upload file (.xlsx, .csv)'}
+                                </span>
+                                <span className="text-xs text-gray-500 mt-1">Maksimal 5MB. Proses analisis AI mungkin memakan waktu beberapa detik.</span>
+                            </label>
+                        </div>
+                        {importErrors.file && <p className="text-xs text-red-500 text-center">{importErrors.file}</p>}
+                        
+                        <DialogFooter>
+                            <Button type="button" variant="ghost" onClick={() => setIsImportModalOpen(false)}>Batal</Button>
+                            <Button type="submit" disabled={!importData.file || importing} className="bg-brand-green hover:bg-brand-green/90 text-white">
+                                {importing ? (
+                                    <>
+                                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                        Menganalisis dengan AI...
+                                    </>
+                                ) : (
+                                    'Proses & Import'
+                                )}
+                            </Button>
+                        </DialogFooter>
+                    </form>
+                </DialogContent>
+            </Dialog>
         </AdminLayout>
     );
 }
