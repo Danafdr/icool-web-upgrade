@@ -4,6 +4,26 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        {{-- Primary Meta Tags --}}
+        <meta name="title" content="iCool - Layanan HVAC & AC Premium">
+        <meta name="description" content="Layanan perbaikan dan perawatan AC profesional dengan standar enterprise. Booking teknisi tersertifikasi secara instan.">
+
+        {{-- Open Graph / WhatsApp / Facebook --}}
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://icool-staging.vercel.app/">
+        <meta property="og:title" content="iCool - Layanan HVAC & AC Premium">
+        <meta property="og:description" content="Layanan perbaikan dan perawatan AC profesional dengan standar enterprise. Booking teknisi tersertifikasi secara instan.">
+        <meta property="og:image" content="https://icool-staging.vercel.app/images/og-preview.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+
+        {{-- Twitter Card --}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="https://icool-staging.vercel.app/">
+        <meta name="twitter:title" content="iCool - Layanan HVAC & AC Premium">
+        <meta name="twitter:description" content="Layanan perbaikan dan perawatan AC profesional dengan standar enterprise. Booking teknisi tersertifikasi secara instan.">
+        <meta name="twitter:image" content="https://icool-staging.vercel.app/images/og-preview.png">
+
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
             (function() {
